@@ -5,20 +5,20 @@
     <!-- Gathering skills -->
     <string name="skill_mining_name">Mining</string> <!-- untranslated -->
     <string name="skill_mining_desc">Extract valuable ores and gems from the earth.</string> <!-- untranslated -->
-    <string name="skill_fishing_name">Fishing</string> <!-- untranslated -->
-    <string name="skill_fishing_desc">Catch fish and aquatic treasures from the waters.</string> <!-- untranslated -->
-    <string name="skill_woodcutting_name">Woodcutting</string> <!-- untranslated -->
-    <string name="skill_woodcutting_desc">Chop trees and gather various types of wood.</string> <!-- untranslated -->
+    <string name="skill_fishing_name">Рибальство</string>
+    <string name="skill_fishing_desc">Ловіть рибу та водні скарби з водойм.</string>
+    <string name="skill_woodcutting_name">Лісозаготівля</string>
+    <string name="skill_woodcutting_desc">Рубайте дерева та збирайте різні породи деревини.</string>
     <string name="skill_farming_name">Farming</string> <!-- untranslated -->
     <string name="skill_farming_desc">Plant and harvest crops from your farming patches.</string> <!-- untranslated -->
     <string name="skill_firemaking_name">Firemaking</string> <!-- untranslated -->
     <string name="skill_firemaking_desc">Burn logs from your inventory to gain Firemaking XP. Each log burned also produces ashes, which can be scattered in the Prayer skill for bonus Prayer XP.</string> <!-- untranslated -->
-    <string name="skill_agility_name">Agility</string> <!-- untranslated -->
+    <string name="skill_agility_name">Спритність</string>
     <string name="skill_agility_desc">Train Agility to reduce session times across all skills. Level 99 cuts %1$d minutes off the hour (60 min → %2$d min), with a smooth linear reduction as you level up.</string> <!-- untranslated -->
 
     <!-- Crafting skills -->
-    <string name="skill_smithing_name">Smithing</string> <!-- untranslated -->
-    <string name="skill_smithing_desc">Smelt ores into bars and forge powerful metal equipment.</string> <!-- untranslated -->
+    <string name="skill_smithing_name">Ковальство</string>
+    <string name="skill_smithing_desc">Виплавляйте руду в злитки та куйте потужне металеве обладнання.</string>
     <string name="skill_cooking_name">Cooking</string> <!-- untranslated -->
     <string name="skill_cooking_desc">Cook raw ingredients into food that restores HP in combat.</string> <!-- untranslated -->
     <string name="skill_fletching_name">Fletching</string> <!-- untranslated -->
@@ -58,12 +58,12 @@
     <string name="label_xp_per_kill">%1$s (%2$d XP/kill)</string> <!-- untranslated -->
 
     <!-- ===== Tree names ===== -->
-    <string name="tree_tree_name">Tree</string> <!-- untranslated -->
+    <string name="tree_tree_name">Дерево</string>
     <string name="tree_oak_tree_name">Oak Tree</string> <!-- untranslated -->
     <string name="tree_willow_tree_name">Willow Tree</string> <!-- untranslated -->
-    <string name="tree_maple_tree_name">Maple Tree</string> <!-- untranslated -->
-    <string name="tree_yew_tree_name">Yew Tree</string> <!-- untranslated -->
-    <string name="tree_magic_tree_name">Magic Tree</string> <!-- untranslated -->
+    <string name="tree_maple_tree_name">Кленове Дерево</string>
+    <string name="tree_yew_tree_name">Тисове Дерево</string>
+    <string name="tree_magic_tree_name">Магічне Дерево</string>
     <string name="tree_redwood_tree_name">Redwood Tree</string> <!-- untranslated -->
     <!-- Elder Isle woodcutting targets -->
     <string name="tree_coastal_pine_name">Coastal Pine</string> <!-- untranslated -->

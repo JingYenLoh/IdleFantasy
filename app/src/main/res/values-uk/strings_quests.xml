@@ -18,18 +18,18 @@
     <string name="quest_mining_6_objective">Mine 3650 Runite Ore</string> <!-- untranslated -->
 
     <!-- Woodcutting -->
-    <string name="quest_woodcutting_1_name">Woodcutting I</string> <!-- untranslated -->
-    <string name="quest_woodcutting_1_objective">Cut 500 Logs</string> <!-- untranslated -->
-    <string name="quest_woodcutting_2_name">Woodcutting II</string> <!-- untranslated -->
-    <string name="quest_woodcutting_2_objective">Cut 750 Oak Logs</string> <!-- untranslated -->
-    <string name="quest_woodcutting_3_name">Woodcutting III</string> <!-- untranslated -->
-    <string name="quest_woodcutting_3_objective">Cut 1100 Willow Logs</string> <!-- untranslated -->
-    <string name="quest_woodcutting_4_name">Woodcutting IV</string> <!-- untranslated -->
-    <string name="quest_woodcutting_4_objective">Cut 1650 Maple Logs</string> <!-- untranslated -->
-    <string name="quest_woodcutting_5_name">Woodcutting V</string> <!-- untranslated -->
-    <string name="quest_woodcutting_5_objective">Cut 2450 Yew Logs</string> <!-- untranslated -->
-    <string name="quest_woodcutting_6_name">Woodcutting VI</string> <!-- untranslated -->
-    <string name="quest_woodcutting_6_objective">Cut 3650 Magic Logs</string> <!-- untranslated -->
+    <string name="quest_woodcutting_1_name">Лісозаготівля I</string>
+    <string name="quest_woodcutting_1_objective">Зрубати 500 Колод</string>
+    <string name="quest_woodcutting_2_name">Лісозаготівля II</string>
+    <string name="quest_woodcutting_2_objective">Зрубати 750 Дубових Колод</string>
+    <string name="quest_woodcutting_3_name">Лісозаготівля III</string>
+    <string name="quest_woodcutting_3_objective">Зрубати 1100 Вербових Колод</string>
+    <string name="quest_woodcutting_4_name">Лісозаготівля IV</string>
+    <string name="quest_woodcutting_4_objective">Зрубати 1650 Кленових Колод</string>
+    <string name="quest_woodcutting_5_name">Лісозаготівля V</string>
+    <string name="quest_woodcutting_5_objective">Зрубати 2450 Тисових Колод</string>
+    <string name="quest_woodcutting_6_name">Лісозаготівля VI</string>
+    <string name="quest_woodcutting_6_objective">Зрубати 3650 Магічних Колод</string>
 
     <!-- Fishing -->
     <string name="quest_fishing_1_name">Рибальство I</string>
@@ -46,18 +46,18 @@
     <string name="quest_fishing_6_objective">Зловити 3650 рибин</string>
 
     <!-- Smithing -->
-    <string name="quest_smithing_1_name">Smithing I</string> <!-- untranslated -->
-    <string name="quest_smithing_1_objective">Smelt 500 Bronze Bars</string> <!-- untranslated -->
-    <string name="quest_smithing_2_name">Smithing II</string> <!-- untranslated -->
-    <string name="quest_smithing_2_objective">Smelt 750 Iron Bars</string> <!-- untranslated -->
-    <string name="quest_smithing_3_name">Smithing III</string> <!-- untranslated -->
-    <string name="quest_smithing_3_objective">Smelt 1100 Steel Bars</string> <!-- untranslated -->
-    <string name="quest_smithing_4_name">Smithing IV</string> <!-- untranslated -->
-    <string name="quest_smithing_4_objective">Smelt 1650 Mithril Bars</string> <!-- untranslated -->
-    <string name="quest_smithing_5_name">Smithing V</string> <!-- untranslated -->
-    <string name="quest_smithing_5_objective">Smelt 2450 Adamantite Bars</string> <!-- untranslated -->
-    <string name="quest_smithing_6_name">Smithing VI</string> <!-- untranslated -->
-    <string name="quest_smithing_6_objective">Smelt 3650 Runite Bars</string> <!-- untranslated -->
+    <string name="quest_smithing_1_name">Ковальство I</string>
+    <string name="quest_smithing_1_objective">Виплавте 500 Бронзових Злитків</string>
+    <string name="quest_smithing_2_name">Ковальство II</string>
+    <string name="quest_smithing_2_objective">Виплавте 750 Залізних Злитків</string>
+    <string name="quest_smithing_3_name">Ковальство III</string>
+    <string name="quest_smithing_3_objective">Виплавте 1100 Сталевих Злитків</string>
+    <string name="quest_smithing_4_name">Ковальство IV</string>
+    <string name="quest_smithing_4_objective">Виплавте 1650 Міфрилові Злитки</string>
+    <string name="quest_smithing_5_name">Ковальство V</string>
+    <string name="quest_smithing_5_objective">Виплавте 2450 Адамантієвих Злитків</string>
+    <string name="quest_smithing_6_name">Ковальство VI</string>
+    <string name="quest_smithing_6_objective">Виплавте 3650 Рунітових Злитків</string>
 
     <!-- Cooking - Fish -->
     <string name="quest_cooking_fish_1_name">Cooking — Fish I</string> <!-- untranslated -->
@@ -265,9 +265,9 @@
     <string name="quest_firemaking_3_name">Firemaking III</string> <!-- untranslated -->
     <string name="quest_firemaking_3_objective">Burn 1100 Willow Logs</string> <!-- untranslated -->
     <string name="quest_firemaking_4_name">Firemaking IV</string> <!-- untranslated -->
-    <string name="quest_firemaking_4_objective">Burn 1650 Maple Logs</string> <!-- untranslated -->
+    <string name="quest_firemaking_4_objective">Спалити 1650 Кленових Колод</string>
     <string name="quest_firemaking_5_name">Firemaking V</string> <!-- untranslated -->
-    <string name="quest_firemaking_5_objective">Burn 2450 Yew Logs</string> <!-- untranslated -->
+    <string name="quest_firemaking_5_objective">Спалити 2450 Тисових Колод</string>
     <string name="quest_firemaking_6_name">Firemaking VI</string> <!-- untranslated -->
     <string name="quest_firemaking_6_objective">Burn 3650 Magic Logs</string> <!-- untranslated -->
 
@@ -307,15 +307,15 @@
     <string name="quest_construction_3_name">Construction III</string> <!-- untranslated -->
     <string name="quest_construction_3_objective">Build 50 Willow Cabinets</string> <!-- untranslated -->
     <string name="quest_construction_4_name">Construction IV</string> <!-- untranslated -->
-    <string name="quest_construction_4_objective">Build 50 Maple Dressers</string> <!-- untranslated -->
+    <string name="quest_construction_4_objective">Побудувати 50 Кленових Комодів</string>
     <string name="quest_construction_5_name">Construction V</string> <!-- untranslated -->
-    <string name="quest_construction_5_objective">Build 25 Magic Thrones</string> <!-- untranslated -->
+    <string name="quest_construction_5_objective">Побудувати 25 Магічних Тронів</string>
     <string name="quest_construction_upgrade_inn_name">Renovate the Inn</string> <!-- untranslated -->
     <string name="quest_construction_upgrade_inn_objective">Upgrade the Inn at least once</string> <!-- untranslated -->
     <string name="quest_construction_upgrade_guild_name">Expand the Guild Hall</string> <!-- untranslated -->
     <string name="quest_construction_upgrade_guild_objective">Upgrade the Guild Hall at least once</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_church_name">Restore the Church</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_church_objective">Upgrade the Church at least once</string> <!-- untranslated -->
+    <string name="quest_construction_upgrade_church_name">Віновити Церкву</string>
+    <string name="quest_construction_upgrade_church_objective">Покращити Церкву хоча б один раз</string>
 
     <!-- Thieving -->
     <string name="quest_thieving_1_name">Thieving I</string> <!-- untranslated -->
@@ -482,7 +482,7 @@
     <string name="quest_daily_fish_shark_objective">Catch 15 sharks.</string> <!-- untranslated -->
     <string name="quest_daily_wc_oak_objective">Chop 100 oak logs.</string> <!-- untranslated -->
     <string name="quest_daily_wc_willow_objective">Chop 70 willow logs.</string> <!-- untranslated -->
-    <string name="quest_daily_wc_yew_objective">Chop 25 yew logs.</string> <!-- untranslated -->
+    <string name="quest_daily_wc_yew_objective">Зрубати 25 тисових колод.</string>
     <string name="quest_daily_wc_magic_objective">Chop 10 magic logs.</string> <!-- untranslated -->
     <string name="quest_daily_smith_iron_objective">Smith 40 iron bars.</string> <!-- untranslated -->
     <string name="quest_daily_smith_mithril_objective">Smith 15 mithril bars.</string> <!-- untranslated -->
@@ -492,10 +492,10 @@
     <string name="quest_daily_cook_salmon_objective">Cook 80 salmon.</string> <!-- untranslated -->
     <string name="quest_daily_cook_lobster_objective">Cook 40 lobsters.</string> <!-- untranslated -->
     <string name="quest_daily_cook_swordfish_objective">Cook 20 swordfish.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_goblin_objective">Defeat 80 goblins.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_bandit_objective">Defeat 50 bandits.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_demon_objective">Defeat 20 demons.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_dragon_objective">Defeat 10 dragons.</string> <!-- untranslated -->
+    <string name="quest_daily_kill_goblin_objective">Перемогти 80 гоблінів.</string>
+    <string name="quest_daily_kill_bandit_objective">Перемогти 50 бандитів.</string>
+    <string name="quest_daily_kill_demon_objective">Перемогти 20 демонів.</string>
+    <string name="quest_daily_kill_dragon_objective">Перемогти 10 драконів.</string>
 
     <!-- Quest objective verb strings for craft skills -->
     <string name="daily_verb_crafting">Craft</string> <!-- untranslated -->

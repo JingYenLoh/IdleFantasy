@@ -12,7 +12,7 @@
     <string name="quest_weekly_oak_logger_name">Oak Harvester</string> <!-- untranslated -->
     <string name="quest_weekly_oak_logger_desc">Chop 600 oak logs this week.</string> <!-- untranslated -->
     <string name="quest_weekly_yew_logger_name">Yew Feller</string> <!-- untranslated -->
-    <string name="quest_weekly_yew_logger_desc">Chop 300 yew logs this week.</string> <!-- untranslated -->
+    <string name="quest_weekly_yew_logger_desc">Зрубати 300 тисових колод цього тижня</string>
     <string name="quest_weekly_magic_logger_name">Arcane Lumberjack</string> <!-- untranslated -->
     <string name="quest_weekly_magic_logger_desc">Chop 150 magic logs this week.</string> <!-- untranslated -->
     <string name="quest_weekly_trout_fisher_name">River Angler</string> <!-- untranslated -->

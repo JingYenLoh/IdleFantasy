@@ -61,11 +61,11 @@
     <string name="item_oak_log_desc">Logs from oak trees.</string> <!-- untranslated -->
     <string name="item_willow_log_name">Willow Logs</string> <!-- untranslated -->
     <string name="item_willow_log_desc">Lightweight logs from willow trees.</string> <!-- untranslated -->
-    <string name="item_maple_log_name">Maple Logs</string> <!-- untranslated -->
+    <string name="item_maple_log_name">Кленові Дрова</string>
     <string name="item_maple_log_desc">Dense logs from maple trees.</string> <!-- untranslated -->
-    <string name="item_yew_log_name">Yew Logs</string> <!-- untranslated -->
-    <string name="item_yew_log_desc">Logs from ancient yew trees.</string> <!-- untranslated -->
-    <string name="item_magic_log_name">Magic Logs</string> <!-- untranslated -->
+    <string name="item_yew_log_name">Тисові Колоди</string>
+    <string name="item_yew_log_desc">Колоди зі стародавніх тисових дерев.</string>
+    <string name="item_magic_log_name">Магічні Колоди</string>
     <string name="item_magic_log_desc">Imbued logs from rare magic trees.</string> <!-- untranslated -->
     <string name="item_redwood_log_name">Redwood Logs</string> <!-- untranslated -->
     <string name="item_redwood_log_desc">Massive logs from the tallest redwood trees.</string> <!-- untranslated -->
@@ -494,11 +494,11 @@
     <string name="item_oak_ashes_desc">Burnt remnants of oak logs. Scatter for more Prayer XP than regular ashes.</string> <!-- untranslated -->
     <string name="item_willow_ashes_name">Willow Ashes</string> <!-- untranslated -->
     <string name="item_willow_ashes_desc">Burnt remnants of willow logs. Scatter for Prayer XP.</string> <!-- untranslated -->
-    <string name="item_maple_ashes_name">Maple Ashes</string> <!-- untranslated -->
+    <string name="item_maple_ashes_name">Кленовий Попіл</string>
     <string name="item_maple_ashes_desc">Burnt remnants of maple logs. Scatter for Prayer XP.</string> <!-- untranslated -->
-    <string name="item_yew_ashes_name">Yew Ashes</string> <!-- untranslated -->
+    <string name="item_yew_ashes_name">Попіл Тису</string>
     <string name="item_yew_ashes_desc">Burnt remnants of yew logs. Scatter for significant Prayer XP.</string> <!-- untranslated -->
-    <string name="item_magic_ashes_name">Magic Ashes</string> <!-- untranslated -->
+    <string name="item_magic_ashes_name">Попіл Магії</string>
     <string name="item_magic_ashes_desc">Burnt remnants of magic logs. Scatter for substantial Prayer XP.</string> <!-- untranslated -->
     <string name="item_redwood_ashes_name">Redwood Ashes</string> <!-- untranslated -->
     <string name="item_redwood_ashes_desc">Burnt remnants of redwood logs. Scatter for the most Prayer XP of any ash.</string> <!-- untranslated -->
@@ -706,18 +706,18 @@
     <string name="item_enhanced_super_magic_potion_name">Enhanced Super Magic Potion</string> <!-- untranslated -->
     <string name="item_enhanced_overload_potion_name">Enhanced Overload Potion</string> <!-- untranslated -->
 
-    <string name="item_any_fish_name">fish (any type)</string> <!-- untranslated -->
+    <string name="item_any_fish_name">риба (будь-який вид)</string>
 
     <!-- Construction item names (planks, nails, stone) -->
     <string name="item_plank_name">Дошка</string>
     <string name="item_oak_plank_name">Oak Plank</string> <!-- untranslated -->
     <string name="item_willow_plank_name">Willow Plank</string> <!-- untranslated -->
-    <string name="item_maple_plank_name">Maple Plank</string> <!-- untranslated -->
-    <string name="item_yew_plank_name">Yew Plank</string> <!-- untranslated -->
-    <string name="item_magic_plank_name">Magic Plank</string> <!-- untranslated -->
+    <string name="item_maple_plank_name">Кленова Дошка</string>
+    <string name="item_yew_plank_name">Тисова Дошка</string>
+    <string name="item_magic_plank_name">Магічна Дошка</string>
     <string name="item_redwood_plank_name">Redwood Plank</string> <!-- untranslated -->
-    <string name="item_iron_nail_name">Iron Nail</string> <!-- untranslated -->
-    <string name="item_steel_nail_name">Steel Nail</string> <!-- untranslated -->
+    <string name="item_iron_nail_name">Залізний Цвях</string>
+    <string name="item_steel_nail_name">Сталевий Цвях</string>
     <string name="item_mithril_nail_name">Mithril Nail</string> <!-- untranslated -->
     <string name="item_runite_nail_name">Runite Nail</string> <!-- untranslated -->
     <string name="item_stone_name">Камінь</string>
@@ -732,7 +732,7 @@
     <string name="item_oak_bookshelf_name">Oak Bookshelf</string> <!-- untranslated -->
     <string name="item_willow_cabinet_name">Willow Cabinet</string> <!-- untranslated -->
     <string name="item_maple_dresser_name">Maple Dresser</string> <!-- untranslated -->
-    <string name="item_yew_wardrobe_name">Yew Wardrobe</string> <!-- untranslated -->
+    <string name="item_yew_wardrobe_name">Тисова Шафа</string>
     <string name="item_magic_throne_name">Магічний Трон</string>
     <string name="item_redwood_bench_name">Redwood Bench</string> <!-- untranslated -->
     <string name="item_redwood_bookcase_name">Redwood Bookcase</string> <!-- untranslated -->
@@ -858,8 +858,8 @@
     <string name="item_farming_guild_cape_name">Farming Guild Cape</string> <!-- untranslated -->
     <string name="item_firemaking_cape_name">Firemaking Cape</string> <!-- untranslated -->
     <string name="item_firemaking_guild_cape_name">Firemaking Guild Cape</string> <!-- untranslated -->
-    <string name="item_fishing_cape_name">Fishing Cape</string> <!-- untranslated -->
-    <string name="item_fishing_guild_cape_name">Fishing Guild Cape</string> <!-- untranslated -->
+    <string name="item_fishing_cape_name">Накидка Рибальства</string>
+    <string name="item_fishing_guild_cape_name">Гільдійська Накидка Рибальства</string>
     <string name="item_flame_heart_amulet_name">Flame Heart Amulet</string> <!-- untranslated -->
     <string name="item_fletching_cape_name">Fletching Cape</string> <!-- untranslated -->
     <string name="item_fletching_guild_cape_name">Fletching Guild Cape</string> <!-- untranslated -->
@@ -887,7 +887,7 @@
     <string name="item_magic_shortbow_name">Magic Shortbow</string> <!-- untranslated -->
     <string name="item_elven_shortbow_name">Elven Shortbow</string> <!-- untranslated -->
     <string name="item_elven_longbow_name">Elven Longbow</string> <!-- untranslated -->
-    <string name="item_maple_shortbow_name">Maple Shortbow</string> <!-- untranslated -->
+    <string name="item_maple_shortbow_name">Кленовий короткий лук</string>
     <string name="item_mercantile_guild_cape_name">Mercantile Guild Cape</string> <!-- untranslated -->
     <string name="item_mining_cape_name">Mining Cape</string> <!-- untranslated -->
     <string name="item_mining_guild_cape_name">Mining Guild Cape</string> <!-- untranslated -->
@@ -946,8 +946,8 @@
     <string name="item_silver_ruby_necklace_name">Silver Ruby Necklace</string> <!-- untranslated -->
     <string name="item_silver_ruby_ring_name">Silver Ruby Ring</string> <!-- untranslated -->
     <string name="item_slayer_guild_cape_name">Slayer Guild Cape</string> <!-- untranslated -->
-    <string name="item_smithing_cape_name">Smithing Cape</string> <!-- untranslated -->
-    <string name="item_smithing_guild_cape_name">Smithing Guild Cape</string> <!-- untranslated -->
+    <string name="item_smithing_cape_name">Накидка Ковальства</string>
+    <string name="item_smithing_guild_cape_name">Гільдійська Накидка Ковальства</string>
     <string name="item_steel_arrow_tip_name">Steel Arrow Tips</string> <!-- untranslated -->
     <string name="item_steel_boots_name">Steel Boots</string> <!-- untranslated -->
     <string name="item_steel_chainbody_name">Steel Chainbody</string> <!-- untranslated -->
@@ -967,10 +967,10 @@
     <string name="item_trident_of_the_seas_name">Trident Of The Seas</string> <!-- untranslated -->
     <string name="item_warriors_guild_cape_name">Warriors Guild Cape</string> <!-- untranslated -->
     <string name="item_willow_shortbow_name">Willow Shortbow</string> <!-- untranslated -->
-    <string name="item_woodcutting_cape_name">Woodcutting Cape</string> <!-- untranslated -->
-    <string name="item_woodcutting_guild_cape_name">Woodcutting Guild Cape</string> <!-- untranslated -->
-    <string name="item_yew_longbow_name">Yew Longbow</string> <!-- untranslated -->
-    <string name="item_yew_shortbow_name">Yew Shortbow</string> <!-- untranslated -->
+    <string name="item_woodcutting_cape_name">Накидка Лісозаготівлі</string>
+    <string name="item_woodcutting_guild_cape_name">Гільдійська Накидка Лісозаготівлі</string>
+    <string name="item_yew_longbow_name">Тисовий Довгий Лук</string>
+    <string name="item_yew_shortbow_name">Тисовий Короткий Лук</string>
     <string name="item_void_reaver_name">Void Reaver</string> <!-- untranslated -->
     <string name="item_void_reaver_desc">A blade forged from crystallised void energy. Its edge cuts through armour as if it were cloth.</string> <!-- untranslated -->
     <string name="item_sovereign_crown_name">Sovereign Crown</string> <!-- untranslated -->
@@ -1003,11 +1003,11 @@
     <string name="item_shortbow_desc">A shortbow crafted from regular logs.</string> <!-- untranslated -->
     <string name="item_oak_shortbow_desc">A shortbow crafted from oak logs.</string> <!-- untranslated -->
     <string name="item_willow_shortbow_desc">A shortbow crafted from willow logs.</string> <!-- untranslated -->
-    <string name="item_maple_shortbow_desc">A shortbow crafted from maple logs.</string> <!-- untranslated -->
-    <string name="item_yew_shortbow_desc">A shortbow crafted from yew logs.</string> <!-- untranslated -->
-    <string name="item_yew_longbow_desc">A longbow crafted from yew logs.</string> <!-- untranslated -->
-    <string name="item_magic_shortbow_desc">A shortbow crafted from magic logs.</string> <!-- untranslated -->
-    <string name="item_magic_longbow_desc">A longbow crafted from magic logs.</string> <!-- untranslated -->
+    <string name="item_maple_shortbow_desc">Короткий лук, виготовлений з кленовий дошок.</string>
+    <string name="item_yew_shortbow_desc">Короткий лук, виготовлений з тисових дошок.</string>
+    <string name="item_yew_longbow_desc">Довгий лук, виготовлений з тисових дошок.</string>
+    <string name="item_magic_shortbow_desc">Короткий лук, виготовлений з магічних дошок.</string>
+    <string name="item_magic_longbow_desc">Довгий лук, виготовлений з магічних дошок.</string>
     <string name="item_elven_shortbow_desc">A swift bow strung with elven silk. Only elven hands know the fletching.</string> <!-- untranslated -->
     <string name="item_elven_longbow_desc">A tall elven warbow of layered redwood. Only elven hands know the fletching.</string> <!-- untranslated -->
     <string name="item_tower_crossbow_name">Tower Crossbow</string> <!-- untranslated -->
@@ -1110,17 +1110,17 @@
     <string name="item_mining_cape_desc" formatted="false">Awarded for reaching level 99 Mining. Grants 10% more ore per session.</string> <!-- untranslated -->
     <string name="item_construction_guild_cape_desc" formatted="false">Awarded for reaching Builders Guild level 10. Grants 5% more furniture per session.</string> <!-- untranslated -->
     <string name="item_mining_guild_cape_desc" formatted="false">Awarded for reaching Mining Guild level 10. Grants 5% more ore per session.</string> <!-- untranslated -->
-    <string name="item_fishing_cape_desc" formatted="false">Awarded for reaching level 99 Fishing. Grants 10% more fish per session.</string> <!-- untranslated -->
-    <string name="item_fishing_guild_cape_desc" formatted="false">Awarded for reaching Fishing Guild level 10. Grants 5% more fish per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_cape_desc" formatted="false">Awarded for reaching level 99 Woodcutting. Grants 10% more logs per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_guild_cape_desc" formatted="false">Awarded for reaching Woodcutting Guild level 10. Grants 5% more logs per session.</string> <!-- untranslated -->
+    <string name="item_fishing_cape_desc" formatted="false">Нагорода за досягнення 99 рівня Рибальства. Надає на 10% більше риби за сесію.</string>
+    <string name="item_fishing_guild_cape_desc" formatted="false">Нагорода за досягнення 10 Гільдійського рівня Рибальства. Надає на 5% більше риби за сесію.</string>
+    <string name="item_woodcutting_cape_desc" formatted="false">Нагорода за досягнення 99 рівня Лісозаготівлі. Надає на 10% більше колод за сесію.</string>
+    <string name="item_woodcutting_guild_cape_desc" formatted="false">Нагорода за досягення 10 Гільдійського рівня Лісозаготівлі. Надає на 5% більше колод за сесію.</string>
     <string name="item_farming_cape_desc" formatted="false">Awarded for reaching level 99 Farming. Grants 10% more harvest per session.</string> <!-- untranslated -->
     <string name="item_farming_guild_cape_desc" formatted="false">Awarded for reaching Farming Guild level 10. Grants 5% more harvest per session.</string> <!-- untranslated -->
     <string name="item_thieving_cape_name">Thieving Cape</string> <!-- untranslated -->
     <string name="item_thieving_cape_desc" formatted="false">Awarded for reaching level 99 Thieving. Grants 10% more successful pickpockets per session.</string> <!-- untranslated -->
     <string name="item_thieving_guild_cape_desc" formatted="false">Awarded for reaching Thieves Guild level 10. Grants 5% more successful pickpockets per session.</string> <!-- untranslated -->
-    <string name="item_smithing_cape_desc" formatted="false">Awarded for reaching level 99 Smithing. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_smithing_guild_cape_desc" formatted="false">Awarded for reaching Smithing Guild level 10. Grants 5% more items per session.</string> <!-- untranslated -->
+    <string name="item_smithing_cape_desc" formatted="false">Нагорода за досягнення 99 рівня Ковальства. Надає на 10% більше речей за сесію.</string>
+    <string name="item_smithing_guild_cape_desc" formatted="false">Нагорода за досягнення 10 Гільдійського Рівня Ковальства. Надає на 5% більше речей за сесію.</string>
     <string name="item_cooking_cape_desc" formatted="false">Awarded for reaching level 99 Cooking. Grants 10% more food per session.</string> <!-- untranslated -->
     <string name="item_cooking_guild_cape_desc" formatted="false">Awarded for reaching Cooking Guild level 10. Grants 5% more food per session.</string> <!-- untranslated -->
     <string name="item_fletching_cape_desc" formatted="false">Awarded for reaching level 99 Fletching. Grants 10% more arrows per session.</string> <!-- untranslated -->
@@ -1172,12 +1172,12 @@
     <string name="item_runite_hoe_desc">A runite hoe. The finest farming tool available.</string> <!-- untranslated -->
     <string name="item_dwarven_hoe_desc">A legendary dwarven hoe. Doubles the harvest of any crop.</string> <!-- untranslated -->
     <string name="item_divine_hoe_desc">A hoe blessed by divine light. Crops flourish at its touch.</string> <!-- untranslated -->
-    <string name="item_bronze_hammer_desc">A bronze hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_iron_hammer_desc">An iron hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_steel_hammer_desc">A steel hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_mithril_hammer_desc">A mithril hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_adamantite_hammer_desc">An adamantite hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_runite_hammer_desc">A runite hammer for smithing.</string> <!-- untranslated -->
+    <string name="item_bronze_hammer_desc">Бронзовий молот для ковальства.</string>
+    <string name="item_iron_hammer_desc">Залізний молот для ковальства.</string>
+    <string name="item_steel_hammer_desc">Сталевий молот для ковальства.</string>
+    <string name="item_mithril_hammer_desc">Міфрильний молот для ковальства.</string>
+    <string name="item_adamantite_hammer_desc">Адамантієвий молот для ковальства.</string>
+    <string name="item_runite_hammer_desc">Рунітний молот для ковальства.</string>
     <string name="item_dwarven_hammer_desc">A dwarven-forged hammer. Strikes true every time.</string> <!-- untranslated -->
     <string name="item_divine_hammer_desc">A hammer touched by divine light. Metal bends to its will.</string> <!-- untranslated -->
     <string name="item_bronze_tinderbox_desc">A bronze tinderbox for firemaking.</string> <!-- untranslated -->
