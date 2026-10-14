@@ -2401,7 +2401,7 @@
     <string name="save_slot_delete_body">%1$s endgültig löschen? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="save_slot_delete_btn">Löschen</string>
     <string name="save_slot_switch_failed">Charakterwechsel fehlgeschlagen.</string>
-    <string name="collect_blocked_switching">Character switch in progress. Please wait and try again.</string> <!-- untranslated -->
+    <string name="collect_blocked_switching">Der Charakterwechsel läuft gerade. Warte bitte und versuche es noch einmal.</string>
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">Ironman-Modus</string>
