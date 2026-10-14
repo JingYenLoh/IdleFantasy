@@ -1048,28 +1048,28 @@
 
     <!-- Church -->
     <string name="church_title">Церква</string>
-    <string name="church_desc">Blessings for XP, defense, and coins</string> <!-- untranslated -->
-    <string name="church_no_active_blessing">No active blessing — visit the Church to pray.</string> <!-- untranslated -->
-    <string name="church_active_label">Active Blessing</string> <!-- untranslated -->
+    <string name="church_desc">Благословіння для ХР, захисту та монет</string>
+    <string name="church_no_active_blessing">Немає активних благословінь - відвідайте Церкву, щоб помолитись.</string>
+    <string name="church_active_label">Активне благословіння</string>
     <string name="church_expires_in">Expires in %1$s</string> <!-- untranslated -->
     <string name="church_blessing_active_fmt">%1$s • %2$s left</string> <!-- untranslated -->
-    <string name="church_section_xp">XP Blessings</string> <!-- untranslated -->
-    <string name="church_section_defense">Defense Blessings</string> <!-- untranslated -->
-    <string name="church_section_coins">Coin Blessings</string> <!-- untranslated -->
+    <string name="church_section_xp">XP Благословіння</string>
+    <string name="church_section_defense">Благословіння Захисту</string>
+    <string name="church_section_coins">Благословіння Монет</string>
     <string name="church_locked_level">Requires Prayer level %1$d</string> <!-- untranslated -->
-    <string name="church_active_chip">Active</string> <!-- untranslated -->
-    <string name="church_activate">Activate</string> <!-- untranslated -->
-    <string name="church_blessing_bonus">+%1$s from blessing</string> <!-- untranslated -->
+    <string name="church_active_chip">Активно</string>
+    <string name="church_activate">Активувати</string>
+    <string name="church_blessing_bonus">+%1$s з благословіння</string>
     <!-- Golden Goose pet coin share, split from the blessing line (issue #1941). Pending Weblate translation. -->
     <string name="pet_coin_bonus">+%1$s from pet</string> <!-- untranslated -->
-    <string name="church_blessing_suffix">from blessing</string> <!-- untranslated -->
+    <string name="church_blessing_suffix">з благословіння</string>
     <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string> <!-- untranslated -->
     <string name="church_effect_def">+%1$d Defense for %2$d hours</string> <!-- untranslated -->
     <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string> <!-- untranslated -->
     <string name="church_cost_bones">Costs %1$d bones</string> <!-- untranslated -->
-    <string name="church_confirm_title">Activate Blessing?</string> <!-- untranslated -->
+    <string name="church_confirm_title">Активувати Благословіння?</string>
     <string name="church_bones_available">You have %1$d bones on hand — worth %2$d toward blessings (bigger bones count for more)</string> <!-- untranslated -->
-    <string name="church_not_enough_bones">Not enough bones (need %1$d)</string> <!-- untranslated -->
+    <string name="church_not_enough_bones">Недостатньо кісток (необхідно %1$d)</string>
     <string name="church_already_active">Благословіння вже активне</string>
     <string name="church_blessing_activated">Благословіння активоване!</string>
     <string name="church_blessing_extended">Благословіння продовжене!</string>

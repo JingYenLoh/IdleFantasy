@@ -314,7 +314,7 @@
     <string name="quest_construction_upgrade_inn_objective">Upgrade the Inn at least once</string> <!-- untranslated -->
     <string name="quest_construction_upgrade_guild_name">Expand the Guild Hall</string> <!-- untranslated -->
     <string name="quest_construction_upgrade_guild_objective">Upgrade the Guild Hall at least once</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_church_name">Віновити Церкву</string>
+    <string name="quest_construction_upgrade_church_name">Відновити Церкву</string>
     <string name="quest_construction_upgrade_church_objective">Покращити Церкву хоча б один раз</string>
 
     <!-- Thieving -->
