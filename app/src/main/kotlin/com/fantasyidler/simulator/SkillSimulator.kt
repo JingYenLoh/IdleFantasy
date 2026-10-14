@@ -76,6 +76,8 @@ object SkillSimulator {
             val levelAfter = XpTable.levelForXp(currentXp)
 
             oreAccumulator += toolEfficiency
+            // Deliberate 1/min minimum (also woodcutting, fishing, estimateGatheringQty): a
+            // session always yields something even if a future tool drops below 1.0 (#1990).
             val oreQty = oreAccumulator.toInt().coerceAtLeast(1)
             oreAccumulator -= oreQty
             val items = mutableMapOf(oreKey to oreQty)
@@ -83,7 +85,7 @@ object SkillSimulator {
             // Bonus gem rolls — one independent roll per ore mined per gem type
             for (i in 0 until oreQty) {
                 for ((gemKey, gemData) in gems) {
-                    if (random.nextDouble() < gemData.dropRate * gemChanceMult) {
+                    if (random.nextDouble() < (gemData.dropRate * gemChanceMult).coerceAtMost(1.0)) {
                         items[gemKey] = (items[gemKey] ?: 0) + 1
                     }
                 }

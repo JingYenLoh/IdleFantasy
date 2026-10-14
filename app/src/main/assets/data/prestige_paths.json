@@ -246,7 +246,7 @@
             "id": "fishing_race_halfling_2",
             "cost": 4,
             "effect": "flow_interval_reduction",
-            "value": 10,
+            "value": 30,
             "races": [
               "halfling"
             ]

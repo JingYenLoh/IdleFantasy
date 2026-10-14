@@ -1,3 +1,14 @@
+v1.15.9
+• Added a Time elapsed row to the session summary
+• The Guild Hall now hides its quests tab once your guild reaches max level
+• Patient Angler II now shortens the fishing flow-state interval by 30 minutes (was 10)
+• Sigil Stones now boost small drops too, so each Topaz adds a real chance of an extra Ancient Sigil
+• Mining gem drop chance is now capped at 100%
+• Fixed an interrupted character switch being able to erase the character you were leaving
+• Fixed queued Elder Isle mining, woodcutting and fishing using your mainland XP
+• Fixed Elder Isle dungeons and bosses started directly using mainland session lengths
+• Updated German and Ukrainian translations
+
 v1.15.8
 • Redesigned the farming patch cards and replaced the fertilizer chips with a dropdown
 • The plant sheet now preselects the best ash you own
