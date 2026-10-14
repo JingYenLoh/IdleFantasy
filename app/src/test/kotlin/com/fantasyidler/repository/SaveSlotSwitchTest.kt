@@ -1,5 +1,6 @@
 package com.fantasyidler.repository
 
+import android.app.AlarmManager
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
@@ -11,7 +12,12 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QuestProgress
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.SkillSessionExport
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.After
@@ -23,6 +29,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import java.io.File
 import javax.inject.Provider
@@ -127,6 +134,42 @@ class SaveSlotSwitchTest {
                 activityKey = "iron_ore",
             )
         )
+    }
+
+    /** Second character with values distinct from [seedCharacterA] so imports are observable. */
+    private suspend fun seedCharacterB() {
+        db.playerDao().upsert(
+            playerRepo.getOrCreatePlayer().copy(
+                skillLevels = """{"fishing":7}""",
+                skillXp = """{"fishing":9000}""",
+                inventory = """{"shrimp":5}""",
+                coins = 222_222L,
+                flags = json.encodeToString<PlayerFlags>(PlayerFlags(currentHp = 33, characterName = "B")),
+            )
+        )
+    }
+
+    /** Slot directory for the current Robolectric app, created on demand. */
+    private fun slotsDir(): File = File(context.filesDir, "save_slots").apply { mkdirs() }
+
+    private fun writeSlotFile(slot: Int, content: String) {
+        File(slotsDir(), "slot_$slot.json").writeText(content)
+    }
+
+    private fun writeSwitchMarker(content: String) {
+        File(slotsDir(), "pending_switch.marker").writeText(content)
+    }
+
+    /** Saves character B to [slot]'s file and returns its export JSON. */
+    private suspend fun writeTargetSlotB(slot: Int): String {
+        seedCharacterB()
+        return saveSlotRepo.exportFullSave().also { writeSlotFile(slot, it) }
+    }
+
+    /** Seeds the outgoing character A and writes its complete snapshot to [slot]. */
+    private suspend fun snapshotOutgoingA(slot: Int) {
+        seedCharacterA(System.currentTimeMillis())
+        writeSlotFile(slot, saveSlotRepo.exportFullSave())
     }
 
     @Test
@@ -258,5 +301,634 @@ class SaveSlotSwitchTest {
         assertFalse(slotTwoJson.exists())
         assertFalse(slotTwoMeta.exists())
         assertTrue(File(context.filesDir, "save_slots/slot_1.json").exists())
+    }
+
+    // ------------------------------------------------------------------
+    // Switch/recovery (D2 + review rounds: identity, fresh replay, guards).
+    // run-by-orchestrator: workers run no Gradle; the orchestrator executes
+    // these tests on this branch (GREEN) and on the base (RED).
+    // ------------------------------------------------------------------
+
+    /**
+     * Legacy marker resolution by live material: the bare pre-fix marker rolls back when Room
+     * holds the outgoing character (with or without a target file), and completes by pointer only
+     * when there is no file and no live progress — the interrupted new-slot reset already ran.
+     */
+    @Test
+    fun `legacy marker rolls back a live character and completes an empty one`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        writeTargetSlotB(2)
+        seedCharacterA(System.currentTimeMillis())
+        val live = playerRepo.getOrCreatePlayer()
+        writeSwitchMarker("2")
+        assertFalse(File(slotsDir(), "slot_1.json").exists())
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertFalse(recovered)
+        assertEquals(1, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        // Rollback only clears the marker: no snapshot is written by recovery.
+        assertFalse(File(slotsDir(), "slot_1.json").exists())
+        assertEquals(live, playerRepo.getOrCreatePlayer())
+        assertEquals(1, db.questProgressDao().getAllProgress().size)
+        assertEquals(1, db.farmingPatchDao().getAllPatches().size)
+
+        // With live material and no target file the rollback stands (outgoing still alive).
+        writeSwitchMarker("3")
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+        assertEquals(1, saveSlotRepo.activeSlot())
+
+        // Case (b): the interrupted fresh reset wiped Room while the outgoing snapshot sat on
+        // disk; completion must move the pointer only and keep that file intact.
+        snapshotOutgoingA(1)
+        playerRepo.resetProgression()
+        sessionRepo.deleteAllSessions()
+        writeSwitchMarker("3")
+
+        assertTrue(saveSlotRepo.recoverInterruptedSwitch())
+        assertEquals(3, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertEquals(111_111L, json.decodeFromString<PlayerExport>(File(slotsDir(), "slot_1.json").readText()).coins)
+        assertFalse(File(slotsDir(), "slot_3.json").exists())
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    /**
+     * Legacy marker from inside the (non-atomic) import: the player row already holds the
+     * target's material fields but the sessions were not swapped yet. Recovery must re-import the
+     * file — the source of truth for sessions/quests/patches — or the target would inherit the
+     * outgoing sessions. The tail repeats it with a double-written (garbage-trailing) file.
+     */
+    @Test
+    fun `legacy marker completes the switch when Room already holds the target`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        seedCharacterB()
+        sessionRepo.insertSession(
+            SkillSession("b_completed", skillName = "fishing", startedAt = 1L, endsAt = 2L, completed = true))
+        val targetFileJson = saveSlotRepo.exportFullSave()
+        writeSlotFile(2, targetFileJson)
+        sessionRepo.deleteAllSessions()
+        snapshotOutgoingA(1)
+
+        // Crash state: player row = B's material fields, sessions still A's (import half-done).
+        val target = json.decodeFromString<PlayerExport>(targetFileJson)
+        db.playerDao().upsert(
+            playerRepo.getOrCreatePlayer().copy(
+                skillLevels = target.skillLevels, skillXp = target.skillXp,
+                inventory = target.inventory, equipped = target.equipped,
+                pets = target.pets, coins = target.coins,
+            ),
+        )
+        writeSwitchMarker("2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertTrue(recovered)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertEquals(222_222L, playerRepo.getOrCreatePlayer().coins)
+        // getActiveSession() returns the newest row even when completed (DAO quirk, hunt finding
+        // F8), so assert the swap at the row level: only the file's session remains.
+        assertEquals(listOf("b_completed"), db.skillSessionDao().getAllSessions().map { it.sessionId })
+        assertEquals(listOf("b_completed"), sessionRepo.getAllCompletedSessions().map { it.sessionId })
+        assertEquals(111_111L, json.decodeFromString<PlayerExport>(File(slotsDir(), "slot_1.json").readText()).coins)
+
+        // Trailing garbage (a double write the repo tolerates) must not break the identity parse.
+        globalStateRepo.setActiveSaveSlot(1)
+        writeSlotFile(2, targetFileJson + targetFileJson)
+        writeSwitchMarker("2")
+        assertTrue(saveSlotRepo.recoverInterruptedSwitch())
+        assertEquals(2, saveSlotRepo.activeSlot())
+
+        // A legacy file still carrying the raw "hp" key must match too: the live row migrates it
+        // away inside getOrCreatePlayer before the comparison.
+        val hpXp = """{"hp":5000,"fishing":9000}"""
+        val hpLevels = """{"hp":10,"fishing":7}"""
+        writeSlotFile(2, json.encodeToString(json.decodeFromString<PlayerExport>(targetFileJson)
+            .copy(skillXp = hpXp, skillLevels = hpLevels)))
+        globalStateRepo.setActiveSaveSlot(1)
+        db.playerDao().upsert(playerRepo.getOrCreatePlayer().copy(skillXp = hpXp, skillLevels = hpLevels))
+        writeSwitchMarker("2")
+
+        assertTrue(saveSlotRepo.recoverInterruptedSwitch())
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertEquals(listOf("b_completed"), sessionRepo.getAllCompletedSessions().map { it.sessionId })
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    /** Crash after the ready marker: the outgoing character is on disk, so recovery imports
+     *  the target and moves the pointer. */
+    @Test
+    fun `phase 2 crash completes the switch by importing the target`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        writeTargetSlotB(2)
+        snapshotOutgoingA(1)
+        writeSwitchMarker("ready:2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertTrue(recovered)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        val imported = playerRepo.getOrCreatePlayer()
+        assertEquals(222_222L, imported.coins)
+        assertEquals("""{"fishing":7}""", imported.skillLevels)
+        assertEquals("""{"shrimp":5}""", imported.inventory)
+        assertEquals(33, json.decodeFromString<PlayerFlags>(imported.flags).currentHp)
+        // The outgoing snapshot is untouched by the completion.
+        val outgoing = json.decodeFromString<PlayerExport>(File(slotsDir(), "slot_1.json").readText())
+        assertEquals(111_111L, outgoing.coins)
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    /** Crash in the new-slot branch during the fresh reset: recovery replays the idempotent
+     *  reset to completion and moves the pointer. No slot file may be created. */
+    @Test
+    fun `fresh target marker replays the reset for a new slot`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        seedCharacterA(System.currentTimeMillis())
+        writeSwitchMarker("fresh:1:2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertTrue(recovered)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertFalse(File(slotsDir(), "slot_1.json").exists())
+        assertFalse(File(slotsDir(), "slot_2.json").exists())
+        assertNull(sessionRepo.getActiveSession())
+        assertEquals(0, sessionRepo.getAllCompletedSessions().size)
+        assertTrue(db.questProgressDao().getAllProgress().isEmpty())
+        assertTrue(db.farmingPatchDao().getAllPatches().all { it.cropType == null && it.plantedAt == null })
+        val fresh = playerRepo.getOrCreatePlayer()
+        assertEquals(0L, fresh.coins)
+        assertTrue(json.decodeFromString<PlayerFlags>(fresh.flags).ironman)
+
+        // A `ready:` marker whose file vanished (slot deleted before recovery) replays the reset.
+        seedCharacterA(System.currentTimeMillis())
+        writeSwitchMarker("ready:3")
+        assertTrue(saveSlotRepo.recoverInterruptedSwitch())
+        assertEquals(3, saveSlotRepo.activeSlot())
+        assertNull(sessionRepo.getActiveSession())
+        assertEquals(0L, playerRepo.getOrCreatePlayer().coins)
+        // ironman is assumed false: the ready marker does not record the choice.
+        assertFalse(json.decodeFromString<PlayerFlags>(playerRepo.getOrCreatePlayer().flags).ironman)
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    /** A marker left after the pointer already moved (failed delete or crash after
+     *  setActiveSaveSlot) must not re-import the slot file over progress made since the switch. */
+    @Test
+    fun `marker on an already-active target is cleared without re-importing`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        seedCharacterB()
+        writeSlotFile(2, saveSlotRepo.exportFullSave())
+        globalStateRepo.setActiveSaveSlot(2)
+        db.playerDao().upsert(playerRepo.getOrCreatePlayer().copy(coins = 333_333L))
+
+        writeSwitchMarker("2")
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+        assertEquals(333_333L, playerRepo.getOrCreatePlayer().coins)
+
+        db.playerDao().upsert(playerRepo.getOrCreatePlayer().copy(coins = 444_444L))
+        writeSwitchMarker("ready:2")
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+        assertEquals(444_444L, playerRepo.getOrCreatePlayer().coins)
+
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertEquals(2, saveSlotRepo.activeSlot())
+    }
+
+    // run-by-orchestrator: workers run no Gradle; the orchestrator executes this RED on the
+    // base (pointer moves, no snapshot written anywhere) and GREEN on this branch.
+    /**
+     * B-002: a live character holding only non-material state (name/appearance/flags, no coins
+     * or XP) also reads as "no material progress", so the legacy no-file completion moved the
+     * pointer without snapshotting it first — the character was silently rehomed and no slot
+     * file described it. Recovery must preserve it at its current slot before moving the
+     * pointer, and must create nothing for the target slot (no duplicate-slot artifacts).
+     * Proves: preservation-at-origin plus target-slot cleanliness. Does NOT prove: quest/patch
+     * emptiness (out of scope — un-injected DAOs) or concurrent-switch behavior.
+     */
+    @Test
+    fun `legacy empty completion snapshots a non-material character before moving pointer`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        db.playerDao().upsert(
+            playerRepo.getOrCreatePlayer().copy(
+                coins = 0L,
+                flags = json.encodeToString<PlayerFlags>(
+                    PlayerFlags(characterName = "Homed", characterRace = "elf", characterSetupDone = true),
+                ),
+            )
+        )
+        assertFalse(File(slotsDir(), "slot_1.json").exists())
+        assertFalse(File(slotsDir(), "slot_2.json").exists())
+        writeSwitchMarker("2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertTrue(recovered)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        // The live character was preserved at its home slot before the pointer moved.
+        assertTrue(File(slotsDir(), "slot_1.json").exists())
+        assertTrue(File(slotsDir(), "slot_1.meta.json").exists())
+        val preserved = json.decodeFromString<PlayerExport>(File(slotsDir(), "slot_1.json").readText())
+        assertEquals("Homed", json.decodeFromString<PlayerFlags>(preserved.flags).characterName)
+        assertEquals(0L, preserved.coins)
+        // Still live under the new pointer, not wiped; nothing created for the target slot.
+        assertEquals("Homed", json.decodeFromString<PlayerFlags>(playerRepo.getOrCreatePlayer().flags).characterName)
+        assertFalse(File(slotsDir(), "slot_2.json").exists())
+        assertFalse(File(slotsDir(), "slot_2.meta.json").exists())
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    // run-by-orchestrator: workers run no Gradle; the orchestrator executes this RED on the
+    // current branch (it would write the origin file) and GREEN after the identity guard.
+    /**
+     * Truly-fresh character (default flags: no setup, no name) under a stray legacy marker with
+     * no origin file: recovery must stay a pointer-only move exactly as before — no origin file
+     * may be created (no phantom slot entry), while alarms are still re-armed (T1 intact).
+     * Proves: fresh defaults read false on the identity guard. Does NOT prove: marker provenance.
+     */
+    @Test
+    fun `legacy empty completion leaves a truly-fresh character fileless`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        playerRepo.getOrCreatePlayer()
+        val now = System.currentTimeMillis()
+        val xpBoostAt = now + 3_600_000L
+        val blessingAt = now + 7_200_000L
+        playerRepo.updateFlagsAtomically {
+            it.copy(
+                xpBoostExpiresAt = xpBoostAt,
+                activeBlessingExpiresAt = blessingAt,
+                backupFrequency = "daily",
+            )
+        }
+        assertFalse(File(slotsDir(), "slot_1.json").exists())
+        assertFalse(File(slotsDir(), "slot_1.meta.json").exists())
+        writeSwitchMarker("2")
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val shadowAm = Shadows.shadowOf(alarmManager)
+        assertEquals(0, shadowAm.scheduledAlarms.size)
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertTrue(recovered)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertFalse(File(slotsDir(), "slot_1.json").exists())
+        assertFalse(File(slotsDir(), "slot_1.meta.json").exists())
+        assertFalse(File(slotsDir(), "slot_2.json").exists())
+        assertFalse(File(slotsDir(), "slot_2.meta.json").exists())
+        val triggers = shadowAm.scheduledAlarms.map { it.triggerAtTime }
+        assertTrue(triggers.contains(xpBoostAt))
+        assertTrue(triggers.contains(blessingAt))
+        assertEquals(3, shadowAm.scheduledAlarms.size)
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    // run-by-orchestrator: P2 race — the orchestrator executes this RED on the base
+    // (outside-lock read) and GREEN on this branch (read under lock). Workers run no Gradle.
+    /**
+     * P2 race: the marker read + parse must be atomic with switchTo under switchMutex.
+     * Holds the switch mutex while a recovery is in flight, then publishes a ready marker
+     * (simulating a concurrent switch's marker window) and releases: a correct recovery reads
+     * under the lock and honours the fresh marker (completes to slot 2); a racy recovery reads
+     * outside the lock, sees the initial absent marker, and returns false leaving slot 1 live.
+     * Proves: read and apply are atomic w.r.t. the mutex. Does NOT prove: a real concurrent
+     * switchTo interleaving end-to-end, deadlock-freedom, or unchanged branch outcomes
+     * (covered by the sequential tests above/below).
+     */
+    @Test
+    fun `recovery reads marker atomically under switch mutex`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        writeTargetSlotB(2)
+        snapshotOutgoingA(1)
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+
+        val mutexField = SaveSlotRepository::class.java.getDeclaredField("switchMutex")
+        mutexField.isAccessible = true
+        val mutex = mutexField.get(saveSlotRepo) as Mutex
+
+        // Hold the mutex to simulate a concurrent switchTo critical section, start recovery
+        // (it must wait for the lock), publish the marker while it waits, then release.
+        val deferred = mutex.withLock {
+            val d = async(Dispatchers.IO) { saveSlotRepo.recoverInterruptedSwitch() }
+            // A racy outside-lock read needs no lock, so this window guarantees it has
+            // observed the initial absent marker before we publish (generous: loaded CI).
+            delay(1000)
+            writeSwitchMarker("ready:2")
+            d
+        }
+        val recovered = deferred.await()
+
+        assertTrue(recovered)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertEquals(222_222L, playerRepo.getOrCreatePlayer().coins)
+    }
+
+    /** Happy path regression: a completed switch leaves no marker and a full outgoing snapshot. */
+    @Test
+    fun `completed switch clears the marker and keeps a full outgoing snapshot`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        seedCharacterA(System.currentTimeMillis())
+
+        val demoted = saveSlotRepo.switchTo(2)
+
+        assertFalse(demoted)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        val outgoing = json.decodeFromString<PlayerExport>(File(slotsDir(), "slot_1.json").readText())
+        assertEquals(111_111L, outgoing.coins)
+        assertEquals("""{"mining":42}""", outgoing.skillLevels)
+        assertEquals("""{"mining":123456}""", outgoing.skillXp)
+        assertTrue(File(slotsDir(), "slot_1.meta.json").exists())
+    }
+
+    // run-by-orchestrator: workers run no Gradle; the orchestrator executes this RED on the
+    // base (no alarms re-armed) and GREEN on this branch.
+    /**
+     * P1: the legacy no-file + no-material-progress completion moves the pointer but never
+     * re-arms alarms, while every other completion path funnels through
+     * rescheduleAlarmsFromFlags. Recovery must leave the buff-expiry and backup alarms behind.
+     */
+    @Test
+    fun `legacy empty completion re-arms buff and backup alarms`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        snapshotOutgoingA(1)
+        playerRepo.resetProgression()
+        sessionRepo.deleteAllSessions()
+        val now = System.currentTimeMillis()
+        val xpBoostAt = now + 3_600_000L
+        val blessingAt = now + 7_200_000L
+        playerRepo.updateFlagsAtomically {
+            it.copy(
+                xpBoostExpiresAt = xpBoostAt,
+                activeBlessingExpiresAt = blessingAt,
+                backupFrequency = "daily",
+            )
+        }
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val shadowAm = Shadows.shadowOf(alarmManager)
+        assertEquals(0, shadowAm.scheduledAlarms.size)
+        writeSwitchMarker("3")
+
+        assertTrue(saveSlotRepo.recoverInterruptedSwitch())
+        assertEquals(3, saveSlotRepo.activeSlot())
+
+        val triggers = shadowAm.scheduledAlarms.map { it.triggerAtTime }
+        assertTrue(triggers.contains(xpBoostAt))
+        assertTrue(triggers.contains(blessingAt))
+        assertEquals(3, shadowAm.scheduledAlarms.size)
+    }
+
+    // ------------------------------------------------------------------
+    // P4 medio-wipeado: LEGACY bare marker + crash mid-way through the OLD reset
+    // (sessions/quests/patches wiped, player row intact, no target file) with the good
+    // snapshot still on disk.
+    // run-by-orchestrator: workers run no Gradle; the orchestrator executes the heal
+    // test RED on the base (rollback leaves the half-wiped character alive, pointer stays)
+    // and all four GREEN on this branch.
+    // ------------------------------------------------------------------
+
+    /**
+     * P4 medio-wipeado heals: Room seeded as post-mid-reset (intact player + wiped
+     * sessions/quests/patches) with a content-full active snapshot on disk. Recovery must
+     * heal from the active snapshot — restoring sessions AND quests AND patches — then move
+     * the pointer and clear the marker.
+     * Proves: heal restores every wiped section and completes normally. Does NOT prove:
+     * concurrent-switch behavior or quest/patch-only newer progress (out of scope).
+     */
+    @Test
+    fun `legacy mid-reset wipe heals from the active snapshot`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        snapshotOutgoingA(1)
+        val snapActiveEndsAt = json.decodeFromString<PlayerExport>(
+            File(slotsDir(), "slot_1.json").readText()
+        ).sessions.single { !it.completed }.endsAt
+        // Crash mid-way through the OLD reset: sessions/quests/patches wiped, player intact.
+        sessionRepo.deleteAllSessions()
+        sessionRepo.deleteAllWorkerSessions()
+        db.questProgressDao().deleteAll()
+        db.farmingPatchDao().clearAll()
+        assertFalse(File(slotsDir(), "slot_2.json").exists())
+        writeSwitchMarker("2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertTrue(recovered)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        val healed = playerRepo.getOrCreatePlayer()
+        assertEquals(111_111L, healed.coins)
+        assertEquals("""{"mining":42}""", healed.skillLevels)
+        assertEquals("""{"mining":123456}""", healed.skillXp)
+        assertEquals("""{"iron_ore":99}""", healed.inventory)
+        assertEquals(listOf("a_completed"), sessionRepo.getAllCompletedSessions().map { it.sessionId })
+        val healedActive = sessionRepo.getActiveSession()
+        assertNotNull(healedActive)
+        assertEquals("a_active", healedActive!!.sessionId)
+        assertEquals(snapActiveEndsAt, healedActive.endsAt)
+        val quests = db.questProgressDao().getAllProgress()
+        assertEquals(1, quests.size)
+        assertEquals("sheep_shearer", quests.single().questId)
+        assertEquals(3, quests.single().progress)
+        val patches = db.farmingPatchDao().getAllPatches()
+        assertEquals(1, patches.size)
+        assertEquals("guam_seed", patches.single().cropType)
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    /**
+     * Live-with-newer-progress rolls back: same wipe as above, but the live player row is
+     * materially different from the snapshot (coins earned/spent since). Signal 3 alone goes
+     * false, so recovery must leave Room byte-untouched, clear the marker, keep the pointer.
+     * Proves: the player-material guard pins the heal. Does NOT prove: which field diverged.
+     */
+    @Test
+    fun `legacy wipe with mismatched live player rolls back`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        snapshotOutgoingA(1)
+        sessionRepo.deleteAllSessions()
+        sessionRepo.deleteAllWorkerSessions()
+        db.questProgressDao().deleteAll()
+        db.farmingPatchDao().clearAll()
+        db.playerDao().upsert(playerRepo.getOrCreatePlayer().copy(coins = 555_555L))
+        val liveBefore = playerRepo.getOrCreatePlayer()
+        val patchesBefore = db.farmingPatchDao().getAllPatches().size
+        writeSwitchMarker("2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertFalse(recovered)
+        assertEquals(1, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertEquals(liveBefore, playerRepo.getOrCreatePlayer())
+        assertEquals(0, sessionRepo.getAllCompletedSessions().size)
+        assertTrue(db.questProgressDao().getAllProgress().isEmpty())
+        val patchesAfter = db.farmingPatchDao().getAllPatches()
+        assertEquals(patchesBefore, patchesAfter.size)
+        assertTrue(patchesAfter.all { it.cropType == null })
+        // The stale snapshot is left intact for forensics, never imported.
+        assertEquals(111_111L, json.decodeFromString<PlayerExport>(File(slotsDir(), "slot_1.json").readText()).coins)
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    /**
+     * Missing active snapshot rolls back: wiped Room, no slot file at the origin, bare marker.
+     * Signal 2 alone goes false — recovery must not crash on the absent file, must clear the
+     * marker and keep the pointer with Room untouched.
+     * Proves: absent-snapshot safety. Does NOT prove: marker provenance.
+     */
+    @Test
+    fun `legacy wipe without an active snapshot rolls back`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        seedCharacterA(System.currentTimeMillis())
+        sessionRepo.deleteAllSessions()
+        sessionRepo.deleteAllWorkerSessions()
+        db.questProgressDao().deleteAll()
+        db.farmingPatchDao().clearAll()
+        assertFalse(File(slotsDir(), "slot_1.json").exists())
+        val liveBefore = playerRepo.getOrCreatePlayer()
+        writeSwitchMarker("2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertFalse(recovered)
+        assertEquals(1, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertEquals(liveBefore, playerRepo.getOrCreatePlayer())
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    /**
+     * Corrupt active snapshot rolls back without throwing: the origin file exists but does not
+     * parse, so the probe reads no-match; recovery clears the marker, keeps the pointer, and
+     * leaves the live row alive (no loop is possible because the marker is gone).
+     * Proves: corrupt-snapshot safety. Does NOT prove: boot-loop handling of corrupt-ready
+     * targets (D1 territory, untouched).
+     */
+    @Test
+    fun `legacy wipe with a corrupt active snapshot rolls back without throwing`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        snapshotOutgoingA(1)
+        sessionRepo.deleteAllSessions()
+        sessionRepo.deleteAllWorkerSessions()
+        db.questProgressDao().deleteAll()
+        db.farmingPatchDao().clearAll()
+        File(slotsDir(), "slot_1.json").writeText("{corrupt!!")
+        val liveBefore = playerRepo.getOrCreatePlayer()
+        writeSwitchMarker("2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertFalse(recovered)
+        assertEquals(1, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertEquals(liveBefore, playerRepo.getOrCreatePlayer())
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    /**
+     * Idle intact quests block the heal: live sessions empty but quests/patches INTACT and newer,
+     * player materially matching an old contentful snapshot. Healing here would rewind live
+     * progress (B-001), so recovery must roll back with quests/patches/sessions/player ALL
+     * byte-identical pre/post (pointer stays, marker cleared).
+     * Proves: the live-content guard blocks the rewind direction. Does NOT prove: detection of
+     * quest-only staleness finer than empty/non-empty.
+     */
+    @Test
+    fun `idle intact quests block the heal and stay byte-identical`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        snapshotOutgoingA(1)
+        // Idle with newer live progress: sessions empty, quests/patches intact and newer.
+        sessionRepo.deleteAllSessions()
+        sessionRepo.deleteAllWorkerSessions()
+        db.questProgressDao().upsert(QuestProgress("cooks_assistant", progress = 1))
+        db.farmingPatchDao().upsert(
+            FarmingPatch(patchNumber = 1, cropType = "potato_seed", plantedAt = System.currentTimeMillis())
+        )
+        assertFalse(File(slotsDir(), "slot_2.json").exists())
+        val playerBefore = playerRepo.getOrCreatePlayer()
+        val questsBefore = db.questProgressDao().getAllProgress().sortedBy { it.questId }
+        val patchesBefore = db.farmingPatchDao().getAllPatches()
+        val sessionsBefore = db.skillSessionDao().getAllSessions()
+        writeSwitchMarker("2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertFalse(recovered)
+        assertEquals(1, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        assertEquals(playerBefore, playerRepo.getOrCreatePlayer())
+        assertEquals(questsBefore, db.questProgressDao().getAllProgress().sortedBy { it.questId })
+        assertEquals(patchesBefore, db.farmingPatchDao().getAllPatches())
+        assertEquals(sessionsBefore, db.skillSessionDao().getAllSessions())
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
+    }
+
+    // run-by-orchestrator: workers run no Gradle; the orchestrator executes this RED on the
+    // base (no heal — pointer moves with wiped quests/patches) and GREEN on this branch.
+    /**
+     * Session-free OR-content arm: snapshot holds zero sessions but real quest progress + a
+     * planted crop; live Room wiped to the same shape (player intact, sessions empty,
+     * quests/patches empty) under a bare marker. Recovery must heal quests AND patches from
+     * the snapshot, then complete normally.
+     * Proves: the OR-content rule heals without sessions. Does NOT prove: session-carrying
+     * heals (covered above) or concurrent-switch behavior.
+     */
+    @Test
+    fun `session-free snapshot with quest and patch content heals`() = runBlocking {
+        globalStateRepo.setActiveSaveSlot(1)
+        val base = System.currentTimeMillis()
+        // Seed player + quest + patch WITHOUT sessions (snapshotOutgoingA always seeds sessions).
+        db.playerDao().upsert(
+            playerRepo.getOrCreatePlayer().copy(
+                skillLevels = """{"mining":42}""",
+                skillXp = """{"mining":123456}""",
+                inventory = """{"iron_ore":99}""",
+                equipped = """{"head":"bronze_helm"}""",
+                pets = """[{"id":"rock_golem"}]""",
+                coins = 111_111L,
+                flags = json.encodeToString<PlayerFlags>(PlayerFlags(currentHp = 66)),
+            )
+        )
+        db.questProgressDao().upsert(QuestProgress("sheep_shearer", progress = 3))
+        db.farmingPatchDao().upsert(FarmingPatch(patchNumber = 0, cropType = "guam_seed", plantedAt = base))
+        // Snapshot collects the empty live session list.
+        writeSlotFile(1, saveSlotRepo.exportFullSave())
+        // Crash mid-way through the OLD reset, session-free shape: quests/patches wiped, player intact.
+        db.questProgressDao().deleteAll()
+        db.farmingPatchDao().clearAll()
+        assertTrue(db.questProgressDao().getAllProgress().isEmpty())
+        assertTrue(db.farmingPatchDao().getAllPatches().all { it.cropType == null })
+        assertNull(sessionRepo.getActiveSession())
+        assertTrue(sessionRepo.getAllCompletedSessions().isEmpty())
+        assertFalse(File(slotsDir(), "slot_2.json").exists())
+        writeSwitchMarker("2")
+
+        val recovered = saveSlotRepo.recoverInterruptedSwitch()
+
+        assertTrue(recovered)
+        assertEquals(2, saveSlotRepo.activeSlot())
+        assertFalse(File(slotsDir(), "pending_switch.marker").exists())
+        val healed = playerRepo.getOrCreatePlayer()
+        assertEquals(111_111L, healed.coins)
+        assertEquals("""{"mining":42}""", healed.skillLevels)
+        assertEquals("""{"mining":123456}""", healed.skillXp)
+        val quests = db.questProgressDao().getAllProgress()
+        assertEquals(1, quests.size)
+        assertEquals("sheep_shearer", quests.single().questId)
+        assertEquals(3, quests.single().progress)
+        val patches = db.farmingPatchDao().getAllPatches()
+        assertEquals(1, patches.size)
+        assertEquals("guam_seed", patches.single().cropType)
+        assertEquals(base, patches.single().plantedAt)
+        assertNull(sessionRepo.getActiveSession())
+        assertTrue(sessionRepo.getAllCompletedSessions().isEmpty())
+        assertFalse(saveSlotRepo.recoverInterruptedSwitch())
     }
 }
