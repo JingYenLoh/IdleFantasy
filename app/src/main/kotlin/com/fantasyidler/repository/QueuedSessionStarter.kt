@@ -562,7 +562,7 @@ class QueuedSessionStarter @Inject constructor(
                     oreKey          = oreKey,
                     oreData         = oreData,
                     gems            = gameData.gems,
-                    startXp         = xpMap[Skills.MINING] ?: 0L,
+                    startXp         = if (isElder) flags.elderSkillXp[Skills.MINING] ?: 0L else xpMap[Skills.MINING] ?: 0L,
                     agilityLevel    = agilityLevel,
                     floorReductionMin = floorReductionMin,
                     petBoostPct     = miningBoosts.petBoostPct,
@@ -587,7 +587,7 @@ class QueuedSessionStarter @Inject constructor(
                 )
                 val result   = SkillSimulator.simulateWoodcutting(
                     treeData        = treeData,
-                    startXp         = xpMap[Skills.WOODCUTTING] ?: 0L,
+                    startXp         = if (isElder) flags.elderSkillXp[Skills.WOODCUTTING] ?: 0L else xpMap[Skills.WOODCUTTING] ?: 0L,
                     agilityLevel    = agilityLevel,
                     floorReductionMin = floorReductionMin,
                     petBoostPct     = woodcuttingBoosts.petBoostPct,
@@ -612,7 +612,7 @@ class QueuedSessionStarter @Inject constructor(
                 val result   = SkillSimulator.simulateFishing(
                     fishKey          = fishKey,
                     fishData         = fishData,
-                    startXp          = xpMap[Skills.FISHING] ?: 0L,
+                    startXp          = if (isElder) flags.elderSkillXp[Skills.FISHING] ?: 0L else xpMap[Skills.FISHING] ?: 0L,
                     agilityLevel     = agilityLevel,
                     floorReductionMin  = floorReductionMin,
                     petBoostPct      = fishingBoosts.petBoostPct,
