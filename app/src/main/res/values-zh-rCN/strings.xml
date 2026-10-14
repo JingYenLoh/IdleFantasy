@@ -116,6 +116,7 @@
     <string name="duration_complete">完成</string>
     <string name="label_session_results">训练结果</string>
     <string name="label_xp_gained">获得经验值</string>
+    <string name="label_time_elapsed">Time elapsed</string> <!-- untranslated -->
     <string name="label_items_collected">收集物品</string>
     <string name="label_level_ups">升级次数</string>
     <string name="label_requirements">需求</string>

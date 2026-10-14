@@ -174,6 +174,10 @@ fun HomeScreen(
                     modifier            = Modifier.verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
+                    SummaryRow(
+                        label = stringResource(R.string.label_time_elapsed),
+                        value = summary.durationMs.formatDurationMs(LocalContext.current),
+                    )
                     if (summary.died) {
                         Text(
                             text  = stringResource(R.string.home_died_message),
@@ -345,6 +349,10 @@ fun HomeScreen(
                     modifier            = Modifier.verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
+                    SummaryRow(
+                        label = stringResource(R.string.label_time_elapsed),
+                        value = summary.durationMs.formatDurationMs(LocalContext.current),
+                    )
                     if (summary.boostWasActive) {
                         Text(
                             text       = stringResource(R.string.home_xp_boost_was_active),

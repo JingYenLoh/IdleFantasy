@@ -116,6 +116,7 @@
     <string name="duration_complete">Complete</string> <!-- untranslated -->
     <string name="label_session_results">Torthaí Na Seisiún</string>
     <string name="label_xp_gained">Taithí faighte</string>
+    <string name="label_time_elapsed">Time elapsed</string> <!-- untranslated -->
     <string name="label_items_collected">Earraí creicha</string>
     <string name="label_level_ups">Leibhéil suas</string>
     <string name="label_requirements">Riachtanas</string>

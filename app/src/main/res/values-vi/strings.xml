@@ -116,6 +116,7 @@
     <string name="duration_complete">Hoàn thành</string>
     <string name="label_session_results">Kết quả phiên</string>
     <string name="label_xp_gained">XP nhận được</string>
+    <string name="label_time_elapsed">Time elapsed</string> <!-- untranslated -->
     <string name="label_items_collected">Đã thu thập vật phẩm</string>
     <string name="label_level_ups">Lên cấp</string>
     <string name="label_requirements">Yêu cầu</string>

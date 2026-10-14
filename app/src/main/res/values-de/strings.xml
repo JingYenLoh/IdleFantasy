@@ -116,6 +116,7 @@
     <string name="duration_complete">Abgeschlossen</string>
     <string name="label_session_results">Ergebnis der Aktivität</string>
     <string name="label_xp_gained">EP erworben</string>
+    <string name="label_time_elapsed">Time elapsed</string> <!-- untranslated -->
     <string name="label_items_collected">Gesammelte Gegenstände</string>
     <string name="label_level_ups">Levelaufstiege</string>
     <string name="label_requirements">Anforderungen</string>

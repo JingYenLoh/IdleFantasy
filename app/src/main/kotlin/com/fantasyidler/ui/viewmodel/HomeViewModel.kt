@@ -164,6 +164,8 @@ internal fun collectSkillDisplayXp(
 
 data class SessionSummary(
     val title: String,
+    /** Real time the collected sessions took, in ms. */
+    val durationMs: Long = 0L,
     val died: Boolean = false,
     /** Skill name → "+X XP" label — for multi-skill sessions (combat). */
     val xpLines: List<Pair<String, String>> = emptyList(),
@@ -820,6 +822,7 @@ class HomeViewModel @Inject constructor(
 
             val summary = SessionSummary(
                 title          = title,
+                durationMs     = sessions.sumOf { sessionRepo.realDurationMs(it) },
                 died           = acc.anyDied,
                 xpLines        = if (useTotalLabel) emptyList()
                                  else sortedXpEntries.mapIndexed { index, (skill, _) ->
@@ -1790,6 +1793,7 @@ class HomeViewModel @Inject constructor(
 
             val summary = SessionSummary(
                 title          = title,
+                durationMs     = maxOf(slot1Sessions.sumOf { sessionRepo.realDurationMs(it) }, slot2Sessions.sumOf { sessionRepo.realDurationMs(it) }),
                 died           = anyDied,
                 xpLines        = if (useTotalLabel) emptyList()
                                  else sortedXpEntries

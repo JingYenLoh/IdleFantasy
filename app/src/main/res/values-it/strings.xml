@@ -116,6 +116,7 @@
     <string name="duration_complete">Termine</string>
     <string name="label_session_results">Risultati Sessione</string>
     <string name="label_xp_gained">XP guadagnati</string>
+    <string name="label_time_elapsed">Time elapsed</string> <!-- untranslated -->
     <string name="label_items_collected">Oggetti raccolti</string>
     <string name="label_level_ups">Aumenti di livello</string>
     <string name="label_requirements">Requisiti</string>

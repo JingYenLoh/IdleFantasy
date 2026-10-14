@@ -116,6 +116,7 @@
     <string name="duration_complete">Pabaigta</string>
     <string name="label_session_results">Sesijos Rezultatas</string>
     <string name="label_xp_gained">XP surinktą</string>
+    <string name="label_time_elapsed">Time elapsed</string> <!-- untranslated -->
     <string name="label_items_collected">Daiktų Surinktą</string>
     <string name="label_level_ups">Lygio Pakelimas</string>
     <string name="label_requirements">Reikalavimai</string>

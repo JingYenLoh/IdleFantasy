@@ -116,6 +116,7 @@
     <string name="duration_complete">Complete</string> <!-- untranslated -->
     <string name="label_session_results">Sessie Resultaten</string>
     <string name="label_xp_gained">Verworven XP</string>
+    <string name="label_time_elapsed">Time elapsed</string> <!-- untranslated -->
     <string name="label_items_collected">Verzamelde Items</string>
     <string name="label_level_ups">Level ups</string> <!-- untranslated -->
     <string name="label_requirements">Vereisten</string>

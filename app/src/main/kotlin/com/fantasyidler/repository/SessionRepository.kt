@@ -162,6 +162,26 @@ class SessionRepository @Inject constructor(
     } catch (_: Exception) { session.endsAt }
 
     /**
+     * Real time the player waited for this session: boss/dungeon/tower sessions that ended early
+     * (kill or death) stop at the alarm offset; everything else runs endsAt - startedAt.
+     */
+    fun realDurationMs(session: SkillSession): Long {
+        val full = (session.endsAt - session.startedAt).coerceAtLeast(0L)
+        if (session.isWorkerSession) return full
+        return try {
+            when (session.skillName) {
+                "boss"            -> (bossFightEndMs(session) - session.startedAt).coerceIn(0L, full)
+                "combat", "tower" -> {
+                    val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+                    val offset = CombatSimulator.deathAlarmOffsetMs(frames, (full / 60).coerceAtLeast(1L))
+                    if (offset != null) minOf(full, offset) else full
+                }
+                else              -> full
+            }
+        } catch (_: Exception) { full }
+    }
+
+    /**
      * Heirloom item keys already rolled inside any stored session's frames (active or
      * completed-but-uncollected, player or worker). Boss simulations must block these
      * alongside owned heirlooms, otherwise two queued sessions can each roll the same
