@@ -1633,15 +1633,15 @@
     <string name="elder_isle_welcome_title">Приплытие на Старший остров</string>
     <string name="elder_isle_welcome_body">Затихают солёные брызги и рассеивается туман. Впереди лежат: костяно-белый берег, джунгли, исписанные бледными рунами, а вдали виден исходящий дым с вершины, которая не должна дымиться. Старые моряки были правы. Что-то древнее до сих пор живёт здесь.\n\n\n\nВаши материковые навыки, усиления и снаряжения остаются на корабле. Всё, что вы создаёте или прокачиваете на острове, обладает своим путём развития. Старшая экипировка может быть взята обратно на материк, материковое развитие не будет здесь считаться.\n\n\n\nНачните с Навыков. Отправляйтесь на добычу руды или рубку деревьев, чтобы собрать материалы острова. Затем осмотрите Задания для своей первой цели, а также посещайте мастера легенд в городе как только откроется новый фрагмент.</string>
     <string name="elder_isle_welcome_cta">Сойти на берег</string>
-    <string name="elder_isle_stub_skills">Elder skills are being charted. Full skill tracks arrive in a later build.</string> <!-- untranslated -->
-    <string name="elder_isle_stub_combat">Elder dungeons and the Last Elder fight are being drawn up. Later build.</string> <!-- untranslated -->
-    <string name="elder_isle_stub_quests">Isle quests will appear here once the story chain lands.</string> <!-- untranslated -->
-    <string name="elder_isle_stub_profile">Isle stats and gear layout land with the skill-tracks build.</string> <!-- untranslated -->
+    <string name="elder_isle_stub_skills">В настоящее время ведётся работа над навыками Старших. Полные линейки навыков появятся в одной из следующих версий.</string>
+    <string name="elder_isle_stub_combat">В настоящее время ведётся разработка подземелий Старших и сражения с Последним Старшим. Будет реализовано в одной из следующих версий.</string>
+    <string name="elder_isle_stub_quests">Задания на острове появятся здесь, как только начнется сюжетная цепочка.</string>
+    <string name="elder_isle_stub_profile">Статистики острова и расположение снаряжения в варианте с линиями навыков.</string>
     <string name="elder_isle_skills_title">Старшие навыки</string>
     <string name="elder_isle_total_level_label">Суммарный уровень Старшего</string>
     <string name="elder_isle_total_level_value">%1$d / %2$d</string>
-    <string name="elder_isle_skill_activities_title">%1$s activities</string> <!-- untranslated -->
-    <string name="elder_isle_no_activities">No activities yet in this build.</string> <!-- untranslated -->
+    <string name="elder_isle_skill_activities_title">%1$s действий</string>
+    <string name="elder_isle_no_activities">В этой сборке пока нет никаких действий.</string>
     <string name="elder_isle_start_session">Начать сессию</string>
     <string name="elder_isle_session_started">Сессия начата.</string>
     <string name="elder_isle_session_start_failed">Не удалось начать сессию: %1$s</string>
@@ -1747,9 +1747,9 @@
     <string name="item_elder_familiar_name">Прислужник старейшины</string>
 
     <!-- Elder Isle: ore descriptions -->
-    <string name="item_mythrite_ore_desc">Silvery isle ore. Smelts into Mythrite Bars, the base metal of the Coastal armor tier.</string> <!-- untranslated -->
-    <string name="item_abyssal_ore_desc">Dark isle ore laced with pressure-cracked veins. Smelts into Abyssal Bars for Grove-tier gear.</string> <!-- untranslated -->
-    <string name="item_voidsteel_ore_desc">Isle ore that hums faintly under pressure. Smelts into Voidsteel Bars for Volcanic-tier gear.</string> <!-- untranslated -->
+    <string name="item_mythrite_ore_desc">Руда Серебристого острова. При плавке даёт слитки мифрила — основной металл для изготовления доспехов уровня «Прибрежные».</string>
+    <string name="item_abyssal_ore_desc">Руда с Тёмного острова, пронизанная трещинами, образовавшимися под давлением. При плавке даёт слитки бездны, из которых изготавливается снаряжение уровня «Роща».</string>
+    <string name="item_voidsteel_ore_desc">Руда с острова, которая слабо гудит под давлением. При плавке даёт слитки пустотной стали для изготовления снаряжения уровня «Вулканический».</string>
     <string name="item_starforged_ore_desc">The isle\'s rarest ore, said to be shed from the seal itself. Smelts into Starforged Bars for the Elder set.</string> <!-- untranslated -->
     <string name="town_chronos_spire_no_bonus">Улучшите, чтобы сократить продолжительность игровой сессии</string>
     <string name="town_chronos_spire_active_bonus">Сокращение продолжительности игровых сессий на %1$d%%</string>
@@ -2384,21 +2384,21 @@
 
     <!-- Elder Isle pets: 7 dungeon drops + 1 raid-boss drop -->
     <string name="pet_tidal_sprite_name">Фея прилива</string>
-    <string name="pet_tidal_sprite_desc">A shimmering water spirit born from the surf of Beach &amp; Cliffs. Never seems to fully dry.</string> <!-- untranslated -->
+    <string name="pet_tidal_sprite_desc">Мерцающий водный дух, рожденный из прибоя пляжей и утёсов. Кажется, он никогда не высыхает до конца.</string>
     <string name="pet_grove_fawn_name">Оленёнок рощи</string>
-    <string name="pet_grove_fawn_desc">A young forest creature with rune-patterned fur, found among the ancient trees.</string> <!-- untranslated -->
+    <string name="pet_grove_fawn_desc">Молодое лесное существо с шерстью, украшенной руническими узорами, найденное среди вековых деревьев.</string>
     <string name="pet_magma_salamander_name">Магмовая саламандра</string>
-    <string name="pet_magma_salamander_desc">A heat-forged lizard that thrives in Volcano Peak\'s cracks. Its skin is always faintly warm.</string> <!-- untranslated -->
+    <string name="pet_magma_salamander_desc">Ящерица, закаленная жаром, обитающая в расщелинах Вулканической вершины. Её кожа всегда слегка тёплая.</string>
     <string name="pet_abyss_wisp_name">Огонёк бездны</string>
-    <string name="pet_abyss_wisp_desc">A cold silver light that drifted up from the Abyssal Depths and refused to sink back.</string> <!-- untranslated -->
+    <string name="pet_abyss_wisp_desc">Холодный серебристый свет, поднимавшийся из бездонных глубин и не желавший снова погружаться в них.</string>
     <string name="pet_ancient_turtle_name">Древняя черепаха</string>
-    <string name="pet_ancient_turtle_desc">A tiny turtle whose shell bears the same runes as the isle\'s seal. Older than it looks.</string> <!-- untranslated -->
+    <string name="pet_ancient_turtle_desc">Крошечная черепаха, на панцире которой выгравированы те же руны, что и на печати острова. Она старше, чем кажется.</string>
     <string name="pet_cinder_hawk_name">Золовой ястреб</string>
-    <string name="pet_cinder_hawk_desc">A bird of banked embers that circles the volcano and roosts on your shoulder between fights.</string> <!-- untranslated -->
+    <string name="pet_cinder_hawk_desc">Птица из тлеющих углей, которая кружит над вулканом и между боями садится тебе на плечо.</string>
     <string name="pet_deepwater_serpent_name">Глубоководный змей</string>
-    <string name="pet_deepwater_serpent_desc">A miniature cousin of the Sea Serpent, coiled around your wrist like a living bracelet.</string> <!-- untranslated -->
+    <string name="pet_deepwater_serpent_desc">Миниатюрный родственник Морского змея, обвившийся вокруг вашего запястья, словно живой браслет.</string>
     <string name="pet_elder_familiar_name">Прислужник старейшины</string>
-    <string name="pet_elder_familiar_desc">The Last Elder\'s dying companion, bound now to whoever felled its master. Its eyes still remember.</string> <!-- untranslated -->
+    <string name="pet_elder_familiar_desc">Умирающий спутник Последнего Старца, теперь привязанный к тому, кто убил его хозяина. Его глаза до сих пор помнят.</string>
 
     <!-- Save slots / character manager -->
     <string name="settings_characters">Персонажи</string>

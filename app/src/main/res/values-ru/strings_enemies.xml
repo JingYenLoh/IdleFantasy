@@ -175,17 +175,17 @@
 
     <!-- Elder Isle dungeons -->
     <string name="dungeon_beach_and_cliffs_name">Пляж и утёсы</string>
-    <string name="dungeon_beach_and_cliffs_desc">The isle\'s landing zone. Coastal enemies scavenge the wrecks of prior voyages. Every clear has a chance to drop Ancient Sigils.</string> <!-- untranslated -->
+    <string name="dungeon_beach_and_cliffs_desc">Зона высадки на острове. Враги на побережье грабят обломки кораблей, потерпевших крушение в предыдущих плаваниях. При каждом прохождении уровня есть шанс получить древние печати.</string>
     <string name="dungeon_ancient_forest_name">Древний лес</string>
-    <string name="dungeon_ancient_forest_desc">A rune-laced jungle grown over an old library. Grove stalkers and rune-touched dryads keep visitors from the ruins beneath. Every clear has a chance to drop Ancient Sigils.</string> <!-- untranslated -->
+    <string name="dungeon_ancient_forest_desc">Джунгли, пронизанные рунами, заросли старую библиотеку. Лесные охотники и дриады, озаренные рунами, не подпускают посетителей к руинам, скрытым внизу. При каждом уничтожении монстра есть шанс получить Древние печати.</string>
     <string name="dungeon_volcano_peak_name">Вулканический пик</string>
-    <string name="dungeon_volcano_peak_desc">The isle\'s smoking spine, once an Elder altar. Ash beasts and lava wraiths guard the sealing site. Every clear has a chance to drop Ancient Sigils.</string> <!-- untranslated -->
+    <string name="dungeon_volcano_peak_desc">Дымящийся хребет острова, некогда бывший алтарём Старших. Место печати охраняют пепельные чудовища и лавовые призраки. При каждом прохождении есть шанс получить Древние печати.</string>
     <string name="dungeon_abyssal_depths_name">Непроглядные глубины</string>
-    <string name="dungeon_abyssal_depths_desc">A flooded pressure-chamber at the foot of the isle, where the Last Elder waits. Abyssal horrors and void seraphs patrol the approach. Every clear drops Ancient Sigils.</string> <!-- untranslated -->
+    <string name="dungeon_abyssal_depths_desc">Затопленная герметическая камера у подножия острова, где ждет Последний Старейшина. Подступы к ней патрулируют бездонные ужасы и серафимы Пустоты. Каждый побежденный противник оставляет Древние печати.</string>
 
     <!-- Elder Isle raid bosses -->
     <string name="boss_sea_serpent_name">Морской змей</string>
-    <string name="boss_sea_serpent_desc">The voyage boss. A rune-scarred serpent that circles the isle and turns back everyone it doesn\'t drown. Defeat once to permanently enable Set Sail.</string> <!-- untranslated -->
+    <string name="boss_sea_serpent_desc">Повелитель морских путешествий. Змей, покрытый рунами, который кружит вокруг острова и отгоняет всех, кого не утопил. Победите его один раз, чтобы навсегда разблокировать способность «Отплыть».</string>
     <string name="boss_last_elder_name">Последний старейшина</string>
-    <string name="boss_last_elder_desc">The last of the Elders, sealed at the bottom of the Abyssal Depths. Only a full Elder set can survive the fight.</string> <!-- untranslated -->
+    <string name="boss_last_elder_desc">Последний из Старцев, заточенный на дне Бездонных глубин. Только полный набор Старшей экипировки сможет выстоять в этом сражении.</string>
 </resources>
