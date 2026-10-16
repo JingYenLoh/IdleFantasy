@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_home">Domov</string>
+    <string name="nav_quests">Úlohy</string>
+    <string name="btn_cancel">Zrušiť</string>
+    <string name="btn_confirm">Potvrdiť</string>
+    <string name="btn_repeat_action">Zopakovať Akciu</string>
+    <string name="btn_equip">Nasadiť</string>
+    <string name="btn_buy">Kúpiť</string>
+    <string name="btn_sell">Predať</string>
+    <string name="btn_plant">Zasadiť</string>
+    <string name="btn_harvest">Zožať</string>
+    <string name="btn_harvest_all">Zožať Všetko</string>
+    <string name="btn_clear">Vyčistiť</string>
+    <string name="btn_clear_all">Vyčistiť Všetko</string>
+    <string name="btn_enter_arena">Vstúpiť Do Arény</string>
+    <string name="btn_activate">Aktivovať</string>
+    <string name="btn_extend">Rozšíriť</string>
+    <string name="btn_deactivate">Deaktivovať</string>
+    <string name="btn_close">Zavrieť</string>
+    <string name="btn_back">Späť</string>
+    <string name="btn_save">Uložiť</string>
+    <string name="label_level">Úroveň</string>
+    <string name="label_attack">Útok</string>
+    <string name="label_strength">Sila</string>
+    <string name="label_defense">Obrana</string>
+</resources>

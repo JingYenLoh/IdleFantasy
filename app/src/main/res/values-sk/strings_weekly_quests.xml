@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quest_weekly_shark_hunter_name">Lovec Žralokov</string>
+    <string name="quest_weekly_shark_hunter_desc">Ulov 150 žralokov tento týždeň.</string>
+    <string name="quest_weekly_cook_shark_name">Šéfkuchár</string>
+    <string name="quest_weekly_cook_shark_desc">Uvar 110 žralokov tento týždeň.</string>
+    <string name="quest_weekly_skeleton_hunter_name">Lámač Kostí</string>
+    <string name="quest_weekly_skeleton_hunter_desc">Zabi 450 kostlivcov tento týždeň.</string>
+    <string name="quest_weekly_monster_hunter_desc">Zabi ľubovoľných 1 500 nepriateľov tento týždeň.</string>
+    <string name="quest_weekly_devout_desc">Zakop 450 kostí tento týždeň.</string>
+    <string name="quest_weekly_farmer_name">Sezónna Žatva</string>
+    <string name="quest_weekly_farmer_desc">Pozbieraj 30 plodín tento týždeň.</string>
+</resources>
