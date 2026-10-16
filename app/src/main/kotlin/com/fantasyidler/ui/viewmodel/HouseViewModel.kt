@@ -418,7 +418,7 @@ class HouseViewModel @Inject constructor(
             // The name frozen at earn time is only a fallback for events whose data was later
             // removed; live events re-resolve so translation updates apply (issue #1546).
             val currentName = banner?.let { b ->
-                gameData.seasonalEvents[b.eventId]?.let { event ->
+                gameData.seasonalEventRun(b.eventId)?.let { event ->
                     GameStrings.seasonalEventName(context, b.eventId, event.displayName)
                 }
             }

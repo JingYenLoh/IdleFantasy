@@ -415,9 +415,9 @@ class CombatViewModel @Inject constructor(
     // Re-read per access, not lazy: the ViewModel outlives a seasonal event switch while
     // the app stays open, and a cached list kept serving the old event's dungeon (issue #1651).
     fun dungeonList(onElderIsle: Boolean = false): List<DungeonData> {
-        val activeEventId = seasonalEventRepo.activeEvent()?.id
+        val activeSeries = seasonalEventRepo.activeEvent()?.series
         return gameData.dungeons.values
-            .filter { it.eventKey == null || it.eventKey == activeEventId }
+            .filter { it.eventKey == null || it.eventKey == activeSeries }
             .filter { (it.name in ELDER_DUNGEON_KEYS) == onElderIsle }
             .sortedBy { it.recommendedLevel }
     }
@@ -427,10 +427,10 @@ class CombatViewModel @Inject constructor(
 
     /** Monument-gated bosses appear only once the Eternal Flame is lit, so this reads flags per call. */
     fun bossList(monumentComplete: Boolean, dockBuilt: Boolean = false, totalLevel: Int = 0, onElderIsle: Boolean = false, hasFullElderSet: Boolean = false): List<BossData> {
-        val activeEventId = seasonalEventRepo.activeEvent()?.id
+        val activeSeries = seasonalEventRepo.activeEvent()?.series
         return gameData.bosses.values
             .filter { !it.raid }
-            .filter { it.eventKey == null || it.eventKey == activeEventId }
+            .filter { it.eventKey == null || it.eventKey == activeSeries }
             .filter { !it.requiresMonument || monumentComplete }
             .filter { !it.requiresDock || dockBuilt }
             .filter { it.totalLevelRequired == 0 || totalLevel >= it.totalLevelRequired }

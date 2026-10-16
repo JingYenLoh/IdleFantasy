@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import com.fantasyidler.R
+import com.fantasyidler.repository.SeasonalCalendar
 import com.fantasyidler.simulator.PrestigeBoosts
 
 /**
@@ -141,11 +142,16 @@ object GameStrings {
     fun thievingNpcName(context: Context, key: String): String =
         context.stringByName("thieving_npc_${key}_name") ?: key.toTitleCase()
 
-    fun seasonalEventName(context: Context, id: String, fallback: String): String =
-        context.stringByName("seasonal_event_${id}_name") ?: fallback
+    // Event strings are keyed by series ("gloomharvest"), shared by every yearly run; callers
+    // pass the run id ("gloomharvest_2027") and the year suffix is stripped here.
 
+    fun seasonalEventName(context: Context, id: String, fallback: String): String =
+        context.stringByName("seasonal_event_${SeasonalCalendar.seriesOf(id)}_name") ?: fallback
+
+    /** "Participated in the Gloomharvest 2027": the series string takes the run's year as %1$d. */
     fun seasonalEventBanner(context: Context, id: String, fallback: String): String =
-        context.stringByName("seasonal_event_${id}_banner") ?: fallback
+        context.stringByName("seasonal_event_${SeasonalCalendar.seriesOf(id)}_banner", SeasonalCalendar.yearOf(id) ?: 0)
+            ?: fallback
 
     fun seasonalBountyName(context: Context, id: String, fallback: String): String =
         context.stringByName("seasonal_bounty_${id}_name") ?: fallback
@@ -156,8 +162,12 @@ object GameStrings {
     fun seasonalMinigameName(context: Context, id: String, fallback: String): String =
         context.stringByName("seasonal_minigame_${id}_name") ?: fallback
 
+    /** A minigame's own hint text (args: hits/rounds required, total rounds), or null to use its type's generic hint. */
+    fun seasonalMinigameHint(context: Context, id: String, required: Int, rounds: Int): String? =
+        context.stringByName("seasonal_minigame_${id}_hint", required, rounds)
+
     fun seasonalRewardDesc(context: Context, eventId: String, tokens: Int, fallback: String): String =
-        context.stringByName("seasonal_reward_${eventId}_${tokens}_desc") ?: fallback
+        context.stringByName("seasonal_reward_${SeasonalCalendar.seriesOf(eventId)}_${tokens}_desc") ?: fallback
 
     fun seasonalMarketName(context: Context, id: String, fallback: String): String =
         context.stringByName("seasonal_market_${id}_name") ?: fallback

@@ -1,0 +1,22 @@
+{
+  "name": "glacier_hollows",
+  "display_name": "The Glacier Hollows",
+  "description": "Blue-lit caverns carved through the glacier, home to the Frostfall's fiercest beasts. Part of the Frostfall event.",
+  "recommended_level": 62,
+  "encounter_rate": 0.38,
+  "enemy_spawns": [
+    {
+      "enemy": "glacier_yeti",
+      "weight": 8
+    },
+    {
+      "enemy": "rime_giant",
+      "weight": 4
+    },
+    {
+      "enemy": "frostbound_jarl",
+      "weight": 1
+    }
+  ],
+  "event_key": "frostfall"
+}

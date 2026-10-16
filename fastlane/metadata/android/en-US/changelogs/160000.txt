@@ -1,0 +1,8 @@
+• Seasonal events now rotate automatically every season, year after year
+• New winter event: Frostfall, with two expeditions, the Rime Wyrm boss, Snowball Toss and a new reward track
+• New spring event: Bloomtide, with two expeditions, the Thorn Queen boss, Garden Chimes and a new reward track
+• Sunspire Solstice now has a full 300-token reward track, more bounties and a Night Market
+• Each yearly run of an event awards its own banner
+• Daily quests now roll for Divine gear after all Dwarven gear is collected
+• Added Slovak language
+• Updated Czech, Ukrainian and Slovak translations

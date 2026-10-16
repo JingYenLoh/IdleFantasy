@@ -741,69 +741,37 @@
 
     <!-- ===== Seed names ===== -->
     <string name="item_potato_seed_name">Семена картофеля</string>
-    <string name="item_potato_seed_desc">Посадите для выращивания картофеля. Вырастает за 2 часа.
-\n
-\nТребуется 1-й уровень земледелия.</string>
+    <string name="item_potato_seed_desc">Посадите для выращивания картофеля. Вырастает за 2 часа.\n\n\n\nТребуется 1-й уровень земледелия.</string>
     <string name="item_onion_seed_name">Семена лука</string>
-    <string name="item_onion_seed_desc">Посадите для выращивания лука. Вырастает за 3 часа.
-\n
-\nТребуется 5-й уровень земледелия.</string>
+    <string name="item_onion_seed_desc">Посадите для выращивания лука. Вырастает за 3 часа.\n\n\n\nТребуется 5-й уровень земледелия.</string>
     <string name="item_cabbage_seed_name">Семена капусты</string>
-    <string name="item_cabbage_seed_desc">Посадите для выращивания капусты. Вырастает за 4 часа.
-\n
-\nТребуется 10-й уровень фермерства.</string>
+    <string name="item_cabbage_seed_desc">Посадите для выращивания капусты. Вырастает за 4 часа.\n\n\n\nТребуется 10-й уровень фермерства.</string>
     <string name="item_carrot_seed_name">Семена моркови</string>
-    <string name="item_carrot_seed_desc">Посадите для выращивания моркови. Вырастает за 5 часов.
-\n
-\nТребуется 15-й уровень земледелия.</string>
+    <string name="item_carrot_seed_desc">Посадите для выращивания моркови. Вырастает за 5 часов.\n\n\n\nТребуется 15-й уровень земледелия.</string>
     <string name="item_tomato_seed_name">Семена томата</string>
-    <string name="item_tomato_seed_desc">Посадите для выращивания помидоров. Вырастает за 6 часов.
-\n
-\nТребуется 20-й уровень земледелия.</string>
+    <string name="item_tomato_seed_desc">Посадите для выращивания помидоров. Вырастает за 6 часов.\n\n\n\nТребуется 20-й уровень земледелия.</string>
     <string name="item_corn_seed_name">Семена кукурузы</string>
-    <string name="item_corn_seed_desc">Посадите для выращивания кукурузы. Вырастает за 7 часов.
-\n
-\nТребуется 25-й уровень земледелия.</string>
+    <string name="item_corn_seed_desc">Посадите для выращивания кукурузы. Вырастает за 7 часов.\n\n\n\nТребуется 25-й уровень земледелия.</string>
     <string name="item_pumpkin_seed_name">Семена тыквы</string>
-    <string name="item_pumpkin_seed_desc">Посадите для выращивания тыкв. Вырастает за 9 часов.
-\n
-\nТребуется 30-й уровень земледелия.</string>
+    <string name="item_pumpkin_seed_desc">Посадите для выращивания тыкв. Вырастает за 9 часов.\n\n\n\nТребуется 30-й уровень земледелия.</string>
     <string name="item_watermelon_seed_name">Семена арбуза</string>
-    <string name="item_watermelon_seed_desc">Посадите для выращивания арбузов. Вырастает за 10 часов.
-\n
-\nТребуется 35-й уровень фермерства.</string>
+    <string name="item_watermelon_seed_desc">Посадите для выращивания арбузов. Вырастает за 10 часов.\n\n\n\nТребуется 35-й уровень фермерства.</string>
     <string name="item_strawberry_seed_name">Семена клубники</string>
-    <string name="item_strawberry_seed_desc">Посадите для выращивания клубники. Вырастает за 11 часов.
-\n
-\nТребуется 40-й уровень земледелия.</string>
+    <string name="item_strawberry_seed_desc">Посадите для выращивания клубники. Вырастает за 11 часов.\n\n\n\nТребуется 40-й уровень земледелия.</string>
     <string name="item_magic_herb_seed_name">Семена магической травы</string>
-    <string name="item_magic_herb_seed_desc">Посадите для выращивания волшебных трав. Вырастает за 13 часов.
-\n
-\nТребуется 50-й уровень земледелия.</string>
+    <string name="item_magic_herb_seed_desc">Посадите для выращивания волшебных трав. Вырастает за 13 часов.\n\n\n\nТребуется 50-й уровень земледелия.</string>
     <string name="item_dragon_fruit_seed_name">Семена драконьего фрукта</string>
-    <string name="item_dragon_fruit_seed_desc">Посадите для выращивания драконьего фрукта. Вырастает за 14 часов.
-\n
-\nТребуется 55-й уровень фермерства.</string>
+    <string name="item_dragon_fruit_seed_desc">Посадите для выращивания драконьего фрукта. Вырастает за 14 часов.\n\n\n\nТребуется 55-й уровень фермерства.</string>
     <string name="item_golden_wheat_seed_name">Семена золотой пшеницы</string>
-    <string name="item_golden_wheat_seed_desc">Посадите для выращивания золотистой пшеницы. Вырастает за 16 часов.
-\n
-\nТребуется 65-й уровень земледелия.</string>
+    <string name="item_golden_wheat_seed_desc">Посадите для выращивания золотистой пшеницы. Вырастает за 16 часов.\n\n\n\nТребуется 65-й уровень земледелия.</string>
     <string name="item_spirit_seed_name">Семена духовной травы</string>
-    <string name="item_spirit_seed_desc">Посадите для выращивания духовной травы. Вырастает за 19 часов.
-\n
-\nТребуется 75-й уровень земледелия.</string>
+    <string name="item_spirit_seed_desc">Посадите для выращивания духовной травы. Вырастает за 19 часов.\n\n\n\nТребуется 75-й уровень земледелия.</string>
     <string name="item_celestial_bloom_seed_name">Семена небесного цветка</string>
-    <string name="item_celestial_bloom_seed_desc">Посадите для выращивания небесных цветов. Вырастает за 21 час.
-\n
-\nТребуется 85-й уровень земледелия.</string>
+    <string name="item_celestial_bloom_seed_desc">Посадите для выращивания небесных цветов. Вырастает за 21 час.\n\n\n\nТребуется 85-й уровень земледелия.</string>
     <string name="item_starfruit_seed_name">Семена звёздного плода</string>
-    <string name="item_starfruit_seed_desc">Посадите для выращивания звездчатого фрукта. Вырастает за 23 часа.
-\n
-\nТребуется 95-й уровень земледелия.</string>
+    <string name="item_starfruit_seed_desc">Посадите для выращивания звездчатого фрукта. Вырастает за 23 часа.\n\n\n\nТребуется 95-й уровень земледелия.</string>
     <string name="item_void_lotus_seed_name">Семена лотоса пустоты</string>
-    <string name="item_void_lotus_seed_desc">Посадите для выращивания лотоса пустоты. Вырастает за 24 часа.
-\n
-\nТребуется 99-й уровень земледелия.</string>
+    <string name="item_void_lotus_seed_desc">Посадите для выращивания лотоса пустоты. Вырастает за 24 часа.\n\n\n\nТребуется 99-й уровень земледелия.</string>
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
@@ -1325,4 +1293,15 @@
     <string name="item_void_lotus_name">Лотос пустоты</string>
     <string name="item_void_lotus_desc">Таинственный лотос, используемый в самых редких отварах. Для покупки требуется Торговля 60-го уровня.</string>
     <string name="crop_magic_bean_name">Волшебный боб</string>
+
+    <!-- Seasonal rotation gear -->
+    <string name="item_sunstone_ring_desc">A ring set with a shard of solstice sunlight. Warm to the touch, even in winter.</string> <!-- untranslated -->
+    <string name="item_sunforged_sabre_desc">Forged in the heart of the Sunspire bonfire. Its edge never quite cools.</string> <!-- untranslated -->
+    <string name="item_sunweave_cape_desc">Woven from midsummer light at the Night Market. Only sold during the Sunspire Solstice.</string> <!-- untranslated -->
+    <string name="item_frostbound_ring_desc">A band of ice that never melts. Steadies the bow arm on the coldest nights.</string> <!-- untranslated -->
+    <string name="item_glacial_longbow_desc">Carved from glacier ice that never thaws. Awarded to the Frostfall\'s most tireless defenders.</string> <!-- untranslated -->
+    <string name="item_frostweave_cape_desc">Spun from snowdrift and starlight at the Night Market. Only sold during the Frostfall.</string> <!-- untranslated -->
+    <string name="item_seedheart_ring_desc">A living seed sealed in silver. It hums with the patience of growing things.</string> <!-- untranslated -->
+    <string name="item_bloomwood_staff_desc">A flowering branch from the Wildgrove that never wilts. Spells bloom from its tip.</string> <!-- untranslated -->
+    <string name="item_petalweave_cape_desc">Stitched from a thousand spring petals at the Night Market. Only sold during the Bloomtide.</string> <!-- untranslated -->
 </resources>

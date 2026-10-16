@@ -148,9 +148,14 @@ class GameDataRepository @Inject constructor(
 
     // ------------------------------------------------------------------ seasonal events
 
+    /** Yearly event templates keyed by series; [SeasonalCalendar] stamps out each year's dated run. */
     val seasonalEvents: Map<String, SeasonalEventData> by lazy {
         asset("data/seasonal_events.json")
     }
+
+    /** The dated run for a "<series>_<year>" id, or null if its series is unknown. */
+    fun seasonalEventRun(eventId: String): SeasonalEventData? =
+        SeasonalCalendar.byId(seasonalEvents, eventId)
 
     // ------------------------------------------------------------------ skills
 

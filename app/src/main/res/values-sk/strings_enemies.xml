@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ===== Enemy names ===== -->
     <string name="enemy_giant_rat_name">Giant Rat</string> <!-- untranslated -->
     <string name="enemy_goblin_name">Goblin</string> <!-- untranslated -->
     <string name="enemy_skeleton_name">Skeleton</string> <!-- untranslated -->
@@ -73,6 +74,8 @@
     <string name="enemy_shadow_assassin_name">Shadow Assassin</string> <!-- untranslated -->
     <string name="enemy_vault_guardian_name">Vault Guardian</string> <!-- untranslated -->
     <string name="enemy_guild_master_name">Guild Master</string> <!-- untranslated -->
+
+    <!-- ===== Dungeon names and descriptions ===== -->
     <string name="dungeon_imp_cavern_name">Imp Cavern</string> <!-- untranslated -->
     <string name="dungeon_imp_cavern_desc">A shallow cave filled with mischievous imps. Perfect for absolute beginners!</string> <!-- untranslated -->
     <string name="dungeon_goblin_cave_name">Goblin Cave</string> <!-- untranslated -->
@@ -103,6 +106,8 @@
     <string name="dungeon_frozen_citadel_desc">An ancient fortress encased in a glacier, its defenders frozen in eternal vigil.</string> <!-- untranslated -->
     <string name="dungeon_abyssal_throne_name">Abyssal Throne</string> <!-- untranslated -->
     <string name="dungeon_abyssal_throne_desc">The deepest point in the known world, ruled by void lords since the dawn of time.</string> <!-- untranslated -->
+
+    <!-- ===== Event dungeon names ===== -->
     <string name="dungeon_sunspire_name">The Sunspire</string> <!-- untranslated -->
     <string name="dungeon_sunspire_desc">A sun-tower ruin cracked open by the solstice, spilling heat spirits into the region. Part of the Sunspire Solstice event.</string> <!-- untranslated -->
     <string name="dungeon_hollowfen_name">The Hollowfen</string> <!-- untranslated -->
@@ -111,6 +116,8 @@
     <string name="dungeon_cloud_kingdom_desc">A realm above the clouds, reached by climbing a legendary beanstalk. Giants roam vast floating islands, sky serpents drift between the cloudbanks, and storm imps crackle with restless energy. Few have seen it. Fewer still have returned to speak of it.</string> <!-- untranslated -->
     <string name="dungeon_blightwood_name">The Blightwood</string> <!-- untranslated -->
     <string name="dungeon_blightwood_desc">A rotting forest deep past the Hollowfen, where the Gloomharvest\'s strongest horrors gather. Part of the Gloomharvest event.</string> <!-- untranslated -->
+
+    <!-- ===== Raid bosses ===== -->
     <string name="boss_king_black_dragon_name">King Black Dragon</string> <!-- untranslated -->
     <string name="boss_king_black_dragon_desc">The legendary three-headed dragon, feared across the realm.</string> <!-- untranslated -->
     <string name="boss_demon_lord_name">Demon Lord</string> <!-- untranslated -->
@@ -133,6 +140,8 @@
     <string name="boss_brood_empress_desc">Mother of the swarm between the stars. Her brood has ended armies; yours had better be paid well.</string> <!-- untranslated -->
     <string name="boss_the_world_ender_name">The World Ender</string> <!-- untranslated -->
     <string name="boss_the_world_ender_desc">When it stirs, kingdoms write their wills. Four names on the contract or none return.</string> <!-- untranslated -->
+
+    <!-- ===== Expedition-unlocked dungeon names ===== -->
     <string name="dungeon_collapsed_mine_name">Collapsed Mine</string> <!-- untranslated -->
     <string name="dungeon_collapsed_mine_desc">A vast cavern beneath the copper mines. Cave trolls and rock golems haunt the rubble, and giant spiders spin webs across the collapsed shafts.</string> <!-- untranslated -->
     <string name="dungeon_shadow_den_name">Shadow Den</string> <!-- untranslated -->
@@ -153,6 +162,8 @@
     <string name="dungeon_rogue_sanctum_desc">The guild\'s inner refuge, accessible only to proven members.</string> <!-- untranslated -->
     <string name="dungeon_guild_of_shadows_name">Guild of Shadows</string> <!-- untranslated -->
     <string name="dungeon_guild_of_shadows_desc">The innermost sanctum of the thieves\' guild, guarded by its most elite enforcers.</string> <!-- untranslated -->
+
+    <!-- Elder Isle enemies (two per dungeon) -->
     <string name="enemy_beach_marauder_name">Beach Marauder</string> <!-- untranslated -->
     <string name="enemy_beach_leviathan_name">Beach Leviathan</string> <!-- untranslated -->
     <string name="enemy_grove_stalker_name">Grove Stalker</string> <!-- untranslated -->
@@ -161,6 +172,8 @@
     <string name="enemy_lava_wraith_name">Lava Wraith</string> <!-- untranslated -->
     <string name="enemy_abyssal_horror_name">Abyssal Horror</string> <!-- untranslated -->
     <string name="enemy_void_seraph_name">Void Seraph</string> <!-- untranslated -->
+
+    <!-- Elder Isle dungeons -->
     <string name="dungeon_beach_and_cliffs_name">Beach &amp; Cliffs</string> <!-- untranslated -->
     <string name="dungeon_beach_and_cliffs_desc">The isle\'s landing zone. Coastal enemies scavenge the wrecks of prior voyages. Every clear has a chance to drop Ancient Sigils.</string> <!-- untranslated -->
     <string name="dungeon_ancient_forest_name">Ancient Forest</string> <!-- untranslated -->
@@ -169,8 +182,38 @@
     <string name="dungeon_volcano_peak_desc">The isle\'s smoking spine, once an Elder altar. Ash beasts and lava wraiths guard the sealing site. Every clear has a chance to drop Ancient Sigils.</string> <!-- untranslated -->
     <string name="dungeon_abyssal_depths_name">Abyssal Depths</string> <!-- untranslated -->
     <string name="dungeon_abyssal_depths_desc">A flooded pressure-chamber at the foot of the isle, where the Last Elder waits. Abyssal horrors and void seraphs patrol the approach. Every clear drops Ancient Sigils.</string> <!-- untranslated -->
+
+    <!-- Elder Isle raid bosses -->
     <string name="boss_sea_serpent_name">Sea Serpent</string> <!-- untranslated -->
     <string name="boss_sea_serpent_desc">The voyage boss. A rune-scarred serpent that circles the isle and turns back everyone it doesn\'t drown. Defeat once to permanently enable Set Sail.</string> <!-- untranslated -->
     <string name="boss_last_elder_name">The Last Elder</string> <!-- untranslated -->
     <string name="boss_last_elder_desc">The last of the Elders, sealed at the bottom of the Abyssal Depths. Only a full Elder set can survive the fight.</string> <!-- untranslated -->
+
+    <!-- Frostfall and Bloomtide -->
+    <string name="enemy_frost_sprite_name">Frost Sprite</string> <!-- untranslated -->
+    <string name="enemy_snow_wolf_name">Snow Wolf</string> <!-- untranslated -->
+    <string name="enemy_ice_troll_name">Ice Troll</string> <!-- untranslated -->
+    <string name="enemy_rime_revenant_name">Rime Revenant</string> <!-- untranslated -->
+    <string name="enemy_glacier_yeti_name">Glacier Yeti</string> <!-- untranslated -->
+    <string name="enemy_rime_giant_name">Rime Giant</string> <!-- untranslated -->
+    <string name="enemy_frostbound_jarl_name">Frostbound Jarl</string> <!-- untranslated -->
+    <string name="enemy_pollen_sprite_name">Pollen Sprite</string> <!-- untranslated -->
+    <string name="enemy_bramble_boar_name">Bramble Boar</string> <!-- untranslated -->
+    <string name="enemy_briar_beast_name">Briar Beast</string> <!-- untranslated -->
+    <string name="enemy_verdant_drake_name">Verdant Drake</string> <!-- untranslated -->
+    <string name="enemy_thorn_stalker_name">Thorn Stalker</string> <!-- untranslated -->
+    <string name="enemy_blossom_treant_name">Blossom Treant</string> <!-- untranslated -->
+    <string name="enemy_bramble_titan_name">Bramble Titan</string> <!-- untranslated -->
+    <string name="dungeon_rimewaste_name">The Rimewaste</string> <!-- untranslated -->
+    <string name="dungeon_rimewaste_desc">A wind-scoured snowfield where the Frostfall\'s creatures drift down from the peaks. Part of the Frostfall event.</string> <!-- untranslated -->
+    <string name="dungeon_glacier_hollows_name">The Glacier Hollows</string> <!-- untranslated -->
+    <string name="dungeon_glacier_hollows_desc">Blue-lit caverns carved through the glacier, home to the Frostfall\'s fiercest beasts. Part of the Frostfall event.</string> <!-- untranslated -->
+    <string name="dungeon_thornmeadow_name">The Thornmeadow</string> <!-- untranslated -->
+    <string name="dungeon_thornmeadow_desc">A meadow gone wild with the spring thaw, its flowers hiding thorns and teeth. Part of the Bloomtide event.</string> <!-- untranslated -->
+    <string name="dungeon_wildgrove_name">The Wildgrove</string> <!-- untranslated -->
+    <string name="dungeon_wildgrove_desc">An ancient grove past the Thornmeadow where the Thorn Queen\'s court takes root. Part of the Bloomtide event.</string> <!-- untranslated -->
+    <string name="boss_the_rime_wyrm_name">The Rime Wyrm</string> <!-- untranslated -->
+    <string name="boss_the_rime_wyrm_desc">An ancient wyrm of living ice that wakes each Frostfall, burying the Glacier Hollows in endless winter.</string> <!-- untranslated -->
+    <string name="boss_the_thorn_queen_name">The Thorn Queen</string> <!-- untranslated -->
+    <string name="boss_the_thorn_queen_desc">The briar-crowned ruler of the Wildgrove, whose roses bloom each spring with thorns as long as swords.</string> <!-- untranslated -->
 </resources>

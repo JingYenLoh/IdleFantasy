@@ -84,7 +84,7 @@ class TitleRepository @Inject constructor(
         if (id.startsWith("seasonal_")) {
             val eventId = id.removePrefix("seasonal_")
             val earned = flags.seasonalBannersEarned.find { it.eventId == eventId } ?: return null
-            val shortName = earned.eventDisplayName.ifBlank { gameData.seasonalEvents[eventId]?.displayName ?: return null }
+            val shortName = earned.eventDisplayName.ifBlank { gameData.seasonalEventRun(eventId)?.displayName ?: return null }
             return context.withAppLocale().getString(R.string.title_seasonal_champion_of, shortName)
         }
         return null

@@ -256,5 +256,55 @@
   "ancient_turtle":     {"id":"ancient_turtle",     "display_name":"Ancient Turtle",     "emoji":"🐢", "description":"A slow, patient shell-back that has seen a hundred voyages fail.",       "source":"Beach elder-tier rare drop",         "effect_type":"xp_boost", "boosted_skill":"hitpoints",   "boost_percent":10},
   "cinder_hawk":        {"id":"cinder_hawk",        "display_name":"Cinder Hawk",        "emoji":"🦅", "description":"A raptor whose feathers hold the volcano's heat.",                       "source":"Volcano Peak elder-tier rare drop",  "effect_type":"xp_boost", "boosted_skill":"ranged",      "boost_percent":10},
   "deepwater_serpent":  {"id":"deepwater_serpent",  "display_name":"Deepwater Serpent",  "emoji":"🐍", "description":"A slender coil of the deepest reef. Rarely surfaces.",                  "source":"Abyssal Depths elder-tier ultra-rare drop", "effect_type":"xp_boost", "boosted_skill":"magic", "boost_percent":10},
-  "elder_familiar":     {"id":"elder_familiar",     "display_name":"Elder Familiar",     "emoji":"🕯️", "description":"A soft-glowing shape that follows the Elder's final chamber home.",       "source":"The Last Elder — legendary drop",    "effect_type":"xp_boost", "boosted_skill":"combat",      "boost_percent":15}
+  "elder_familiar":     {"id":"elder_familiar",     "display_name":"Elder Familiar",     "emoji":"🕯️", "description":"A soft-glowing shape that follows the Elder's final chamber home.",       "source":"The Last Elder — legendary drop",    "effect_type":"xp_boost", "boosted_skill":"combat",      "boost_percent":15},
+  "sunbird_chick": {
+    "id": "sunbird_chick",
+    "display_name": "Sunbird Chick",
+    "emoji": "🐤",
+    "description": "A fluffy chick hatched in the embers of the solstice bonfire. It loves a good blaze.",
+    "source": "Sunspire Solstice event reward (250 tokens)",
+    "effect_type": "xp_boost",
+    "boosted_skill": "firemaking",
+    "boost_percent": 5
+  },
+  "frost_wyrmling": {
+    "id": "frost_wyrmling",
+    "display_name": "Frost Wyrmling",
+    "emoji": "🐲",
+    "description": "A hatchling of the Rime Wyrm that followed you home, frosting everything it breathes on.",
+    "source": "The Rime Wyrm raid (Frostfall event)",
+    "effect_type": "xp_boost",
+    "boosted_skill": "combat",
+    "boost_percent": 5
+  },
+  "snowhare": {
+    "id": "snowhare",
+    "display_name": "Snowhare",
+    "emoji": "🐇",
+    "description": "A snow-white hare that sniffs out the best fishing holes in the ice.",
+    "source": "Frostfall event reward (250 tokens)",
+    "effect_type": "xp_boost",
+    "boosted_skill": "fishing",
+    "boost_percent": 5
+  },
+  "petal_sprite": {
+    "id": "petal_sprite",
+    "display_name": "Petal Sprite",
+    "emoji": "🌺",
+    "description": "A blossom spirit shaken loose from the Thorn Queen's crown. It dances ahead of you into battle.",
+    "source": "The Thorn Queen raid (Bloomtide event)",
+    "effect_type": "xp_boost",
+    "boosted_skill": "combat",
+    "boost_percent": 5
+  },
+  "bumblebee": {
+    "id": "bumblebee",
+    "display_name": "Bumblebee",
+    "emoji": "🐝",
+    "description": "A busy little bee that knows exactly which flowers make the best potions.",
+    "source": "Bloomtide event reward (250 tokens)",
+    "effect_type": "xp_boost",
+    "boosted_skill": "herblore",
+    "boost_percent": 5
+  }
 }

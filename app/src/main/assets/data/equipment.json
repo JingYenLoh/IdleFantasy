@@ -5050,5 +5050,131 @@
     "strength_bonus": 30,
     "defense_bonus": 25,
     "requirements": {}
+  },
+  "sunstone_ring": {
+    "name": "sunstone_ring",
+    "display_name": "Sunstone Ring",
+    "slot": "ring",
+    "combat_style": "attack",
+    "description": "A ring set with a shard of solstice sunlight. Warm to the touch, even in winter.",
+    "attack_bonus": 10,
+    "strength_bonus": 6,
+    "defense_bonus": 6,
+    "requirements": {
+      "attack": 40
+    }
+  },
+  "sunforged_sabre": {
+    "name": "sunforged_sabre",
+    "display_name": "Sunforged Sabre",
+    "slot": "weapon",
+    "combat_style": "attack",
+    "description": "Forged in the heart of the Sunspire bonfire. Its edge never quite cools.",
+    "attack_bonus": 64,
+    "strength_bonus": 56,
+    "defense_bonus": 0,
+    "requirements": {
+      "attack": 55
+    }
+  },
+  "sunweave_cape": {
+    "name": "sunweave_cape",
+    "display_name": "Sunweave Cape",
+    "slot": "cape",
+    "combat_style": null,
+    "description": "Woven from midsummer light at the Night Market. Only sold during the Sunspire Solstice.",
+    "attack_bonus": 4,
+    "strength_bonus": 4,
+    "defense_bonus": 6,
+    "requirements": {}
+  },
+  "frostbound_ring": {
+    "name": "frostbound_ring",
+    "display_name": "Frostbound Ring",
+    "slot": "ring",
+    "combat_style": "ranged",
+    "description": "A band of ice that never melts. Steadies the bow arm on the coldest nights.",
+    "attack_bonus": 3,
+    "strength_bonus": 0,
+    "defense_bonus": 6,
+    "ranged_attack_bonus": 10,
+    "ranged_strength_bonus": 4,
+    "requirements": {
+      "ranged": 40
+    }
+  },
+  "glacial_longbow": {
+    "name": "glacial_longbow",
+    "display_name": "Glacial Longbow",
+    "slot": "weapon",
+    "combat_style": "ranged",
+    "two_handed": true,
+    "attack_speed": 1.8,
+    "description": "Carved from glacier ice that never thaws. Awarded to the Frostfall's most tireless defenders.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "ranged_attack_bonus": 82,
+    "ranged_strength_bonus": 56,
+    "requirements": {
+      "ranged": 55
+    }
+  },
+  "frostweave_cape": {
+    "name": "frostweave_cape",
+    "display_name": "Frostweave Cape",
+    "slot": "cape",
+    "combat_style": null,
+    "description": "Spun from snowdrift and starlight at the Night Market. Only sold during the Frostfall.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 8,
+    "ranged_attack_bonus": 4,
+    "ranged_strength_bonus": 2,
+    "requirements": {}
+  },
+  "seedheart_ring": {
+    "name": "seedheart_ring",
+    "display_name": "Seedheart Ring",
+    "slot": "ring",
+    "combat_style": "magic",
+    "description": "A living seed sealed in silver. It hums with the patience of growing things.",
+    "attack_bonus": 2,
+    "strength_bonus": 0,
+    "defense_bonus": 6,
+    "magic_attack_bonus": 10,
+    "magic_damage_bonus": 4,
+    "requirements": {
+      "magic": 40
+    }
+  },
+  "bloomwood_staff": {
+    "name": "bloomwood_staff",
+    "display_name": "Bloomwood Staff",
+    "slot": "weapon",
+    "combat_style": "magic",
+    "attack_speed": 1.5,
+    "description": "A flowering branch from the Wildgrove that never wilts. Spells bloom from its tip.",
+    "attack_bonus": 38,
+    "strength_bonus": 0,
+    "defense_bonus": 12,
+    "magic_attack_bonus": 56,
+    "magic_damage_bonus": 16,
+    "requirements": {
+      "magic": 55
+    }
+  },
+  "petalweave_cape": {
+    "name": "petalweave_cape",
+    "display_name": "Petalweave Cape",
+    "slot": "cape",
+    "combat_style": null,
+    "description": "Stitched from a thousand spring petals at the Night Market. Only sold during the Bloomtide.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 8,
+    "magic_attack_bonus": 4,
+    "magic_damage_bonus": 2,
+    "requirements": {}
   }
 }

@@ -38,6 +38,7 @@ import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.blessingPrayerCapeMult
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.repository.PlayerRepository
+import com.fantasyidler.repository.SeasonalCalendar
 import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
@@ -53,9 +54,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import javax.inject.Inject
 import com.fantasyidler.R
 import com.fantasyidler.data.model.OwnedPet
@@ -70,6 +68,8 @@ data class SeasonalBannerDisplay(
     val earnedAtMs: Long?,
     /** Short event name (e.g. "Sunspire Solstice"), used to build this event's Title. */
     val titleName: String,
+    /** Event series shared by every yearly run (e.g. "gloomharvest"); one Title per series. */
+    val series: String,
 )
 
 @HiltViewModel
@@ -274,20 +274,20 @@ class InventoryViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), UiState())
 
     /**
-     * One row per event ever known to the game (from [GameDataRepository.seasonalEvents]) plus any
-     * already-earned banner whose event data has since been removed. Earned banners use their frozen
-     * snapshot (so they still render after the event is gone); events not yet earned show as locked.
+     * One row per yearly event run that has started so far, plus any already-earned banner whose
+     * event data has since been removed. Earned banners use their frozen snapshot (so they still
+     * render after the event is gone); runs not earned show as locked.
      */
     private fun buildSeasonalBannerDisplays(flags: PlayerFlags): List<SeasonalBannerDisplay> {
         val earnedById = flags.seasonalBannersEarned.associateBy { it.eventId }
-        val yearFormat = SimpleDateFormat("yyyy", Locale.getDefault())
-        val allIds = gameData.seasonalEvents.keys + earnedById.keys
+        val runs = SeasonalCalendar.startedRuns(gameData.seasonalEvents, System.currentTimeMillis()).associateBy { it.id }
+        val allIds = runs.keys + earnedById.keys
         return allIds.distinct().mapNotNull { id ->
             val earned = earnedById[id]
-            val event = gameData.seasonalEvents[id]
+            val event = runs[id] ?: gameData.seasonalEventRun(id)
             val eventName = event?.let { GameStrings.seasonalEventName(context, id, it.displayName) }
             val label = when {
-                eventName != null -> "$eventName ${yearFormat.format(Date(event.startMs))}"
+                eventName != null -> "$eventName ${event.year}"
                 earned    != null -> earned.displayText
                 else              -> return@mapNotNull null
             }
@@ -298,8 +298,9 @@ class InventoryViewModel @Inject constructor(
                 earned     = earned != null,
                 earnedAtMs = earned?.completedAtMs,
                 titleName  = eventName ?: earned?.eventDisplayName?.ifBlank { null } ?: label,
+                series     = SeasonalCalendar.seriesOf(id),
             )
-        }.sortedByDescending { gameData.seasonalEvents[it.eventId]?.startMs ?: it.earnedAtMs ?: 0L }
+        }.sortedByDescending { gameData.seasonalEventRun(it.eventId)?.startMs ?: it.earnedAtMs ?: 0L }
     }
 
     // ------------------------------------------------------------------

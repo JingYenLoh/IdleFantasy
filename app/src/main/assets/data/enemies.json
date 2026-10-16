@@ -4160,5 +4160,693 @@
         "quantity_max": 1
       }
     ]
+  },
+  "frost_sprite": {
+    "name": "frost_sprite",
+    "display_name": "Frost Sprite",
+    "hp": 65,
+    "combat_stats": {
+      "attack_level": 23,
+      "strength_level": 20,
+      "defense_level": 16,
+      "attack_bonus": 38,
+      "strength_bonus": 34
+    },
+    "defensive_stats": {
+      "attack_defense": 22,
+      "strength_defense": 22,
+      "ranged_defense": 15,
+      "magic_defense": 52
+    },
+    "xp_drops": {
+      "combat": 430
+    },
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 70,
+        "quantity_max": 160
+      },
+      {
+        "item": "water_rune",
+        "chance": 0.45,
+        "quantity_min": 10,
+        "quantity_max": 25
+      },
+      {
+        "item": "air_rune",
+        "chance": 0.4,
+        "quantity_min": 8,
+        "quantity_max": 18
+      }
+    ]
+  },
+  "snow_wolf": {
+    "name": "snow_wolf",
+    "display_name": "Snow Wolf",
+    "hp": 105,
+    "combat_stats": {
+      "attack_level": 29,
+      "strength_level": 27,
+      "defense_level": 22,
+      "attack_bonus": 50,
+      "strength_bonus": 48
+    },
+    "defensive_stats": {
+      "attack_defense": 45,
+      "strength_defense": 42,
+      "ranged_defense": 28,
+      "magic_defense": 60
+    },
+    "xp_drops": {
+      "combat": 640
+    },
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 140,
+        "quantity_max": 300
+      },
+      {
+        "item": "big_bones",
+        "chance": 0.5,
+        "quantity_min": 1,
+        "quantity_max": 2
+      },
+      {
+        "item": "raw_trout",
+        "chance": 0.3,
+        "quantity_min": 3,
+        "quantity_max": 6
+      }
+    ]
+  },
+  "ice_troll": {
+    "name": "ice_troll",
+    "display_name": "Ice Troll",
+    "hp": 150,
+    "combat_stats": {
+      "attack_level": 33,
+      "strength_level": 34,
+      "defense_level": 26,
+      "attack_bonus": 58,
+      "strength_bonus": 60
+    },
+    "defensive_stats": {
+      "attack_defense": 55,
+      "strength_defense": 50,
+      "ranged_defense": 34,
+      "magic_defense": 66
+    },
+    "xp_drops": {
+      "combat": 900
+    },
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 200,
+        "quantity_max": 420
+      },
+      {
+        "item": "troll_bone",
+        "chance": 0.45,
+        "quantity_min": 1,
+        "quantity_max": 1
+      },
+      {
+        "item": "coal",
+        "chance": 0.4,
+        "quantity_min": 4,
+        "quantity_max": 10
+      },
+      {
+        "item": "raw_shark",
+        "chance": 0.15,
+        "quantity_min": 1,
+        "quantity_max": 2
+      }
+    ]
+  },
+  "rime_revenant": {
+    "name": "rime_revenant",
+    "display_name": "Rime Revenant",
+    "hp": 340,
+    "combat_stats": {
+      "attack_level": 48,
+      "strength_level": 50,
+      "defense_level": 44,
+      "attack_bonus": 95,
+      "strength_bonus": 100
+    },
+    "defensive_stats": {
+      "attack_defense": 95,
+      "strength_defense": 90,
+      "ranged_defense": 60,
+      "magic_defense": 108
+    },
+    "xp_drops": {
+      "combat": 2500
+    },
+    "always_drops": [
+      {
+        "item": "dragon_bone",
+        "quantity": 1
+      }
+    ],
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.9,
+        "quantity_min": 550,
+        "quantity_max": 1300
+      },
+      {
+        "item": "water_rune",
+        "chance": 0.6,
+        "quantity_min": 30,
+        "quantity_max": 60
+      },
+      {
+        "item": "adamantite_ore",
+        "chance": 0.5,
+        "quantity_min": 8,
+        "quantity_max": 16
+      },
+      {
+        "item": "runite_ore",
+        "chance": 0.15,
+        "quantity_min": 1,
+        "quantity_max": 3
+      },
+      {
+        "item": "sapphire",
+        "chance": 0.25,
+        "quantity_min": 1,
+        "quantity_max": 2
+      }
+    ]
+  },
+  "glacier_yeti": {
+    "name": "glacier_yeti",
+    "display_name": "Glacier Yeti",
+    "hp": 170,
+    "combat_stats": {
+      "attack_level": 42,
+      "strength_level": 40,
+      "defense_level": 34,
+      "attack_bonus": 70,
+      "strength_bonus": 68
+    },
+    "defensive_stats": {
+      "attack_defense": 60,
+      "strength_defense": 58,
+      "ranged_defense": 40,
+      "magic_defense": 78
+    },
+    "xp_drops": {
+      "combat": 1150
+    },
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 300,
+        "quantity_max": 650
+      },
+      {
+        "item": "raw_shark",
+        "chance": 0.3,
+        "quantity_min": 1,
+        "quantity_max": 3
+      },
+      {
+        "item": "big_bones",
+        "chance": 0.5,
+        "quantity_min": 1,
+        "quantity_max": 2
+      },
+      {
+        "item": "blood_rune",
+        "chance": 0.2,
+        "quantity_min": 3,
+        "quantity_max": 8
+      }
+    ]
+  },
+  "rime_giant": {
+    "name": "rime_giant",
+    "display_name": "Rime Giant",
+    "hp": 280,
+    "combat_stats": {
+      "attack_level": 50,
+      "strength_level": 52,
+      "defense_level": 45,
+      "attack_bonus": 88,
+      "strength_bonus": 92
+    },
+    "defensive_stats": {
+      "attack_defense": 85,
+      "strength_defense": 82,
+      "ranged_defense": 55,
+      "magic_defense": 98
+    },
+    "xp_drops": {
+      "combat": 1900
+    },
+    "always_drops": [
+      {
+        "item": "big_bones",
+        "quantity": 2
+      }
+    ],
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 500,
+        "quantity_max": 1000
+      },
+      {
+        "item": "giant_bones",
+        "chance": 0.4,
+        "quantity_min": 1,
+        "quantity_max": 2
+      },
+      {
+        "item": "adamantite_ore",
+        "chance": 0.45,
+        "quantity_min": 6,
+        "quantity_max": 12
+      },
+      {
+        "item": "runite_ore",
+        "chance": 0.25,
+        "quantity_min": 1,
+        "quantity_max": 3
+      }
+    ]
+  },
+  "frostbound_jarl": {
+    "name": "frostbound_jarl",
+    "display_name": "Frostbound Jarl",
+    "hp": 500,
+    "combat_stats": {
+      "attack_level": 60,
+      "strength_level": 62,
+      "defense_level": 55,
+      "attack_bonus": 110,
+      "strength_bonus": 115
+    },
+    "defensive_stats": {
+      "attack_defense": 105,
+      "strength_defense": 100,
+      "ranged_defense": 70,
+      "magic_defense": 118
+    },
+    "xp_drops": {
+      "combat": 3600
+    },
+    "always_drops": [
+      {
+        "item": "dragon_bone",
+        "quantity": 2
+      }
+    ],
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.9,
+        "quantity_min": 900,
+        "quantity_max": 2000
+      },
+      {
+        "item": "water_rune",
+        "chance": 0.6,
+        "quantity_min": 40,
+        "quantity_max": 80
+      },
+      {
+        "item": "blood_rune",
+        "chance": 0.35,
+        "quantity_min": 8,
+        "quantity_max": 15
+      },
+      {
+        "item": "runite_ore",
+        "chance": 0.3,
+        "quantity_min": 2,
+        "quantity_max": 5
+      },
+      {
+        "item": "diamond",
+        "chance": 0.12,
+        "quantity_min": 1,
+        "quantity_max": 1
+      }
+    ]
+  },
+  "pollen_sprite": {
+    "name": "pollen_sprite",
+    "display_name": "Pollen Sprite",
+    "hp": 65,
+    "combat_stats": {
+      "attack_level": 23,
+      "strength_level": 20,
+      "defense_level": 16,
+      "attack_bonus": 38,
+      "strength_bonus": 34
+    },
+    "defensive_stats": {
+      "attack_defense": 24,
+      "strength_defense": 24,
+      "ranged_defense": 18,
+      "magic_defense": 44
+    },
+    "xp_drops": {
+      "combat": 430
+    },
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 70,
+        "quantity_max": 160
+      },
+      {
+        "item": "earth_rune",
+        "chance": 0.45,
+        "quantity_min": 10,
+        "quantity_max": 25
+      },
+      {
+        "item": "nature_rune",
+        "chance": 0.25,
+        "quantity_min": 3,
+        "quantity_max": 8
+      }
+    ]
+  },
+  "bramble_boar": {
+    "name": "bramble_boar",
+    "display_name": "Bramble Boar",
+    "hp": 105,
+    "combat_stats": {
+      "attack_level": 29,
+      "strength_level": 27,
+      "defense_level": 22,
+      "attack_bonus": 50,
+      "strength_bonus": 48
+    },
+    "defensive_stats": {
+      "attack_defense": 48,
+      "strength_defense": 45,
+      "ranged_defense": 32,
+      "magic_defense": 52
+    },
+    "xp_drops": {
+      "combat": 640
+    },
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 140,
+        "quantity_max": 300
+      },
+      {
+        "item": "big_bones",
+        "chance": 0.5,
+        "quantity_min": 1,
+        "quantity_max": 2
+      },
+      {
+        "item": "raw_beef",
+        "chance": 0.4,
+        "quantity_min": 1,
+        "quantity_max": 3
+      }
+    ]
+  },
+  "briar_beast": {
+    "name": "briar_beast",
+    "display_name": "Briar Beast",
+    "hp": 150,
+    "combat_stats": {
+      "attack_level": 33,
+      "strength_level": 34,
+      "defense_level": 26,
+      "attack_bonus": 58,
+      "strength_bonus": 60
+    },
+    "defensive_stats": {
+      "attack_defense": 58,
+      "strength_defense": 54,
+      "ranged_defense": 38,
+      "magic_defense": 56
+    },
+    "xp_drops": {
+      "combat": 900
+    },
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 200,
+        "quantity_max": 420
+      },
+      {
+        "item": "oak_log",
+        "chance": 0.35,
+        "quantity_min": 3,
+        "quantity_max": 6
+      },
+      {
+        "item": "maple_log",
+        "chance": 0.3,
+        "quantity_min": 2,
+        "quantity_max": 5
+      },
+      {
+        "item": "strawberry",
+        "chance": 0.3,
+        "quantity_min": 1,
+        "quantity_max": 3
+      }
+    ]
+  },
+  "verdant_drake": {
+    "name": "verdant_drake",
+    "display_name": "Verdant Drake",
+    "hp": 340,
+    "combat_stats": {
+      "attack_level": 48,
+      "strength_level": 50,
+      "defense_level": 44,
+      "attack_bonus": 95,
+      "strength_bonus": 100
+    },
+    "defensive_stats": {
+      "attack_defense": 98,
+      "strength_defense": 94,
+      "ranged_defense": 65,
+      "magic_defense": 98
+    },
+    "xp_drops": {
+      "combat": 2500
+    },
+    "always_drops": [
+      {
+        "item": "dragon_bone",
+        "quantity": 1
+      }
+    ],
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.9,
+        "quantity_min": 550,
+        "quantity_max": 1300
+      },
+      {
+        "item": "nature_rune",
+        "chance": 0.5,
+        "quantity_min": 10,
+        "quantity_max": 20
+      },
+      {
+        "item": "adamantite_ore",
+        "chance": 0.5,
+        "quantity_min": 8,
+        "quantity_max": 16
+      },
+      {
+        "item": "runite_ore",
+        "chance": 0.15,
+        "quantity_min": 1,
+        "quantity_max": 3
+      },
+      {
+        "item": "emerald",
+        "chance": 0.25,
+        "quantity_min": 1,
+        "quantity_max": 2
+      }
+    ]
+  },
+  "thorn_stalker": {
+    "name": "thorn_stalker",
+    "display_name": "Thorn Stalker",
+    "hp": 170,
+    "combat_stats": {
+      "attack_level": 42,
+      "strength_level": 40,
+      "defense_level": 34,
+      "attack_bonus": 70,
+      "strength_bonus": 68
+    },
+    "defensive_stats": {
+      "attack_defense": 64,
+      "strength_defense": 62,
+      "ranged_defense": 45,
+      "magic_defense": 68
+    },
+    "xp_drops": {
+      "combat": 1150
+    },
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 300,
+        "quantity_max": 650
+      },
+      {
+        "item": "nature_rune",
+        "chance": 0.45,
+        "quantity_min": 8,
+        "quantity_max": 16
+      },
+      {
+        "item": "blood_rune",
+        "chance": 0.2,
+        "quantity_min": 3,
+        "quantity_max": 8
+      }
+    ]
+  },
+  "blossom_treant": {
+    "name": "blossom_treant",
+    "display_name": "Blossom Treant",
+    "hp": 280,
+    "combat_stats": {
+      "attack_level": 50,
+      "strength_level": 52,
+      "defense_level": 45,
+      "attack_bonus": 88,
+      "strength_bonus": 92
+    },
+    "defensive_stats": {
+      "attack_defense": 90,
+      "strength_defense": 88,
+      "ranged_defense": 60,
+      "magic_defense": 86
+    },
+    "xp_drops": {
+      "combat": 1900
+    },
+    "always_drops": [
+      {
+        "item": "yew_log",
+        "quantity": 3
+      }
+    ],
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.85,
+        "quantity_min": 500,
+        "quantity_max": 1000
+      },
+      {
+        "item": "magic_log",
+        "chance": 0.3,
+        "quantity_min": 1,
+        "quantity_max": 3
+      },
+      {
+        "item": "adamantite_ore",
+        "chance": 0.45,
+        "quantity_min": 6,
+        "quantity_max": 12
+      },
+      {
+        "item": "runite_ore",
+        "chance": 0.25,
+        "quantity_min": 1,
+        "quantity_max": 3
+      }
+    ]
+  },
+  "bramble_titan": {
+    "name": "bramble_titan",
+    "display_name": "Bramble Titan",
+    "hp": 500,
+    "combat_stats": {
+      "attack_level": 60,
+      "strength_level": 62,
+      "defense_level": 55,
+      "attack_bonus": 110,
+      "strength_bonus": 115
+    },
+    "defensive_stats": {
+      "attack_defense": 110,
+      "strength_defense": 105,
+      "ranged_defense": 75,
+      "magic_defense": 106
+    },
+    "xp_drops": {
+      "combat": 3600
+    },
+    "always_drops": [
+      {
+        "item": "dragon_bone",
+        "quantity": 2
+      }
+    ],
+    "drop_table": [
+      {
+        "item": "coins",
+        "chance": 0.9,
+        "quantity_min": 900,
+        "quantity_max": 2000
+      },
+      {
+        "item": "nature_rune",
+        "chance": 0.6,
+        "quantity_min": 25,
+        "quantity_max": 45
+      },
+      {
+        "item": "blood_rune",
+        "chance": 0.35,
+        "quantity_min": 8,
+        "quantity_max": 15
+      },
+      {
+        "item": "runite_ore",
+        "chance": 0.3,
+        "quantity_min": 2,
+        "quantity_max": 5
+      },
+      {
+        "item": "diamond",
+        "chance": 0.12,
+        "quantity_min": 1,
+        "quantity_max": 1
+      }
+    ]
   }
 }

@@ -553,7 +553,8 @@ private fun BonfireRhythmGame(
     val visibleMs = if (easyMode) config.visibleMsEasy else config.visibleMs
 
     Text(
-        text  = stringResource(R.string.seasonal_minigame_hint, config.hitsRequired, config.rounds),
+        text  = GameStrings.seasonalMinigameHint(LocalContext.current, config.id, config.hitsRequired, config.rounds)
+            ?: stringResource(R.string.seasonal_minigame_hint, config.hitsRequired, config.rounds),
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.primary,
     )
@@ -674,7 +675,8 @@ private fun LanternSequenceGame(
     val flashMs = if (easyMode) config.visibleMsEasy else config.visibleMs
 
     Text(
-        text  = stringResource(R.string.seasonal_minigame_sequence_hint, config.hitsRequired, config.rounds),
+        text  = GameStrings.seasonalMinigameHint(LocalContext.current, config.id, config.hitsRequired, config.rounds)
+            ?: stringResource(R.string.seasonal_minigame_sequence_hint, config.hitsRequired, config.rounds),
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.primary,
     )

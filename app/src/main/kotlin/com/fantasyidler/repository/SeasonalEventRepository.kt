@@ -36,9 +36,9 @@ class SeasonalEventRepository @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
 
-    /** Returns the event whose date window currently contains "now", or null between events. */
+    /** This season's run of its yearly event (e.g. "gloomharvest_2027"), or null if no template covers it. */
     fun activeEvent(): SeasonalEventData? =
-        gameData.seasonalEvents.values.firstOrNull { it.isActiveAt(System.currentTimeMillis()) }
+        SeasonalCalendar.activeAt(gameData.seasonalEvents, System.currentTimeMillis())
 
     fun bountyTasksWithProgress(
         event: SeasonalEventData,
@@ -430,7 +430,7 @@ class SeasonalEventRepository @Inject constructor(
             updated = updated.copy(
                 seasonalBannersEarned = updated.seasonalBannersEarned + SeasonalBannerEarned(
                     eventId          = event.id,
-                    displayText      = GameStrings.seasonalEventBanner(localeContext, event.id, event.bannerText),
+                    displayText      = GameStrings.seasonalEventBanner(localeContext, event.id, event.bannerText.replace("%1\$d", event.year.toString())),
                     completedAtMs    = System.currentTimeMillis(),
                     bannerIcon       = event.bannerIcon,
                     eventDisplayName = GameStrings.seasonalEventName(localeContext, event.id, event.displayName),

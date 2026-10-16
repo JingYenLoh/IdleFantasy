@@ -2,13 +2,25 @@ package com.fantasyidler.data.json
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
+/**
+ * A yearly event template from seasonal_events.json. [id] in the JSON is the series key
+ * (e.g. "gloomharvest"); SeasonalCalendar stamps out each year's run with id
+ * "<series>_<year>" and fills in [series], [year], [startMs] and [endMs].
+ */
 @Serializable
 data class SeasonalEventData(
     val id: String,
     @SerialName("display_name") val displayName: String,
-    @SerialName("start_ms") val startMs: Long,
-    @SerialName("end_ms") val endMs: Long,
+    /** "spring" | "summer" | "autumn" | "winter" (meteorological, UTC). */
+    val season: String,
+    /** First year this event runs; earlier years never produce a run. */
+    @SerialName("first_year") val firstYear: Int = 2026,
+    @Transient val series: String = "",
+    @Transient val year: Int = 0,
+    @Transient val startMs: Long = 0L,
+    @Transient val endMs: Long = 0L,
     @SerialName("token_goal") val tokenGoal: Int,
     /** Subset of "bounty" | "expedition" | "boss" | "minigame". */
     val pillars: List<String>,
@@ -25,11 +37,12 @@ data class SeasonalEventData(
     @SerialName("reward_tiers") val rewardTiers: List<SeasonalRewardTierData> = emptyList(),
     /** Coin-priced offers shown in the event's Night Market section; empty = no market. */
     @SerialName("night_market") val nightMarket: List<NightMarketOfferData> = emptyList(),
+    /** English fallback for the earned banner's text; "%1$d" is replaced with the run's year. */
     @SerialName("banner_text") val bannerText: String,
     /** Drawable resource name (e.g. "banner_summer") shown for this event on the Home card and Profile Banners tab. */
     @SerialName("banner_icon") val bannerIcon: String? = null,
 ) {
-    fun isActiveAt(nowMs: Long): Boolean = nowMs in startMs..endMs
+    fun isActiveAt(nowMs: Long): Boolean = nowMs >= startMs && nowMs < endMs
 
     /** Every expedition dungeon key for this event, whichever field the JSON used. */
     fun expeditionKeys(): List<String> = expeditionDungeonKeys.ifEmpty { listOfNotNull(expeditionDungeonKey) }

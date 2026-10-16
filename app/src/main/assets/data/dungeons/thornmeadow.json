@@ -1,0 +1,26 @@
+{
+  "name": "thornmeadow",
+  "display_name": "The Thornmeadow",
+  "description": "A meadow gone wild with the spring thaw, its flowers hiding thorns and teeth. Part of the Bloomtide event.",
+  "recommended_level": 45,
+  "encounter_rate": 0.38,
+  "enemy_spawns": [
+    {
+      "enemy": "pollen_sprite",
+      "weight": 8
+    },
+    {
+      "enemy": "bramble_boar",
+      "weight": 5
+    },
+    {
+      "enemy": "briar_beast",
+      "weight": 3
+    },
+    {
+      "enemy": "verdant_drake",
+      "weight": 1
+    }
+  ],
+  "event_key": "bloomtide"
+}

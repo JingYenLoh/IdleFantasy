@@ -1,0 +1,26 @@
+{
+  "name": "rimewaste",
+  "display_name": "The Rimewaste",
+  "description": "A wind-scoured snowfield where the Frostfall's creatures drift down from the peaks. Part of the Frostfall event.",
+  "recommended_level": 45,
+  "encounter_rate": 0.38,
+  "enemy_spawns": [
+    {
+      "enemy": "frost_sprite",
+      "weight": 8
+    },
+    {
+      "enemy": "snow_wolf",
+      "weight": 5
+    },
+    {
+      "enemy": "ice_troll",
+      "weight": 3
+    },
+    {
+      "enemy": "rime_revenant",
+      "weight": 1
+    }
+  ],
+  "event_key": "frostfall"
+}

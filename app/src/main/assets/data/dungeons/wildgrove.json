@@ -1,0 +1,22 @@
+{
+  "name": "wildgrove",
+  "display_name": "The Wildgrove",
+  "description": "An ancient grove past the Thornmeadow where the Thorn Queen's court takes root. Part of the Bloomtide event.",
+  "recommended_level": 62,
+  "encounter_rate": 0.38,
+  "enemy_spawns": [
+    {
+      "enemy": "thorn_stalker",
+      "weight": 8
+    },
+    {
+      "enemy": "blossom_treant",
+      "weight": 4
+    },
+    {
+      "enemy": "bramble_titan",
+      "weight": 1
+    }
+  ],
+  "event_key": "bloomtide"
+}

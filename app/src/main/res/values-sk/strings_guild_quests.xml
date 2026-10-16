@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Guild quest names — translate per locale, falls back to JSON name if absent -->
     <string name="quest_agility_guild_1_name">First Laps</string> <!-- untranslated -->
     <string name="quest_agility_guild_10_name">Master of Movement</string> <!-- untranslated -->
     <string name="quest_agility_guild_2_name">Dedicated Runner</string> <!-- untranslated -->
@@ -200,6 +201,8 @@
     <string name="quest_woodcutting_guild_7_name">Redwood Stockpile</string> <!-- untranslated -->
     <string name="quest_woodcutting_guild_8_name">Ancient Timber</string> <!-- untranslated -->
     <string name="quest_woodcutting_guild_9_name">Redwood Legacy</string> <!-- untranslated -->
+
+    <!-- Guild daily quest names -->
     <string name="quest_agility_daily_1a_name">Morning Run</string> <!-- untranslated -->
     <string name="quest_agility_daily_1b_name">Sprint Training</string> <!-- untranslated -->
     <string name="quest_agility_daily_1c_name">Obstacle Circuit</string> <!-- untranslated -->

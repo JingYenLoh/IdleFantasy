@@ -1,11 +1,300 @@
 {
-  "sunspire_solstice_2026": {
-    "id": "sunspire_solstice_2026",
+  "bloomtide": {
+    "id": "bloomtide",
+    "display_name": "Bloomtide",
+    "season": "spring",
+    "first_year": 2027,
+    "token_goal": 300,
+    "pillars": [
+      "bounty",
+      "expedition",
+      "boss",
+      "minigame"
+    ],
+    "icon_emoji": "🌸",
+    "bounty_tasks": [
+      {
+        "id": "bloom_cabbages",
+        "type": "gather",
+        "target": "cabbage",
+        "amount": 30,
+        "display_name": "Plant cabbages for the spring market",
+        "hint": "Grow Cabbages (Farming)",
+        "skill": "farming"
+      },
+      {
+        "id": "bloom_strawberries",
+        "type": "gather",
+        "target": "strawberry",
+        "amount": 20,
+        "display_name": "Grow strawberries for the Bloomtide fair",
+        "hint": "Grow Strawberries (Farming)",
+        "skill": "farming"
+      },
+      {
+        "id": "bloom_oaks",
+        "type": "gather",
+        "target": "oak_log",
+        "amount": 30,
+        "display_name": "Chop oak for the maypole",
+        "hint": "Chop Oak Logs (Woodcutting)",
+        "skill": "woodcutting"
+      },
+      {
+        "id": "bloom_maples",
+        "type": "gather",
+        "target": "maple_log",
+        "amount": 25,
+        "display_name": "Chop maple for the festival stalls",
+        "hint": "Chop Maple Logs (Woodcutting)",
+        "skill": "woodcutting"
+      },
+      {
+        "id": "bloom_salmon",
+        "type": "gather",
+        "target": "raw_salmon",
+        "amount": 20,
+        "display_name": "Catch salmon running upstream",
+        "hint": "Fish Raw Salmon (Fishing)",
+        "skill": "fishing"
+      },
+      {
+        "id": "bloom_lobsters",
+        "type": "gather",
+        "target": "raw_lobster",
+        "amount": 15,
+        "display_name": "Trap lobsters for the spring feast",
+        "hint": "Fish Raw Lobster (Fishing)",
+        "skill": "fishing"
+      },
+      {
+        "id": "bloom_silver",
+        "type": "gather",
+        "target": "silver_ore",
+        "amount": 25,
+        "display_name": "Mine silver for the festival bells",
+        "hint": "Mine Silver Ore (Mining)",
+        "skill": "mining"
+      },
+      {
+        "id": "bloom_magic_brews",
+        "type": "craft",
+        "target": "magic_potion",
+        "amount": 5,
+        "display_name": "Brew Magic Potions for the grove keepers",
+        "hint": "Herblore",
+        "skill": "herblore"
+      },
+      {
+        "id": "bloom_emerald_rings",
+        "type": "craft",
+        "target": "silver_emerald_ring",
+        "amount": 5,
+        "display_name": "Craft emerald rings for the Bloomtide court",
+        "hint": "Crafting",
+        "skill": "crafting"
+      },
+      {
+        "id": "bloom_shortbows",
+        "type": "craft",
+        "target": "willow_shortbow",
+        "amount": 10,
+        "display_name": "Fletch Willow Shortbows for the meadow wardens",
+        "hint": "Fletching",
+        "skill": "fletching"
+      },
+      {
+        "id": "bloom_earth_runes",
+        "type": "craft",
+        "target": "earth_rune",
+        "amount": 80,
+        "display_name": "Craft Earth Runes to wake the soil",
+        "hint": "Runecrafting",
+        "skill": "runecrafting"
+      },
+      {
+        "id": "bloom_lobster_feast",
+        "type": "craft",
+        "target": "lobster",
+        "amount": 15,
+        "display_name": "Cook lobster for the spring feast",
+        "hint": "Cooking",
+        "skill": "cooking"
+      },
+      {
+        "id": "bloom_mithril_bars",
+        "type": "craft",
+        "target": "mithril_bar",
+        "amount": 10,
+        "display_name": "Smelt mithril for the garden gates",
+        "hint": "Smithing",
+        "skill": "smithing"
+      },
+      {
+        "id": "bloom_sprites",
+        "type": "kill",
+        "target": "pollen_sprite",
+        "amount": 15,
+        "display_name": "Shoo away the Pollen Sprites",
+        "hint": "Only found in The Thornmeadow"
+      },
+      {
+        "id": "bloom_boars",
+        "type": "kill",
+        "target": "bramble_boar",
+        "amount": 10,
+        "display_name": "Drive off the Bramble Boars",
+        "hint": "Only found in The Thornmeadow"
+      },
+      {
+        "id": "bloom_beasts",
+        "type": "kill",
+        "target": "briar_beast",
+        "amount": 8,
+        "display_name": "Cut down the Briar Beasts",
+        "hint": "Only found in The Thornmeadow"
+      },
+      {
+        "id": "bloom_stalkers",
+        "type": "kill",
+        "target": "thorn_stalker",
+        "amount": 8,
+        "display_name": "Hunt Thorn Stalkers",
+        "hint": "Only found in The Wildgrove"
+      },
+      {
+        "id": "bloom_drakes",
+        "type": "kill",
+        "target": "verdant_drake",
+        "amount": 3,
+        "display_name": "Drive off the Verdant Drakes",
+        "hint": "Only found in The Thornmeadow (rare)"
+      },
+      {
+        "id": "bloom_tithe_strawberries",
+        "type": "turn_in",
+        "target": "strawberry",
+        "amount": 30,
+        "display_name": "Tithe: donate strawberries",
+        "hint": "Donated straight from your inventory",
+        "skill": "farming"
+      },
+      {
+        "id": "bloom_tithe_oak",
+        "type": "turn_in",
+        "target": "oak_log",
+        "amount": 50,
+        "display_name": "Tithe: donate oak logs",
+        "hint": "Donated straight from your inventory",
+        "skill": "woodcutting"
+      },
+      {
+        "id": "bloom_tithe_salmon",
+        "type": "turn_in",
+        "target": "salmon",
+        "amount": 15,
+        "display_name": "Tithe: donate cooked salmon",
+        "hint": "Donated straight from your inventory",
+        "skill": "cooking"
+      }
+    ],
+    "bounty_rotation_ms": 3600000,
+    "expedition_dungeon_keys": [
+      "thornmeadow",
+      "wildgrove"
+    ],
+    "boss_key": "the_thorn_queen",
+    "minigame": {
+      "id": "garden_chimes",
+      "display_name": "Garden Chimes",
+      "type": "sequence",
+      "rounds": 8,
+      "hole_count": 6,
+      "hits_required": 6,
+      "visible_ms": 550,
+      "cooldown_ms": 3600000,
+      "visible_ms_easy": 800,
+      "cooldown_ms_easy": 7200000,
+      "emoji": "🌸"
+    },
+    "reward_tiers": [
+      {
+        "tokens": 25,
+        "description": "Coin purse (50,000 coins)",
+        "coins": 50000
+      },
+      {
+        "tokens": 60,
+        "description": "Seedheart Ring",
+        "items": {
+          "seedheart_ring": 1
+        }
+      },
+      {
+        "tokens": 100,
+        "description": "Free 48h XP Boost",
+        "xp_boost": true
+      },
+      {
+        "tokens": 150,
+        "description": "Bloomwood Staff",
+        "items": {
+          "bloomwood_staff": 1
+        }
+      },
+      {
+        "tokens": 200,
+        "description": "Coin purse (250,000 coins)",
+        "coins": 250000
+      },
+      {
+        "tokens": 250,
+        "description": "Bumblebee pet",
+        "pet_id": "bumblebee"
+      },
+      {
+        "tokens": 300,
+        "description": "Bloomtide banner"
+      }
+    ],
+    "night_market": [
+      {
+        "id": "petalweave_cape",
+        "display_name": "Petalweave Cape",
+        "coin_cost": 2500000,
+        "limit": 1,
+        "items": {
+          "petalweave_cape": 1
+        }
+      },
+      {
+        "id": "bounty_refresh",
+        "display_name": "Fresh Bounties (skip the wait)",
+        "coin_cost": 1000000,
+        "effect": "skip_bounty_cooldowns"
+      },
+      {
+        "id": "chime_retune",
+        "display_name": "Retune the Chimes (skip minigame cooldown)",
+        "coin_cost": 1000000,
+        "effect": "skip_minigame_cooldown"
+      }
+    ],
+    "banner_text": "Participated in the Bloomtide %1$d",
+    "banner_icon": "banner_spring"
+  },
+  "sunspire_solstice": {
+    "id": "sunspire_solstice",
     "display_name": "Sunspire Solstice",
-    "start_ms": 1780272000000,
-    "end_ms": 1788220800000,
-    "token_goal": 100,
-    "pillars": ["bounty", "expedition", "boss", "minigame"],
+    "season": "summer",
+    "first_year": 2026,
+    "token_goal": 300,
+    "pillars": [
+      "bounty",
+      "expedition",
+      "boss",
+      "minigame"
+    ],
     "icon_emoji": "☀️",
     "bounty_tasks": [
       {
@@ -85,6 +374,87 @@
         "amount": 3,
         "display_name": "Topple Cinder Colossi",
         "hint": "Only found in The Sunspire Expedition — rare"
+      },
+      {
+        "id": "sunspire_tuna",
+        "type": "gather",
+        "target": "raw_tuna",
+        "amount": 20,
+        "display_name": "Land tuna for the midsummer feast",
+        "hint": "Fish Raw Tuna (Fishing)",
+        "skill": "fishing"
+      },
+      {
+        "id": "sunspire_melons",
+        "type": "gather",
+        "target": "watermelon",
+        "amount": 20,
+        "display_name": "Grow watermelons for the midsummer feast",
+        "hint": "Grow Watermelons (Farming)",
+        "skill": "farming"
+      },
+      {
+        "id": "sunspire_tuna_feast",
+        "type": "craft",
+        "target": "tuna",
+        "amount": 15,
+        "display_name": "Cook tuna for the solstice table",
+        "hint": "Cooking",
+        "skill": "cooking"
+      },
+      {
+        "id": "sunspire_gold_bars",
+        "type": "craft",
+        "target": "gold_bar",
+        "amount": 15,
+        "display_name": "Smelt gold for the sun-tower's crown",
+        "hint": "Smithing",
+        "skill": "smithing"
+      },
+      {
+        "id": "sunspire_fire_runes",
+        "type": "craft",
+        "target": "fire_rune",
+        "amount": 80,
+        "display_name": "Craft Fire Runes to feed the beacon",
+        "hint": "Runecrafting",
+        "skill": "runecrafting"
+      },
+      {
+        "id": "sunspire_ruby_rings",
+        "type": "craft",
+        "target": "gold_ruby_ring",
+        "amount": 3,
+        "display_name": "Craft ruby rings for the sun priests",
+        "hint": "Crafting",
+        "skill": "crafting"
+      },
+      {
+        "id": "sunspire_tithe_oak",
+        "type": "turn_in",
+        "target": "oak_log",
+        "amount": 50,
+        "display_name": "Tithe: donate oak logs for the bonfire",
+        "hint": "Donated straight from your inventory",
+        "skill": "woodcutting"
+      },
+      {
+        "id": "sunspire_tithe_melons",
+        "type": "turn_in",
+        "target": "watermelon",
+        "amount": 20,
+        "display_name": "Tithe: donate watermelons",
+        "hint": "Donated straight from your inventory",
+        "skill": "farming"
+      },
+      {
+        "id": "sunspire_tithe_tuna",
+        "type": "turn_in",
+        "target": "tuna",
+        "amount": 15,
+        "display_name": "Tithe: donate cooked tuna",
+        "hint": "Donated straight from your inventory",
+        "skill": "cooking"
       }
     ],
     "bounty_rotation_ms": 3600000,
@@ -103,20 +473,82 @@
     },
     "reward_tiers": [
       {
+        "tokens": 25,
+        "description": "Coin purse (50,000 coins)",
+        "coins": 50000
+      },
+      {
+        "tokens": 60,
+        "description": "Sunstone Ring",
+        "items": {
+          "sunstone_ring": 1
+        }
+      },
+      {
         "tokens": 100,
-        "description": "Sunspire Solstice 2026 banner"
+        "description": "Free 48h XP Boost",
+        "xp_boost": true
+      },
+      {
+        "tokens": 150,
+        "description": "Sunforged Sabre",
+        "items": {
+          "sunforged_sabre": 1
+        }
+      },
+      {
+        "tokens": 200,
+        "description": "Coin purse (250,000 coins)",
+        "coins": 250000
+      },
+      {
+        "tokens": 250,
+        "description": "Sunbird Chick pet",
+        "pet_id": "sunbird_chick"
+      },
+      {
+        "tokens": 300,
+        "description": "Sunspire Solstice banner"
       }
     ],
-    "banner_text": "Participated in the Sunspire Solstice 2026",
-    "banner_icon": "banner_summer"
+    "banner_text": "Participated in the Sunspire Solstice %1$d",
+    "banner_icon": "banner_summer",
+    "night_market": [
+      {
+        "id": "sunweave_cape",
+        "display_name": "Sunweave Cape",
+        "coin_cost": 2500000,
+        "limit": 1,
+        "items": {
+          "sunweave_cape": 1
+        }
+      },
+      {
+        "id": "bounty_refresh",
+        "display_name": "Fresh Bounties (skip the wait)",
+        "coin_cost": 1000000,
+        "effect": "skip_bounty_cooldowns"
+      },
+      {
+        "id": "bonfire_restoke",
+        "display_name": "Restoke the Bonfire (skip minigame cooldown)",
+        "coin_cost": 1000000,
+        "effect": "skip_minigame_cooldown"
+      }
+    ]
   },
-  "gloomharvest_2026": {
-    "id": "gloomharvest_2026",
+  "gloomharvest": {
+    "id": "gloomharvest",
     "display_name": "Gloomharvest",
-    "start_ms": 1788220800000,
-    "end_ms": 1796083200000,
+    "season": "autumn",
+    "first_year": 2026,
     "token_goal": 300,
-    "pillars": ["bounty", "expedition", "boss", "minigame"],
+    "pillars": [
+      "bounty",
+      "expedition",
+      "boss",
+      "minigame"
+    ],
     "icon_emoji": "🎃",
     "bounty_tasks": [
       {
@@ -278,7 +710,10 @@
       }
     ],
     "bounty_rotation_ms": 3600000,
-    "expedition_dungeon_keys": ["hollowfen", "blightwood"],
+    "expedition_dungeon_keys": [
+      "hollowfen",
+      "blightwood"
+    ],
     "boss_key": "the_hollow_king",
     "minigame": {
       "id": "lantern_lights",
@@ -330,7 +765,7 @@
       },
       {
         "tokens": 300,
-        "description": "Gloomharvest 2026 banner"
+        "description": "Gloomharvest banner"
       }
     ],
     "night_market": [
@@ -356,7 +791,291 @@
         "effect": "skip_minigame_cooldown"
       }
     ],
-    "banner_text": "Participated in the Gloomharvest 2026",
+    "banner_text": "Participated in the Gloomharvest %1$d",
     "banner_icon": "banner_fall"
+  },
+  "frostfall": {
+    "id": "frostfall",
+    "display_name": "Frostfall",
+    "season": "winter",
+    "first_year": 2026,
+    "token_goal": 300,
+    "pillars": [
+      "bounty",
+      "expedition",
+      "boss",
+      "minigame"
+    ],
+    "icon_emoji": "❄️",
+    "bounty_tasks": [
+      {
+        "id": "frost_willow",
+        "type": "gather",
+        "target": "willow_log",
+        "amount": 30,
+        "display_name": "Gather willow kindling for the hearths",
+        "hint": "Chop Willow Logs (Woodcutting)",
+        "skill": "woodcutting"
+      },
+      {
+        "id": "frost_yew",
+        "type": "gather",
+        "target": "yew_log",
+        "amount": 20,
+        "display_name": "Chop yew to keep the hearthfires burning",
+        "hint": "Chop Yew Logs (Woodcutting)",
+        "skill": "woodcutting"
+      },
+      {
+        "id": "frost_coal",
+        "type": "gather",
+        "target": "coal",
+        "amount": 40,
+        "display_name": "Mine coal to keep the forges warm",
+        "hint": "Mine Coal (Mining)",
+        "skill": "mining"
+      },
+      {
+        "id": "frost_iron",
+        "type": "gather",
+        "target": "iron_ore",
+        "amount": 30,
+        "display_name": "Mine iron for sled runners",
+        "hint": "Mine Iron Ore (Mining)",
+        "skill": "mining"
+      },
+      {
+        "id": "frost_trout",
+        "type": "gather",
+        "target": "raw_trout",
+        "amount": 25,
+        "display_name": "Fish trout through the ice",
+        "hint": "Fish Raw Trout (Fishing)",
+        "skill": "fishing"
+      },
+      {
+        "id": "frost_sharks",
+        "type": "gather",
+        "target": "raw_shark",
+        "amount": 10,
+        "display_name": "Land sharks beneath the ice floes",
+        "hint": "Fish Raw Shark (Fishing)",
+        "skill": "fishing"
+      },
+      {
+        "id": "frost_potatoes",
+        "type": "gather",
+        "target": "potato",
+        "amount": 30,
+        "display_name": "Dig up potatoes for the winter larder",
+        "hint": "Grow Potatoes (Farming)",
+        "skill": "farming"
+      },
+      {
+        "id": "frost_steel",
+        "type": "craft",
+        "target": "steel_bar",
+        "amount": 20,
+        "display_name": "Smelt steel for sled runners",
+        "hint": "Smithing",
+        "skill": "smithing"
+      },
+      {
+        "id": "frost_arrows",
+        "type": "craft",
+        "target": "adamantite_arrow",
+        "amount": 50,
+        "display_name": "Fletch Adamant arrows for the wall watch",
+        "hint": "Fletching",
+        "skill": "fletching"
+      },
+      {
+        "id": "frost_ranging",
+        "type": "craft",
+        "target": "ranging_potion",
+        "amount": 5,
+        "display_name": "Brew Ranging Potions for the wall archers",
+        "hint": "Herblore",
+        "skill": "herblore"
+      },
+      {
+        "id": "frost_water_runes",
+        "type": "craft",
+        "target": "water_rune",
+        "amount": 80,
+        "display_name": "Craft Water Runes to bind the ice",
+        "hint": "Runecrafting",
+        "skill": "runecrafting"
+      },
+      {
+        "id": "frost_sapphires",
+        "type": "craft",
+        "target": "gold_sapphire_ring",
+        "amount": 5,
+        "display_name": "Craft sapphire rings for the frost wardens",
+        "hint": "Crafting",
+        "skill": "crafting"
+      },
+      {
+        "id": "frost_stew",
+        "type": "craft",
+        "target": "salmon",
+        "amount": 20,
+        "display_name": "Cook salmon for the long night",
+        "hint": "Cooking",
+        "skill": "cooking"
+      },
+      {
+        "id": "frost_sprites",
+        "type": "kill",
+        "target": "frost_sprite",
+        "amount": 15,
+        "display_name": "Scatter the Frost Sprites",
+        "hint": "Only found in The Rimewaste"
+      },
+      {
+        "id": "frost_wolves",
+        "type": "kill",
+        "target": "snow_wolf",
+        "amount": 10,
+        "display_name": "Drive off the Snow Wolves",
+        "hint": "Only found in The Rimewaste"
+      },
+      {
+        "id": "frost_trolls",
+        "type": "kill",
+        "target": "ice_troll",
+        "amount": 8,
+        "display_name": "Smash the Ice Trolls",
+        "hint": "Only found in The Rimewaste"
+      },
+      {
+        "id": "frost_yetis",
+        "type": "kill",
+        "target": "glacier_yeti",
+        "amount": 8,
+        "display_name": "Hunt Glacier Yetis",
+        "hint": "Only found in The Glacier Hollows"
+      },
+      {
+        "id": "frost_revenants",
+        "type": "kill",
+        "target": "rime_revenant",
+        "amount": 3,
+        "display_name": "Shatter Rime Revenants",
+        "hint": "Only found in The Rimewaste (rare)"
+      },
+      {
+        "id": "frost_tithe_coal",
+        "type": "turn_in",
+        "target": "coal",
+        "amount": 50,
+        "display_name": "Tithe: donate coal for the hearths",
+        "hint": "Donated straight from your inventory",
+        "skill": "mining"
+      },
+      {
+        "id": "frost_tithe_willow",
+        "type": "turn_in",
+        "target": "willow_log",
+        "amount": 40,
+        "display_name": "Tithe: donate willow logs",
+        "hint": "Donated straight from your inventory",
+        "skill": "woodcutting"
+      },
+      {
+        "id": "frost_tithe_trout",
+        "type": "turn_in",
+        "target": "trout",
+        "amount": 15,
+        "display_name": "Tithe: donate cooked trout",
+        "hint": "Donated straight from your inventory",
+        "skill": "cooking"
+      }
+    ],
+    "bounty_rotation_ms": 3600000,
+    "expedition_dungeon_keys": [
+      "rimewaste",
+      "glacier_hollows"
+    ],
+    "boss_key": "the_rime_wyrm",
+    "minigame": {
+      "id": "snowball_toss",
+      "display_name": "Snowball Toss",
+      "type": "whack",
+      "rounds": 8,
+      "hole_count": 9,
+      "hits_required": 7,
+      "visible_ms": 500,
+      "cooldown_ms": 3600000,
+      "visible_ms_easy": 800,
+      "cooldown_ms_easy": 7200000,
+      "emoji": "⛄"
+    },
+    "reward_tiers": [
+      {
+        "tokens": 25,
+        "description": "Coin purse (50,000 coins)",
+        "coins": 50000
+      },
+      {
+        "tokens": 60,
+        "description": "Frostbound Ring",
+        "items": {
+          "frostbound_ring": 1
+        }
+      },
+      {
+        "tokens": 100,
+        "description": "Free 48h XP Boost",
+        "xp_boost": true
+      },
+      {
+        "tokens": 150,
+        "description": "Glacial Longbow",
+        "items": {
+          "glacial_longbow": 1
+        }
+      },
+      {
+        "tokens": 200,
+        "description": "Coin purse (250,000 coins)",
+        "coins": 250000
+      },
+      {
+        "tokens": 250,
+        "description": "Snowhare pet",
+        "pet_id": "snowhare"
+      },
+      {
+        "tokens": 300,
+        "description": "Frostfall banner"
+      }
+    ],
+    "night_market": [
+      {
+        "id": "frostweave_cape",
+        "display_name": "Frostweave Cape",
+        "coin_cost": 2500000,
+        "limit": 1,
+        "items": {
+          "frostweave_cape": 1
+        }
+      },
+      {
+        "id": "bounty_refresh",
+        "display_name": "Fresh Bounties (skip the wait)",
+        "coin_cost": 1000000,
+        "effect": "skip_bounty_cooldowns"
+      },
+      {
+        "id": "snowball_restock",
+        "display_name": "Restock the Snowballs (skip minigame cooldown)",
+        "coin_cost": 1000000,
+        "effect": "skip_minigame_cooldown"
+      }
+    ],
+    "banner_text": "Participated in the Frostfall %1$d",
+    "banner_icon": "banner_winter"
   }
 }

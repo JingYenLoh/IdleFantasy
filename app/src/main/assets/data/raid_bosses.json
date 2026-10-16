@@ -525,7 +525,7 @@
       "chance": 0.01,
       "comment": "1/100 per kill"
     },
-    "event_key": "sunspire_solstice_2026"
+    "event_key": "sunspire_solstice"
   },
   "the_hollow_king": {
     "id": "the_hollow_king",
@@ -588,7 +588,7 @@
       "chance": 0.01,
       "comment": "1/100 per kill"
     },
-    "event_key": "gloomharvest_2026"
+    "event_key": "gloomharvest"
   },
   "the_vault_guardian": {
     "id": "the_vault_guardian",
@@ -1039,5 +1039,131 @@
     ],
     "requires_dock": true,
     "total_level_required": 0
+  },
+  "the_rime_wyrm": {
+    "id": "the_rime_wyrm",
+    "display_name": "The Rime Wyrm",
+    "emoji": "\ud83d\udc09",
+    "description": "An ancient wyrm of living ice that wakes each Frostfall, burying the Glacier Hollows in endless winter.",
+    "combat_level_required": 72,
+    "duration_minutes": 55,
+    "hp": 2700,
+    "combat_stats": {
+      "attack_level": 68,
+      "strength_level": 64,
+      "defense_level": 66,
+      "attack_bonus": 52,
+      "strength_bonus": 88
+    },
+    "defensive_stats": {
+      "attack_defense": 90,
+      "strength_defense": 90,
+      "ranged_defense": 100,
+      "magic_defense": 55
+    },
+    "xp_rewards": {
+      "attack": 1650,
+      "strength": 1650,
+      "defense": 1650,
+      "hitpoints": 1300,
+      "magic": 820,
+      "ranged": 820
+    },
+    "common_loot": {
+      "coins_min": 20000,
+      "coins_max": 40000,
+      "items": {
+        "water_rune": {
+          "min": 120,
+          "max": 240
+        },
+        "adamantite_ore": {
+          "min": 50,
+          "max": 90
+        },
+        "runite_ore": {
+          "min": 12,
+          "max": 24
+        }
+      }
+    },
+    "rare_drops": [
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
+      }
+    ],
+    "pet": {
+      "id": "frost_wyrmling",
+      "display_name": "Frost Wyrmling",
+      "emoji": "\ud83d\udc32",
+      "chance": 0.01,
+      "comment": "1/100 per kill"
+    },
+    "event_key": "frostfall"
+  },
+  "the_thorn_queen": {
+    "id": "the_thorn_queen",
+    "display_name": "The Thorn Queen",
+    "emoji": "\ud83c\udf39",
+    "description": "The briar-crowned ruler of the Wildgrove, whose roses bloom each spring with thorns as long as swords.",
+    "combat_level_required": 68,
+    "duration_minutes": 55,
+    "hp": 2500,
+    "combat_stats": {
+      "attack_level": 64,
+      "strength_level": 60,
+      "defense_level": 62,
+      "attack_bonus": 48,
+      "strength_bonus": 82
+    },
+    "defensive_stats": {
+      "attack_defense": 60,
+      "strength_defense": 60,
+      "ranged_defense": 95,
+      "magic_defense": 100
+    },
+    "xp_rewards": {
+      "attack": 1550,
+      "strength": 1550,
+      "defense": 1550,
+      "hitpoints": 1200,
+      "magic": 780,
+      "ranged": 780
+    },
+    "common_loot": {
+      "coins_min": 20000,
+      "coins_max": 40000,
+      "items": {
+        "nature_rune": {
+          "min": 120,
+          "max": 240
+        },
+        "adamantite_ore": {
+          "min": 50,
+          "max": 90
+        },
+        "runite_ore": {
+          "min": 12,
+          "max": 24
+        }
+      }
+    },
+    "rare_drops": [
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
+      }
+    ],
+    "pet": {
+      "id": "petal_sprite",
+      "display_name": "Petal Sprite",
+      "emoji": "\ud83c\udf3a",
+      "chance": 0.01,
+      "comment": "1/100 per kill"
+    },
+    "event_key": "bloomtide"
   }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Weekly quest names and descriptions -->
     <string name="quest_weekly_iron_miner_name">Iron Prospector</string> <!-- untranslated -->
     <string name="quest_weekly_iron_miner_desc">Mine 750 iron ore this week.</string> <!-- untranslated -->
     <string name="quest_weekly_coal_miner_name">Coal Baron</string> <!-- untranslated -->

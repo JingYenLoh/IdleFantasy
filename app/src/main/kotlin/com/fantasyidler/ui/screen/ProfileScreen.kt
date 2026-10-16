@@ -388,7 +388,14 @@ fun ProfileScreen(
                 unlocked    = t.id in state.unlockedTitles,
             )
         }
-        val seasonalTitleOptions = state.seasonalBanners.map { b ->
+        // One Title per event series: "Champion of Gloomharvest" is the same title whichever
+        // year earned it. Banners are newest-first, so this prefers the equipped run, then the
+        // newest earned run, then the newest locked one.
+        val seasonalTitleOptions = state.seasonalBanners.groupBy { it.series }.values.map { runs ->
+            runs.firstOrNull { "seasonal_${it.eventId}" == state.equippedTitle }
+                ?: runs.firstOrNull { it.earned }
+                ?: runs.first()
+        }.map { b ->
             TitleOption(
                 id          = "seasonal_${b.eventId}",
                 name        = stringResource(R.string.title_seasonal_champion_of, b.titleName),
