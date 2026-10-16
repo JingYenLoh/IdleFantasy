@@ -343,7 +343,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 viewModelScope.launch {
                     val inv: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().inventory)
                     val available = gameData.logs.filter { (key, log) ->
-                        inv.containsKey(key) && log.levelRequired <= fmLevel
+                        inv.containsKey(key) && log.levelRequired <= fmLevel && key !in com.fantasyidler.data.model.ElderContent.LOGS
                     }
                     _uiState.update { it.copy(sheetSkill = SheetState.Firemaking(available)) }
                 }
