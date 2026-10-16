@@ -9,7 +9,7 @@
     <string name="skill_fishing_desc">Ловіть рибу та водні скарби з водойм.</string>
     <string name="skill_woodcutting_name">Лісозаготівля</string>
     <string name="skill_woodcutting_desc">Рубайте дерева та збирайте різні породи деревини.</string>
-    <string name="skill_farming_name">Farming</string> <!-- untranslated -->
+    <string name="skill_farming_name">Фермерство</string>
     <string name="skill_farming_desc">Plant and harvest crops from your farming patches.</string> <!-- untranslated -->
     <string name="skill_firemaking_name">Firemaking</string> <!-- untranslated -->
     <string name="skill_firemaking_desc">Burn logs from your inventory to gain Firemaking XP. Each log burned also produces ashes, which can be scattered in the Prayer skill for bonus Prayer XP.</string> <!-- untranslated -->

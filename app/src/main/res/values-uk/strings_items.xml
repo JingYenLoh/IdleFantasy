@@ -812,14 +812,14 @@
     <string name="item_bronze_chainbody_name">Bronze Chainbody</string> <!-- untranslated -->
     <string name="item_bronze_full_helmet_name">Bronze Full Helmet</string> <!-- untranslated -->
     <string name="item_bronze_kiteshield_name">Bronze Kiteshield</string> <!-- untranslated -->
-    <string name="item_bronze_longsword_name">Bronze Longsword</string> <!-- untranslated -->
+    <string name="item_bronze_longsword_name">Бронзовий Довгий Меч</string>
     <string name="item_bronze_med_helmet_name">Bronze Med Helmet</string> <!-- untranslated -->
     <string name="item_bronze_plateskirt_name">Bronze Plateskirt</string> <!-- untranslated -->
     <string name="item_bronze_square_shield_name">Bronze Square Shield</string> <!-- untranslated -->
     <string name="item_chicken_name">Cooked Chicken</string> <!-- untranslated -->
     <string name="item_construction_guild_cape_name">Construction Guild Cape</string> <!-- untranslated -->
-    <string name="item_cooking_cape_name">Cooking Cape</string> <!-- untranslated -->
-    <string name="item_cooking_guild_cape_name">Cooking Guild Cape</string> <!-- untranslated -->
+    <string name="item_cooking_cape_name">Накидка Куховаріння</string>
+    <string name="item_cooking_guild_cape_name">Гільдійська Накидка Куховаріння</string>
     <string name="item_crafting_cape_name">Crafting Cape</string> <!-- untranslated -->
     <string name="item_crafting_guild_cape_name">Crafting Guild Cape</string> <!-- untranslated -->
     <string name="item_deep_iron_pickaxe_name">Deep Iron Pickaxe</string> <!-- untranslated -->
@@ -854,8 +854,8 @@
     <string name="item_dwarven_tinderbox_name">Dwarven Tinderbox</string> <!-- untranslated -->
     <string name="item_dwarven_warhammer_name">Dwarven Warhammer</string> <!-- untranslated -->
     <string name="item_ent_name">Ент</string>
-    <string name="item_farming_cape_name">Farming Cape</string> <!-- untranslated -->
-    <string name="item_farming_guild_cape_name">Farming Guild Cape</string> <!-- untranslated -->
+    <string name="item_farming_cape_name">Накидка Фермерства</string>
+    <string name="item_farming_guild_cape_name">Гільдійська Накидка Фермерства</string>
     <string name="item_firemaking_cape_name">Firemaking Cape</string> <!-- untranslated -->
     <string name="item_firemaking_guild_cape_name">Firemaking Guild Cape</string> <!-- untranslated -->
     <string name="item_fishing_cape_name">Накидка Рибальства</string>
@@ -1114,8 +1114,8 @@
     <string name="item_fishing_guild_cape_desc" formatted="false">Нагорода за досягнення 10 Гільдійського рівня Рибальства. Надає на 5% більше риби за сесію.</string>
     <string name="item_woodcutting_cape_desc" formatted="false">Нагорода за досягнення 99 рівня Лісозаготівлі. Надає на 10% більше колод за сесію.</string>
     <string name="item_woodcutting_guild_cape_desc" formatted="false">Нагорода за досягення 10 Гільдійського рівня Лісозаготівлі. Надає на 5% більше колод за сесію.</string>
-    <string name="item_farming_cape_desc" formatted="false">Awarded for reaching level 99 Farming. Grants 10% more harvest per session.</string> <!-- untranslated -->
-    <string name="item_farming_guild_cape_desc" formatted="false">Awarded for reaching Farming Guild level 10. Grants 5% more harvest per session.</string> <!-- untranslated -->
+    <string name="item_farming_cape_desc" formatted="false">Нагорода за досягнення 99 рівня Фермерства. Надає на 10% більше врожаю за сесію.</string>
+    <string name="item_farming_guild_cape_desc" formatted="false">Нагорода за досягнення 10 Гільдійського рівня Фермерства. Надає на 5% більше врожаю за сесію.</string>
     <string name="item_thieving_cape_name">Thieving Cape</string> <!-- untranslated -->
     <string name="item_thieving_cape_desc" formatted="false">Awarded for reaching level 99 Thieving. Grants 10% more successful pickpockets per session.</string> <!-- untranslated -->
     <string name="item_thieving_guild_cape_desc" formatted="false">Awarded for reaching Thieves Guild level 10. Grants 5% more successful pickpockets per session.</string> <!-- untranslated -->
@@ -1164,9 +1164,9 @@
     <string name="item_blessed_fishing_rod_desc">Crafted from driftwood recovered from the Drowned Temple, blessed by ancient sea rites.</string> <!-- untranslated -->
     <string name="item_dwarven_fishing_rod_desc">A dwarven-crafted fishing rod. Practically hauls fish out of the water.</string> <!-- untranslated -->
     <string name="item_abyssal_rod_desc">Woven from void-touched filament recovered from the Abyssal Ruins. Fish practically leap onto it.</string> <!-- untranslated -->
-    <string name="item_bronze_hoe_desc">A basic hoe for Farming.</string> <!-- untranslated -->
-    <string name="item_iron_hoe_desc">An iron hoe. Increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_steel_hoe_desc">A steel hoe. Noticeably increases harvest yield.</string> <!-- untranslated -->
+    <string name="item_bronze_hoe_desc">Базова мотика для Фермерства.</string>
+    <string name="item_iron_hoe_desc">Залізна мотика. Збільшує врожайність.</string>
+    <string name="item_steel_hoe_desc">Сталева мотика. Значно збільшує врожайність.</string>
     <string name="item_mithril_hoe_desc">A mithril hoe. Greatly increases harvest yield.</string> <!-- untranslated -->
     <string name="item_adamantite_hoe_desc">An adamantite hoe. Substantially increases harvest yield.</string> <!-- untranslated -->
     <string name="item_runite_hoe_desc">A runite hoe. The finest farming tool available.</string> <!-- untranslated -->
