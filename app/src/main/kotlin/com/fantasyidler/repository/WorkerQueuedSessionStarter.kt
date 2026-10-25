@@ -13,6 +13,7 @@ import com.fantasyidler.simulator.ThievingSimulator
 import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import com.fantasyidler.ui.viewmodel.workerRefundMaterials
+import com.fantasyidler.util.craftDurationEfficiency
 import com.fantasyidler.util.toolEfficiency
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -252,9 +253,10 @@ class WorkerQueuedSessionStarter @Inject constructor(
                 val catalystKey = action.catalystKey
                 val outputKey   = if (catalystKey != null) "enhanced_${action.activityKey}" else action.activityKey
                 if (catalystKey != null) playerRepo.consumeItemsUnlocked(mapOf(catalystKey to qty))
-                val frames = buildCraftFrames(xpMap[Skills.HERBLORE] ?: 0L, qty, r.xpPerItem, r.outputQuantity, outputKey)
+                val toolEfficiency = gameData.craftDurationEfficiency(Skills.HERBLORE, action.activityKey, equipped, levels, flags.heirloomXp)
+                val frames = buildCraftFrames(xpMap[Skills.HERBLORE] ?: 0L, qty, r.xpPerItem, r.outputQuantity, outputKey, efficiency = toolEfficiency)
                 // Record the just-consumed catalyst so dismiss can refund it (issue #2013).
-                startSession(slot, action, frames, durationMs, efficiencyMultiplier, levelAtStart, catalystKey, if (catalystKey != null) qty else 0)
+                startSession(slot, action, frames, (tier.craftingPerItemMs / toolEfficiency).toLong() * qty, efficiencyMultiplier, levelAtStart, catalystKey, if (catalystKey != null) qty else 0)
             }
             Skills.CONSTRUCTION -> {
                 val r   = gameData.constructionRecipes[action.activityKey] ?: return

@@ -667,7 +667,7 @@ class ShopViewModel @Inject constructor(
                 EquipSlot.WEAPON                                      -> "Weapons"
                 EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE,
                 EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK,
-                EquipSlot.FRYING_PAN, EquipSlot.LOCKPICK                               -> "Tools"
+                EquipSlot.FRYING_PAN, EquipSlot.MORTAR, EquipSlot.LOCKPICK                               -> "Tools"
                 else                                                  -> "Armor"
             }
         }

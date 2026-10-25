@@ -421,6 +421,7 @@ class InventoryViewModel @Inject constructor(
             EquipSlot.TINDERBOX      -> item.firemakingEfficiency ?: 0f
             EquipSlot.GRAPPLING_HOOK -> item.agilityEfficiency ?: 0f
             EquipSlot.FRYING_PAN     -> item.cookingEfficiency ?: 0f
+            EquipSlot.MORTAR         -> item.herbloreEfficiency ?: 0f
             EquipSlot.LOCKPICK       -> item.thievingEfficiency ?: 0f
             else -> if (slot in EquipSlot.WEAPON_SLOTS) {
                 // Score by the slot's style with the same stat fallbacks the
@@ -656,12 +657,12 @@ class InventoryViewModel @Inject constructor(
         if (equip != null) return when (equip.slot) {
             EquipSlot.WEAPON -> InventoryCategory.WEAPONS
             EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE,
-            EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK, EquipSlot.FRYING_PAN,
+            EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK, EquipSlot.FRYING_PAN, EquipSlot.MORTAR,
             EquipSlot.LOCKPICK -> InventoryCategory.TOOLS
             else -> InventoryCategory.ARMOUR
         }
         if (key in gameData.foodHealValues)  return InventoryCategory.FOOD
-        if (key in gameData.potionEffects)   return InventoryCategory.POTIONS
+        if (key in gameData.potionKeys)   return InventoryCategory.POTIONS
         if (key.endsWith("_arrow"))          return InventoryCategory.AMMUNITION
         if (key in gameData.ores || key in gameData.gems || key.endsWith("_bar"))
                                              return InventoryCategory.ORES

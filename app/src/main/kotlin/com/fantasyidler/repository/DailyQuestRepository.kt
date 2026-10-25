@@ -47,8 +47,16 @@ class DailyQuestRepository @Inject constructor(
         "dwarven_helm", "dwarven_platebody", "dwarven_platelegs",
         "dwarven_shield", "dwarven_boots",
         "dwarven_hammer", "dwarven_tinderbox", "dwarven_frying_pan", "dwarven_grappling_hook",
-        "dwarven_lockpick",
+        "dwarven_lockpick", "dwarven_mortar",
     )
+
+    /** Keep Divine eligibility for owners of the original set; offer the new mortar
+     * alongside Divine pieces so it remains obtainable without revoking that unlock. */
+    internal fun dailyEquipmentPool(ownedItems: Set<String>): List<String> {
+        val missing = dwarvenDropPool.filter { it !in ownedItems }
+        val divineUnlocked = dwarvenDropPool.filter { it != "dwarven_mortar" }.all { it in ownedItems }
+        return if (divineUnlocked) missing + WeeklyQuestRepository.DIVINE_DROP_POOL.filter { it !in ownedItems } else missing
+    }
 
     /** Returns epoch ms of the next daily reset ([resetHour] local time) after [fromMs]. */
     fun nextResetMs(fromMs: Long = System.currentTimeMillis(), resetHour: Int): Long {
@@ -204,15 +212,14 @@ class DailyQuestRepository @Inject constructor(
         check(progress >= template.amount) { "Quest not complete yet" }
         check(templateId !in flags.dailyQuestClaimed) { "Quest already claimed" }
 
-        val missingDwarven = dwarvenDropPool.filter { it !in ownedItems }
-        // Once the Dwarven set is complete the same pity roll drops Divine pieces instead.
-        val dropsDivine = missingDwarven.isEmpty()
-        val missingPieces = if (dropsDivine) WeeklyQuestRepository.DIVINE_DROP_POOL.filter { it !in ownedItems } else missingDwarven
+        // The original Dwarven set unlocks Divine pieces on the same pity roll.
+        val missingPieces = dailyEquipmentPool(ownedItems)
         val dropped = missingPieces.isNotEmpty() &&
             Random.nextInt(dwarvenDropDenominator(flags.dwarvenPityClaims)) == 0
         val reward: DailyReward = if (dropped) {
-            if (dropsDivine) DailyReward.DivineItemReward(missingPieces.random())
-            else DailyReward.DwarvenItemReward(missingPieces.random())
+            val item = missingPieces.random()
+            if (item in WeeklyQuestRepository.DIVINE_DROP_POOL) DailyReward.DivineItemReward(item)
+            else DailyReward.DwarvenItemReward(item)
         } else {
             DailyReward.CoinsReward()
         }

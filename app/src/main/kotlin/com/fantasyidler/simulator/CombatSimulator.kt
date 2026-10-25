@@ -63,16 +63,17 @@ object CombatSimulator {
         val effDefence  = playerDefence  + (potionBonuses["defense"]  ?: 0) + blessingDefBonus
         val effRanged   = playerRanged   + (potionBonuses["ranged"]   ?: 0)
         val effMagic    = playerMagic    + (potionBonuses["magic"]    ?: 0)
+        val potionSpellMaxHit = PotionEffects.magicMaxHit(spellMaxHit, potionBonuses[PotionEffects.MAGIC_DAMAGE_PERCENT] ?: 0)
         val statsAtStart = mapOf(
             "atk" to when (combatStyle) { "ranged" -> effRanged; "magic" -> effMagic; else -> effAttack } + weaponAttackBonus,
             "str" to when (combatStyle) {
                 "ranged" -> effRanged + rangedGearStrengthBonus
-                "magic"  -> spellMaxHit
+                "magic"  -> potionSpellMaxHit
                 else     -> effStrength + weaponStrengthBonus
             },
             "def" to effDefence,
             "atk_potion" to when (combatStyle) { "ranged" -> potionBonuses["ranged"] ?: 0; "magic" -> potionBonuses["magic"] ?: 0; else -> potionBonuses["attack"] ?: 0 },
-            "str_potion" to when (combatStyle) { "ranged" -> potionBonuses["ranged"] ?: 0; "magic" -> 0; else -> potionBonuses["strength"] ?: 0 },
+            "str_potion" to when (combatStyle) { "ranged" -> potionBonuses["ranged"] ?: 0; "magic" -> potionSpellMaxHit - spellMaxHit.coerceAtLeast(1); else -> potionBonuses["strength"] ?: 0 },
             "def_potion" to (potionBonuses["defense"] ?: 0),
         )
 
@@ -146,7 +147,7 @@ object CombatSimulator {
                         enemyDefStat = enemy.defensiveStats.rangedDefense
                     }
                     "magic" -> {
-                        playerMaxHit = spellMaxHit.coerceAtLeast(1)
+                        playerMaxHit = potionSpellMaxHit
                         playerEffAtk = effMagic + weaponAttackBonus
                         enemyDefStat = enemy.defensiveStats.magicDefense
                     }
@@ -432,6 +433,7 @@ object CombatSimulator {
         potionAttackBonus: Int = 0,
         potionStrengthBonus: Int = 0,
         potionDefenseBonus: Int = 0,
+        potionMagicDamagePercent: Int = 0,
         random: Random = Random.Default,
     ): List<SessionFrame> {
         val speed = attackSpeedSec.coerceIn(1.2, BASE_ATTACK_SPEED_SEC)
@@ -449,7 +451,7 @@ object CombatSimulator {
                 bossDefence = boss.defensiveStats.rangedDefense
             }
             "magic" -> {
-                playerMax  = spellMaxHit.coerceAtLeast(1)
+                playerMax  = PotionEffects.magicMaxHit(spellMaxHit, potionMagicDamagePercent)
                 effAtk     = playerMagic + weaponAttackBonus
                 bossDefence = boss.defensiveStats.magicDefense
             }
@@ -478,16 +480,17 @@ object CombatSimulator {
         val bossMax    = if (bossEffStr == 0) 0 else (max(0, 1 + bossEffStr * (boss.combatStats.strengthBonus + 64) / 640) * partyScale).roundToInt()
         val bossEffAtk = boss.combatStats.attackLevel + boss.combatStats.attackBonus
         val effPlayerDefence = playerDefence + blessingDefBonus
+        val potionSpellMaxHit = PotionEffects.magicMaxHit(spellMaxHit, potionMagicDamagePercent)
         val statsAtStart = mapOf(
             "atk" to effAtk,
             "str" to when (combatStyle) {
                 "ranged" -> playerRanged + rangedGearStrengthBonus
-                "magic"  -> spellMaxHit
+                "magic"  -> potionSpellMaxHit
                 else     -> playerStrength + weaponStrBonus
             },
             "def" to effPlayerDefence,
             "atk_potion" to potionAttackBonus,
-            "str_potion" to potionStrengthBonus,
+            "str_potion" to if (combatStyle == "magic") potionSpellMaxHit - spellMaxHit.coerceAtLeast(1) else potionStrengthBonus,
             "def_potion" to potionDefenseBonus,
         )
         val bossHitChance = (when {

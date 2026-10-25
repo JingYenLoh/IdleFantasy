@@ -40,6 +40,7 @@ fun GameDataRepository.toolEfficiency(
         EquipSlot.TINDERBOX      -> eq.firemakingEfficiency  ?: 1.0f
         EquipSlot.GRAPPLING_HOOK -> eq.agilityEfficiency     ?: 1.0f
         EquipSlot.FRYING_PAN     -> eq.cookingEfficiency     ?: 1.0f
+        EquipSlot.MORTAR         -> eq.herbloreEfficiency    ?: 1.0f
         EquipSlot.LOCKPICK       -> eq.thievingEfficiency    ?: 1.0f
         else                     -> 1.0f
     }
@@ -52,6 +53,7 @@ fun GameDataRepository.toolEfficiency(
         EquipSlot.TINDERBOX      -> Skills.FIREMAKING
         EquipSlot.GRAPPLING_HOOK -> Skills.AGILITY
         EquipSlot.FRYING_PAN     -> Skills.COOKING
+        EquipSlot.MORTAR         -> Skills.HERBLORE
         EquipSlot.LOCKPICK       -> Skills.THIEVING
         else                     -> return base
     }
@@ -67,7 +69,7 @@ fun GameDataRepository.toolEfficiency(
 /**
  * Tool efficiency multiplier that shortens a crafting session's duration, keyed by
  * [skillName]/[activityKey] rather than a full recipe object. Only smithing (hammer),
- * cooking (frying pan), and firemaking (tinderbox) affect duration; other crafting
+ * cooking (frying pan), herblore (mortar), and firemaking (tinderbox) affect duration; other crafting
  * skills return 1.0.
  */
 fun GameDataRepository.craftDurationEfficiency(
@@ -83,6 +85,9 @@ fun GameDataRepository.craftDurationEfficiency(
         } ?: 1.0f
         Skills.COOKING -> cookingRecipes[activityKey]?.levelRequired?.let {
             toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, it, skillLevels, heirloomXp)
+        } ?: 1.0f
+        Skills.HERBLORE -> herbloreRecipes[activityKey]?.levelRequired?.let {
+            toolEfficiency(equipped[EquipSlot.MORTAR], EquipSlot.MORTAR, it, skillLevels, heirloomXp)
         } ?: 1.0f
         Skills.FIREMAKING -> logs[activityKey]?.levelRequired?.let {
             toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, it, skillLevels, heirloomXp)

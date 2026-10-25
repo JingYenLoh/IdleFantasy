@@ -25,6 +25,7 @@ import com.fantasyidler.repository.WorkerQueuedSessionStarter
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.util.singleBatchItems
 import com.fantasyidler.util.toolEfficiency
+import com.fantasyidler.util.craftDurationEfficiency
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -56,6 +57,7 @@ data class WorkerSkillsUiState(
     val miningEfficiency: Float = 1.0f,
     val woodcuttingEfficiency: Float = 1.0f,
     val fishingEfficiency: Float = 1.0f,
+    val herbloreEfficiencyByRecipe: Map<String, Float> = emptyMap(),
     /** Agility-based per-item duration — used for crafting/prayer/runecrafting estimates. */
     val sessionDurationMs: Long = 0L,
     /** Worker tier fixed duration for gathering/combat sessions. */
@@ -131,6 +133,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 miningEfficiency      = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE],     EquipSlot.PICKAXE, skillLevels = levels, heirloomXp = flags.heirloomXp),
                 woodcuttingEfficiency = gameData.toolEfficiency(equipped[EquipSlot.AXE],         EquipSlot.AXE, skillLevels = levels, heirloomXp = flags.heirloomXp),
                 fishingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, skillLevels = levels, heirloomXp = flags.heirloomXp),
+                herbloreEfficiencyByRecipe = gameData.herbloreRecipes.keys.associateWith { gameData.craftDurationEfficiency(Skills.HERBLORE, it, equipped, levels, flags.heirloomXp) },
                 sessionDurationMs     = currentWorker?.tier?.craftingSessionMs ?: agilityMs,
                 gatheringDurationMs   = tierDurationMs,
                 maxCraftQty           = currentWorker?.tier?.maxCraftQty ?: Int.MAX_VALUE,
@@ -288,8 +291,10 @@ class WorkerSkillsViewModel @Inject constructor(
                 outputQty     = r.outputQuantity,
                 xpPerItem     = r.xpPerItem,
                 skillName     = Skills.HERBLORE,
-                category      = "Potion",
                 effects       = r.effects,
+                effectPercent = r.effectPercent,
+                magicDamagePercent = r.magicDamagePercent,
+                category      = "Potion",
             )
         }.sortedBy { it.levelRequired }
     }
@@ -551,7 +556,8 @@ class WorkerSkillsViewModel @Inject constructor(
         viewModelScope.launch {
             val slot      = _uiState.value.selectedSlot
             val tier      = uiState.value.currentWorker?.tier ?: return@launch
-            val perItemMs = tier.craftingPerItemMs
+            val efficiency = state.herbloreEfficiencyByRecipe[recipe.key] ?: 1.0f
+            val perItemMs = (tier.craftingPerItemMs / efficiency).toLong()
             val qty       = qty.coerceAtMost(tier.maxCraftQty)
 
             val totalMaterials = recipe.materials.mapValues { (_, v) -> v * qty }

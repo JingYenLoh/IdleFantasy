@@ -43,6 +43,7 @@ object HeirloomStats {
         Skills.FIREMAKING  -> EquipSlot.TINDERBOX
         Skills.AGILITY     -> EquipSlot.GRAPPLING_HOOK
         Skills.COOKING     -> EquipSlot.FRYING_PAN
+        Skills.HERBLORE    -> EquipSlot.MORTAR
         Skills.THIEVING    -> EquipSlot.LOCKPICK
         Skills.ATTACK      -> EquipSlot.WEAPON_ATK
         Skills.STRENGTH    -> EquipSlot.WEAPON_STR
@@ -77,6 +78,7 @@ object HeirloomStats {
             firemakingEfficiency  = eq.firemakingEfficiency?.let { lerpF(base.efficiency, it) },
             agilityEfficiency     = eq.agilityEfficiency?.let { lerpF(base.efficiency, it) },
             cookingEfficiency     = eq.cookingEfficiency?.let { lerpF(base.efficiency, it) },
+            herbloreEfficiency    = eq.herbloreEfficiency?.let { lerpF(base.efficiency, it) },
             thievingEfficiency    = eq.thievingEfficiency?.let { lerpF(base.efficiency, it) },
         )
     }

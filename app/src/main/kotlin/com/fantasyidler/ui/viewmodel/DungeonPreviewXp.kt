@@ -80,7 +80,7 @@ internal fun estimateDungeonPreviewXp(
         EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0)
     else 0
 
-    val potionBonuses = potionKey?.let { gameData.potionEffects[it] } ?: emptyMap()
+    val potionBonuses = boostRepo.boostedPotionEffects(flags, gameData.potionEffects(potionKey, levels))
     val staffCoversRune  = combatStyle == "magic" && selectedSpell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
     val simulatorRuneKey = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
 

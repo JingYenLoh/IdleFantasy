@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.simulator.PotionEffects
 import com.fantasyidler.util.withAppLocale
 
 import android.content.Context
@@ -98,6 +99,7 @@ data class CombatUiState(
     val equippedFood: Map<String, Int> = emptyMap(),
     val selectedPotionKey: String? = null,
     val availablePotions: Map<String, Int> = emptyMap(),
+    val potionEffects: Map<String, Map<String, Int>> = emptyMap(),
     val dungeonRuns: Map<String, Int> = emptyMap(),
     val dungeonLastRunStats: Map<String, DungeonRunStats> = emptyMap(),
     val unlockedDungeons: List<String> = emptyList(),
@@ -193,7 +195,7 @@ class CombatViewModel @Inject constructor(
         }
     }
 
-    val potionEffects: Map<String, Map<String, Int>> = gameData.potionEffects
+    val potionEffects: Map<String, Map<String, Int>> get() = uiState.value.potionEffects
 
     companion object {
         const val MAX_BOSS_REPEAT_COUNT = 100
@@ -368,7 +370,8 @@ class CombatViewModel @Inject constructor(
                     flags.equippedFood.keys.associateWith { inventory[it] ?: 0 },
                     pendingFood,
                 ).filter { (_, qty) -> qty > 0 },
-                availablePotions        = inventory.filterKeys { it in gameData.potionEffects }
+                potionEffects = gameData.potionKeys.associateWith { boostRepo.boostedPotionEffects(flags, gameData.potionEffects(it, levels)) },
+                availablePotions        = inventory.filterKeys { it in gameData.potionKeys }
                     .filter { (_, qty) -> qty > 0 },
                 dungeonRuns             = flags.dungeonRuns,
                 dungeonLastRunStats     = flags.dungeonLastRunStats,
@@ -752,7 +755,7 @@ class CombatViewModel @Inject constructor(
                 val potionKey     = _extra.value.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
                     playerRepo.consumeItems(mapOf(potionKey to 1))
-                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[potionKey] ?: emptyMap())
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects(potionKey, levels))
                 } else emptyMap()
 
                 // Issue #2066: on the isle duration uses elder Agility only;
@@ -933,7 +936,7 @@ class CombatViewModel @Inject constructor(
                 val potionKey     = _extra.value.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
                     playerRepo.consumeItems(mapOf(potionKey to 1))
-                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[potionKey] ?: emptyMap())
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects(potionKey, levels))
                 } else emptyMap()
 
                 val combatStyle = when (bossWeapon?.combatStyle) {
@@ -1021,6 +1024,7 @@ class CombatViewModel @Inject constructor(
                     potionAttackBonus   = when (combatStyle) { "ranged" -> potionBonuses["ranged"] ?: 0; "magic" -> potionBonuses["magic"] ?: 0; else -> potionBonuses["attack"] ?: 0 },
                     potionStrengthBonus = when (combatStyle) { "ranged" -> potionBonuses["ranged"] ?: 0; "magic" -> 0; else -> potionBonuses["strength"] ?: 0 },
                     potionDefenseBonus  = potionBonuses["defense"] ?: 0,
+                    potionMagicDamagePercent = potionBonuses[PotionEffects.MAGIC_DAMAGE_PERCENT] ?: 0,
                 )
 
                 val framesJson = json.encodeToString(
@@ -1189,7 +1193,7 @@ class CombatViewModel @Inject constructor(
             Skills.ATTACK, Skills.STRENGTH, Skills.DEFENSE,
             Skills.HITPOINTS, Skills.RANGED, Skills.MAGIC, Skills.AGILITY,
         ).joinToString(",") { "${it}=${levels[it] ?: 1}" }
-        return "$combatLevels|${player.equipped}|${flags.equippedFood}|$foodQtys|${flags.prestigeNodes},${flags.characterRace}|${flags.activeWeaponSlot}|${flags.activeSpell}|${flags.activeBlessingKey}|${flags.activeBlessingExpiresAt}"
+        return "$combatLevels|${player.equipped}|${flags.equippedFood}|$foodQtys|${flags.prestigeNodes},${flags.characterRace}|${flags.activeWeaponSlot}|${flags.activeSpell}|${flags.activeBlessingKey}|${flags.activeBlessingExpiresAt}|${flags.activePotionKey}|${inventory[flags.activePotionKey] ?: 0}"
     }
 
     private fun simulateAllDungeons(player: Player, pending: Map<String, Int> = emptyMap()): Map<String, CombatSimulator.SurvivalRating> {
@@ -1232,6 +1236,9 @@ class CombatViewModel @Inject constructor(
         val activeSpell = flags.activeSpell?.let { gameData.spells[it] }
         val spellMaxHit = if (combatStyle == "magic") activeSpell?.maxHit ?: 0 else 0
 
+        val potionKey = flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
+        val potionBonuses = boostRepo.boostedPotionEffects(flags, gameData.potionEffects(potionKey, levels))
+
         // Pending-aware estimate input (issue #1960): same source as real starts.
         val foodQtys = FoodReservation.available(inventory, flags.equippedFood.keys, pending)
 
@@ -1263,6 +1270,7 @@ class CombatViewModel @Inject constructor(
                     spellMaxHit         = spellMaxHit,
                     agilityLevel        = agility,
                     floorReductionMin     = boostRepo.sessionFloorReductionMin(flags),
+                    potionBonuses       = potionBonuses,
                     equippedFood        = foodQtys,
                     foodHealValues      = gameData.foodHealValues,
                     availableArrows     = availableArrows,
@@ -1348,7 +1356,7 @@ class CombatViewModel @Inject constructor(
         val magicLevel = levels[Skills.MAGIC] ?: 1
         if (combatStyle == "magic" && selectedSpell != null && magicLevel < selectedSpell.magicLevelRequired) return 0L
 
-        val potionBonuses = potionKey?.let { gameData.potionEffects[it] } ?: emptyMap()
+        val potionBonuses = boostRepo.boostedPotionEffects(flags, gameData.potionEffects(potionKey, levels))
         val totalAtkBonus = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
             val eq = equipMap[equipped[slot]] ?: return@sumOf 0
             eq.attackBonus + when (combatStyle) {
@@ -1386,6 +1394,7 @@ class CombatViewModel @Inject constructor(
             playerRanged       = (levels[Skills.RANGED] ?: 1) + (potionBonuses["ranged"] ?: 0) + boostRepo.combatStatBonus(Skills.RANGED, flags, levels[Skills.RANGED] ?: 1),
             playerMagic        = magicLevel + (potionBonuses["magic"] ?: 0) + boostRepo.combatStatBonus(Skills.MAGIC, flags, levels[Skills.MAGIC] ?: 1),
             rangedGearStrengthBonus = bossRangedStrBonus,
+            potionMagicDamagePercent = potionBonuses[PotionEffects.MAGIC_DAMAGE_PERCENT] ?: 0,
             spellMaxHit        = (selectedSpell?.maxHit ?: 0) + bossMagicDmgBonus,
             availableArrows    = ARROW_TIERS.associateWith { Int.MAX_VALUE },
             arrowStrengthBonuses = ARROW_STRENGTH_BONUS,

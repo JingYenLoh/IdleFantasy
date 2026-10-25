@@ -1,5 +1,6 @@
 package com.fantasyidler.repository
 
+import com.fantasyidler.simulator.PotionEffects
 import com.fantasyidler.util.withAppLocale
 
 import android.content.Context
@@ -25,6 +26,7 @@ import com.fantasyidler.simulator.TowerScaling
 import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.ui.screen.UNLOCK_TOLERANCE
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
+import com.fantasyidler.util.craftDurationEfficiency
 import com.fantasyidler.util.toolEfficiency
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.sync.Mutex
@@ -850,10 +852,12 @@ class QueuedSessionStarter @Inject constructor(
                 // Ash is already consumed at enqueue time (CraftingViewModel);
                 // action.catalystQty carries that amount through for the refund-on-abandon path.
                 val ashCost   = action.catalystQty
+                val efficiency = gameData.craftDurationEfficiency(Skills.HERBLORE, action.activityKey, equipped, levels, flags.heirloomXp)
                 val frames    = buildCraftFrames(xpMap[Skills.HERBLORE] ?: 0L, qty, r.xpPerItem, r.outputQuantity, outputKey,
+                    efficiency = efficiency,
                     petBoostPct = boostRepo.boostedPetPct(Skills.HERBLORE, flags, gatheringPetBoost(player.pets, Skills.HERBLORE, flags.ironman)),
                     petDropKey = petDropKey(Skills.HERBLORE), petDropChance = petDropChance(Skills.HERBLORE))
-                val perItemMs = effectiveSessionMs / 60
+                val perItemMs = (effectiveSessionMs / 60 / efficiency).toLong()
                 sessionRepo.startSession(Skills.HERBLORE, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs,
                     catalystKey = catalystKey, catalystQty = ashCost, levelAtStart = levelAtStart, playerMutexHeld = true, consumedMaterials = encodeConsumedMaterials(action))
             }
@@ -890,7 +894,7 @@ class QueuedSessionStarter @Inject constructor(
                 val bossSpellName = action.spellName ?: flags.activeSpell
                 val bossPotionBonuses = if (action.potionKey != null && (inventory[action.potionKey] ?: 0) > 0) {
                     playerRepo.consumeItemsUnlocked(mapOf(action.potionKey to 1))
-                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[action.potionKey] ?: emptyMap())
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects(action.potionKey, if (isElder) flags.elderSkillLevels else levels))
                 } else emptyMap()
                 val bossWeaponSlot = action.weaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { bossEquipped[it] != null }
@@ -961,6 +965,7 @@ class QueuedSessionStarter @Inject constructor(
                     potionAttackBonus   = when (combatStyle) { "ranged" -> bossPotionBonuses["ranged"] ?: 0; "magic" -> bossPotionBonuses["magic"] ?: 0; else -> bossPotionBonuses["attack"] ?: 0 },
                     potionStrengthBonus = when (combatStyle) { "ranged" -> bossPotionBonuses["ranged"] ?: 0; "magic" -> 0; else -> bossPotionBonuses["strength"] ?: 0 },
                     potionDefenseBonus  = bossPotionBonuses["defense"] ?: 0,
+                    potionMagicDamagePercent = bossPotionBonuses[PotionEffects.MAGIC_DAMAGE_PERCENT] ?: 0,
                 )
                 val frameMs        = effectiveSessionMs / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
@@ -1009,7 +1014,7 @@ class QueuedSessionStarter @Inject constructor(
                 val combatSpellName = action.spellName ?: flags.activeSpell
                 val combatPotBonuses = if (action.potionKey != null && (inventory[action.potionKey] ?: 0) > 0) {
                     playerRepo.consumeItemsUnlocked(mapOf(action.potionKey to 1))
-                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[action.potionKey] ?: emptyMap())
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects(action.potionKey, if (isElder) flags.elderSkillLevels else levels))
                 } else emptyMap()
                 val activeWeaponSlot = action.weaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { combatEquipped[it] != null }
@@ -1047,16 +1052,16 @@ class QueuedSessionStarter @Inject constructor(
                                 val result = CombatSimulator.simulateDungeon(
                     dungeon             = dungeon,
                     enemies             = gameData.enemies,
-                    playerAttack        = (combatLevels[Skills.ATTACK]   ?: 1) + boostRepo.combatStatBonus(Skills.ATTACK, flags, combatLevels[Skills.ATTACK] ?: 1) + (combatPotBonuses["attack"]   ?: 0),
-                    playerStrength      = (combatLevels[Skills.STRENGTH] ?: 1) + boostRepo.combatStatBonus(Skills.STRENGTH, flags, combatLevels[Skills.STRENGTH] ?: 1) + (combatPotBonuses["strength"] ?: 0),
-                    playerDefence       = (combatLevels[Skills.DEFENSE]  ?: 1) + totalDefBonus + boostRepo.combatStatBonus(Skills.DEFENSE, flags, combatLevels[Skills.DEFENSE] ?: 1) + (combatPotBonuses["defense"] ?: 0),
+                    playerAttack        = (combatLevels[Skills.ATTACK]   ?: 1) + boostRepo.combatStatBonus(Skills.ATTACK, flags, combatLevels[Skills.ATTACK] ?: 1),
+                    playerStrength      = (combatLevels[Skills.STRENGTH] ?: 1) + boostRepo.combatStatBonus(Skills.STRENGTH, flags, combatLevels[Skills.STRENGTH] ?: 1),
+                    playerDefence       = (combatLevels[Skills.DEFENSE]  ?: 1) + totalDefBonus + boostRepo.combatStatBonus(Skills.DEFENSE, flags, combatLevels[Skills.DEFENSE] ?: 1),
                     playerHp            = (combatLevels[Skills.HITPOINTS] ?: 1) + boostRepo.combatStatBonus(Skills.HITPOINTS, flags, combatLevels[Skills.HITPOINTS] ?: 1) + flags.towerHpBonus,
                     blessingDefBonus    = ChurchRepository.defBonus(flags, prayerCapeMult, gameData.blessings),
                     weaponAttackBonus   = totalAtkBonus,
                     weaponStrengthBonus = totalStrBonus,
                     combatStyle         = combatStyle,
-                    playerRanged        = (combatLevels[Skills.RANGED] ?: 1) + boostRepo.combatStatBonus(Skills.RANGED, flags, combatLevels[Skills.RANGED] ?: 1) + (combatPotBonuses["ranged"] ?: 0),
-                    playerMagic         = (combatLevels[Skills.MAGIC]  ?: 1) + boostRepo.combatStatBonus(Skills.MAGIC, flags, combatLevels[Skills.MAGIC] ?: 1) + (combatPotBonuses["magic"]  ?: 0),
+                    playerRanged        = (combatLevels[Skills.RANGED] ?: 1) + boostRepo.combatStatBonus(Skills.RANGED, flags, combatLevels[Skills.RANGED] ?: 1),
+                    playerMagic         = (combatLevels[Skills.MAGIC]  ?: 1) + boostRepo.combatStatBonus(Skills.MAGIC, flags, combatLevels[Skills.MAGIC] ?: 1),
                     rangedGearStrengthBonus = totalRangedStrBonus,
                     spellMaxHit         = (spell?.maxHit ?: 0) + totalMagicDmgBonus,
                     agilityLevel        = agilityLevel,
@@ -1064,6 +1069,7 @@ class QueuedSessionStarter @Inject constructor(
                     petBoostPct         = combatPetBoost(player.pets, flags.ironman),
                     equippedFood        = availableFood,
                     foodHealValues      = boostRepo.boostedFoodHeal(flags, gameData.foodHealValues),
+                    potionBonuses       = combatPotBonuses,
                     availableArrows     = availableArrows,
                     arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
                     runeKey             = queueRuneKey,
@@ -1128,7 +1134,11 @@ class QueuedSessionStarter @Inject constructor(
                 val staffCoversRune = combatStyle == "magic" && spell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == spell.runeType)
                 val towerRuneKey  = if (combatStyle == "magic" && spell != null && !staffCoversRune) spell.runeType else null
                 val towerRuneCost = spell?.runeCost ?: 1
-                                val result = CombatSimulator.simulateDungeon(
+                val towerPotionBonuses = if (action.potionKey != null && (inventory[action.potionKey] ?: 0) > 0) {
+                    playerRepo.consumeItemsUnlocked(mapOf(action.potionKey to 1))
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects(action.potionKey, levels))
+                } else emptyMap()
+                val result = CombatSimulator.simulateDungeon(
                     dungeon             = dungeon,
                     enemies             = scaledTowerEnemies(floor),
                     playerAttack        = (levels[Skills.ATTACK]   ?: 1) + boostRepo.combatStatBonus(Skills.ATTACK, flags, levels[Skills.ATTACK] ?: 1),
@@ -1148,6 +1158,7 @@ class QueuedSessionStarter @Inject constructor(
                     petBoostPct         = combatPetBoost(player.pets, flags.ironman),
                     equippedFood        = availableFood,
                     foodHealValues      = boostRepo.boostedFoodHeal(flags, gameData.foodHealValues),
+                    potionBonuses       = towerPotionBonuses,
                     availableArrows     = availableArrows,
                     arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
                     runeKey             = towerRuneKey,

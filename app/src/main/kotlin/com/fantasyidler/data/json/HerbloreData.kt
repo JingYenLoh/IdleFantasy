@@ -12,4 +12,6 @@ data class HerbloreRecipe(
     @SerialName("xp_per_item")    val xpPerItem:      Double,
     @SerialName("time_per_item")  val timePerItem:    Int = 120,
     val effects:                   Map<String, Int>,
+    @SerialName("effect_percent") val effectPercent: Int = 0,
+    @SerialName("magic_damage_percent") val magicDamagePercent: Int = 0,
 )

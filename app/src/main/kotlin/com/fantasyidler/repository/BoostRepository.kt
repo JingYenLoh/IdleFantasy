@@ -1,5 +1,6 @@
 package com.fantasyidler.repository
 
+import com.fantasyidler.simulator.PotionEffects
 import com.fantasyidler.data.json.PrestigeSkillTreeData
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
@@ -204,7 +205,9 @@ class BoostRepository @Inject constructor(
     fun boostedPotionEffects(flags: PlayerFlags, effects: Map<String, Int>): Map<String, Int> {
         val bonus = potionBonusFlat(flags)
         if (bonus <= 0 || effects.isEmpty()) return effects
-        return effects.mapValues { (_, v) -> v + bonus }
+        return effects.mapValues { (key, v) ->
+            if (key == PotionEffects.MAGIC_DAMAGE_PERCENT) v else v + bonus
+        }
     }
 
     /** Fraction of crafting inputs refunded for [skill] (smithing/crafting thrift + race branches). */

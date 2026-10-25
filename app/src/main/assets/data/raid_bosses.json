@@ -825,6 +825,11 @@
         "item": "race_change_token",
         "chance": 0.008,
         "comment": "1/125"
+      },
+      {
+        "item": "heirloom_mortar",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
       }
     ],
     "raid": true

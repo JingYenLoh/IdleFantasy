@@ -377,6 +377,7 @@ private fun armoryStatRows(item: EquipmentData): List<Pair<String, String>> {
     item.firemakingEfficiency?.let  { rows.add(stringResource(R.string.armory_stat_firemaking) to "×${"%.2f".format(it)}") }
     item.agilityEfficiency?.let     { rows.add(stringResource(R.string.armory_stat_agility) to "×${"%.2f".format(it)}") }
     item.cookingEfficiency?.let     { rows.add(stringResource(R.string.armory_stat_cooking) to "×${"%.2f".format(it)}") }
+    item.herbloreEfficiency?.let     { rows.add(stringResource(R.string.armory_stat_herblore) to "×${"%.2f".format(it)}") }
     item.thievingEfficiency?.let    { rows.add(stringResource(R.string.armory_stat_thieving) to "×${"%.2f".format(it)}") }
     if (rows.isEmpty()) {
         if (item.attackBonus   != 0) rows.add(stringResource(R.string.armory_stat_attack) to "+${item.attackBonus}")

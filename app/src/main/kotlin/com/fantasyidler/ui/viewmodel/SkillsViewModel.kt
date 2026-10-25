@@ -93,6 +93,7 @@ data class SkillsUiState(
     val agilityEfficiency: Float = 1.0f,
     val thievingEfficiency: Float = 1.0f,
     val cookingEfficiency: Float = 1.0f,
+    val herbloreEfficiency: Float = 1.0f,
     val cropsReadyCount: Int = 0,
     val xpBonusMult: Float = 1.0f,
     /** Full per-skill XP multiplier (2x boosts, blessing, prestige xp_pct) for sheet previews. 1.0 on isle/ironman. */
@@ -254,6 +255,7 @@ class SkillsViewModel @Inject constructor(
                 agilityEfficiency     = if (flags.onElderIsle) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, 0, skillLevels = levels, heirloomXp = flags.heirloomXp),
                 thievingEfficiency    = if (flags.onElderIsle) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK],       EquipSlot.LOCKPICK,       0, skillLevels = levels, heirloomXp = flags.heirloomXp),
                 cookingEfficiency     = if (flags.onElderIsle) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN],     EquipSlot.FRYING_PAN,     0, skillLevels = levels, heirloomXp = flags.heirloomXp),
+                herbloreEfficiency     = if (flags.onElderIsle) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.MORTAR],     EquipSlot.MORTAR,     0, skillLevels = levels, heirloomXp = flags.heirloomXp),
                 xpBonusMult           = if (flags.ironman || flags.onElderIsle) 1.0f
                                         else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0f else 1.0f) * ChurchRepository.xpMultiplier(flags, capeMult, gameData.blessings) * sigilXpMult(flags.embeddedSigils).toFloat(),
                 // Isle rows show the isle payout rate: elder level scaling times Sapphires.

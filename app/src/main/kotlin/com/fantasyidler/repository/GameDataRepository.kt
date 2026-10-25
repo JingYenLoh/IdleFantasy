@@ -1,5 +1,6 @@
 package com.fantasyidler.repository
 
+import com.fantasyidler.simulator.PotionEffects
 import android.content.Context
 import com.fantasyidler.data.json.BlessingData
 import com.fantasyidler.data.json.BoneData
@@ -252,13 +253,14 @@ class GameDataRepository @Inject constructor(
         asset<List<ThievingNpcData>>("data/thieving_npcs.json").associateBy { it.key }
     }
 
-    /** Potion key → map of stat name → flat bonus value. Includes enhanced_* variants at 2× base. */
-    val potionEffects: Map<String, Map<String, Int>> by lazy {
-        val base = herbloreRecipes.mapValues { (_, recipe) -> recipe.effects }
-        val enhanced = herbloreRecipes.mapValues { (_, recipe) ->
-            recipe.effects.mapValues { (_, v) -> (v * 2.0).toInt().coerceAtLeast(v + 1) }
-        }.mapKeys { (key, _) -> "enhanced_$key" }
-        base + enhanced
+    val potionKeys: Set<String> by lazy {
+        herbloreRecipes.keys + herbloreRecipes.keys.map { "enhanced_$it" }
+    }
+
+    fun potionEffects(key: String?, levels: Map<String, Int>): Map<String, Int> {
+        if (key == null) return emptyMap()
+        val recipe = herbloreRecipes[key.removePrefix("enhanced_")] ?: return emptyMap()
+        return PotionEffects.resolve(recipe, levels, key.startsWith("enhanced_"))
     }
 
     // ------------------------------------------------------------------ marketplace

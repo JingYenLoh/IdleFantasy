@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import com.fantasyidler.simulator.PotionEffects
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -332,7 +333,11 @@ internal fun PotionLoadoutPicker(
                             }
                             if (key != null) {
                                 val effectStr = potionEffects[key]?.entries
-                                    ?.joinToString(", ") { (stat, bonus) -> "+$bonus ${stat.toTitleCase()}" }
+                                    ?.joinToString(", ") { (stat, bonus) ->
+                                        if (stat == PotionEffects.MAGIC_DAMAGE_PERCENT)
+                                            context.getString(R.string.potion_magic_damage, bonus)
+                                        else "+$bonus ${GameStrings.skillName(context, stat)}"
+                                    }
                                 if (effectStr != null) {
                                     Text(
                                         text  = effectStr,

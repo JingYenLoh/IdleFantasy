@@ -1209,25 +1209,33 @@ def gen_herblore() -> str:
     recipes = load("recipes/herblore.json")
     assert isinstance(recipes, dict)
 
-    def fmt_effects(effects: dict, enhanced: bool = False) -> str:
-        def val_for(v):
-            return max(int(v * 2), v + 1) if enhanced else v
-        return ", ".join(f"{stat.title()} +{val_for(val)}" for stat, val in effects.items())
+    def fmt_effects(recipe: dict, enhanced: bool = False) -> str:
+        percent = recipe.get("effect_percent", 0)
+        parts = []
+        for stat, flat in recipe.get("effects", {}).items():
+            formula = f"{flat} + floor({percent}% × base level)" if percent else str(flat)
+            parts.append(f"{stat.title()} +" + (f"2 × ({formula})" if enhanced else formula))
+        damage = recipe.get("magic_damage_percent", 0) * (2 if enhanced else 1)
+        if damage:
+            parts.append(f"Magic damage +{damage}%")
+        return ", ".join(parts)
 
     rows = sorted(
         [[
             item_name(k),
             r["level_required"],
             fmt_materials(r["materials"]),
-            fmt_effects(r.get("effects", {})),
-            fmt_effects(r.get("effects", {}), enhanced=True),
+            fmt_effects(r),
+            fmt_effects(r, enhanced=True),
             r["xp_per_item"],
         ] for k, r in recipes.items()],
         key=lambda r: r[1]
     )
     return get_template("skills/crafting/herblore").format(
         icon=html_image(skill_icon_path("herblore"), "", "text"),
-        potion_table=table(['Potion','Level','Ingredients','Effect','Enhanced Effect','XP'], rows),
+        potion_table=table(['Potion','Level','Ingredients','Effect','Enhanced Effect','Base XP'], rows),
+        mortar_table=_tool_table("mortar", "herblore_efficiency"),
+        tool_efficiency_section=_crafting_tool_eff_section("brewing", "herblore", "mortar"),
     )
 
 
@@ -1459,7 +1467,7 @@ def gen_equipment() -> str:
     assert isinstance(equip, dict)
     slot_order = ["weapon", "head", "body", "legs", "boots", "cape", "ring", "necklace",
                   "shield", "pickaxe", "axe", "fishing_rod", "hoe",
-                  "hammer", "tinderbox", "grappling_hook", "frying_pan", "lockpick"]
+                  "hammer", "tinderbox", "grappling_hook", "frying_pan", "lockpick", "mortar"]
     # Todo: Categories are currently hardcoded in InventoryViewModel and should instead be handled in json files instead (eg. in equipment.json).
     # These should replace the current method using slot names
     by_slot: dict[str, list] = {s: [] for s in slot_order}
@@ -1476,7 +1484,7 @@ def gen_equipment() -> str:
                 item.get("fishing_efficiency") or item.get("farming_efficiency") or
                 item.get("smithing_efficiency") or item.get("firemaking_efficiency") or
                 item.get("agility_efficiency") or item.get("cooking_efficiency") or
-                item.get("thieving_efficiency") or "—",
+                item.get("thieving_efficiency") or item.get("herblore_efficiency") or "—",
                 reqs,
             ])
 

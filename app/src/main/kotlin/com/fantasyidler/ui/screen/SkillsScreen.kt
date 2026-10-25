@@ -794,6 +794,7 @@ private fun SkillsTabContent(
                 Skills.SMITHING   -> state.smithingEfficiency
                 Skills.FIREMAKING -> state.firemakingEfficiency
                 Skills.COOKING    -> state.cookingEfficiency
+                Skills.HERBLORE   -> state.herbloreEfficiency
                 else              -> 1.0f
             }
             SkillRow(

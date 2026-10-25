@@ -68,6 +68,7 @@ data class QuestsUiState(
     val dwarvenDropDenominator: Int? = null,
     /** True once the Dwarven set is complete and the daily roll drops Divine pieces. */
     val dailyDropIsDivine: Boolean = false,
+    val dailyDropIsMixed: Boolean = false,
 )
 
 // ---------------------------------------------------------------------------
@@ -148,13 +149,16 @@ class QuestsViewModel @Inject constructor(
         var divineDropChance = extra.divineDropChance
         var dwarvenDropDenominator = extra.dwarvenDropDenominator
         var dailyDropIsDivine = extra.dailyDropIsDivine
+        var dailyDropIsMixed = extra.dailyDropIsMixed
         if (player != null) {
             val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val ownedItems = (inventory.keys + equipped.values.filterNotNull()).toSet()
             divineDropChance = weeklyQuestRepo.currentDivineDropChanceForDisplay(flags, ownedItems)
             dwarvenDropDenominator = dailyQuestRepo.dailyDropDenominatorForDisplay(flags, ownedItems)
-            dailyDropIsDivine = dailyQuestRepo.dwarvenDropPool.all { it in ownedItems }
+            val dailyPool = dailyQuestRepo.dailyEquipmentPool(ownedItems)
+            dailyDropIsDivine = dailyPool.any { it.startsWith("divine_") }
+            dailyDropIsMixed = dailyDropIsDivine && dailyPool.any { it.startsWith("dwarven_") }
         }
 
         extra.copy(
@@ -167,6 +171,7 @@ class QuestsViewModel @Inject constructor(
             divineDropChance   = divineDropChance,
             dwarvenDropDenominator = dwarvenDropDenominator,
             dailyDropIsDivine  = dailyDropIsDivine,
+            dailyDropIsMixed   = dailyDropIsMixed,
             weeklyBonusClaimed = flags.weeklyBonusClaimed,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), QuestsUiState())

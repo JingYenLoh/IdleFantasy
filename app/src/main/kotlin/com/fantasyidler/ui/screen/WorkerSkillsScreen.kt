@@ -728,8 +728,9 @@ private fun WorkerCraftRecipeRow(
             if (recipe.effects.isNotEmpty()) {
                 Text(
                     text  = recipe.effects.entries.joinToString("  ") { (stat, bonus) ->
-                        "+$bonus ${stat.replaceFirstChar { it.uppercase() }}"
-                    },
+                        if (recipe.effectPercent > 0) context.getString(R.string.potion_scaling_effect, bonus, recipe.effectPercent, GameStrings.skillName(context, stat))
+                        else "+$bonus ${GameStrings.skillName(context, stat)}"
+                    } + if (recipe.magicDamagePercent > 0) "  " + context.getString(R.string.potion_magic_damage, recipe.magicDamagePercent) else "",
                     style = MaterialTheme.typography.labelSmall,
                     color = if (enabled) MaterialTheme.colorScheme.primary else dim,
                 )
@@ -761,7 +762,7 @@ private fun WorkerCraftRecipeRow(
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
-                        text  = "${recipe.xpPerItem.toInt()} XP",
+                        text  = "${(recipe.xpPerItem * (state.herbloreEfficiencyByRecipe[recipe.key] ?: 1.0f)).toInt()} XP",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -792,7 +793,8 @@ private fun WorkerCraftQuantityContent(
     val max      = minOf(state.maxCraftable(recipe), state.maxCraftQty)
     var quantity by remember(recipe) { mutableIntStateOf(max.coerceAtLeast(1)) }
     val qty      = quantity.coerceIn(1, max.coerceAtLeast(1))
-    val totalXp  = recipe.xpPerItem * qty
+    val efficiency = state.herbloreEfficiencyByRecipe[recipe.key] ?: 1.0f
+    val totalXp  = recipe.xpPerItem * qty * efficiency
     var textValue by remember(recipe) { mutableStateOf(qty.toString()) }
     fun setQuantity(value: Int) {
         quantity  = value.coerceIn(1, max.coerceAtLeast(1))
@@ -892,7 +894,7 @@ private fun WorkerCraftQuantityContent(
         )
         if (state.sessionDurationMs > 0) {
             Text(
-                text     = "~${(qty.toLong() * (state.sessionDurationMs / 60)).formatDurationMs(context)}",
+                text     = "~${(qty.toLong() * ((state.sessionDurationMs / 60 / efficiency).toLong())).formatDurationMs(context)}",
                 style    = MaterialTheme.typography.bodySmall,
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.align(Alignment.CenterHorizontally),

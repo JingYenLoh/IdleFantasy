@@ -2797,4 +2797,10 @@
     <string name="pet_petal_sprite_desc">A blossom spirit shaken loose from the Thorn Queen\'s crown. It dances ahead of you into battle.</string>
     <string name="pet_bumblebee_name">Bumblebee</string>
     <string name="pet_bumblebee_desc">A busy little bee that knows exactly which flowers make the best potions.</string>
+    <string name="profile_stat_herblore">Herblore</string>
+    <string name="armory_stat_herblore">Herblore Efficiency</string>
+    <string name="potion_magic_damage">+%1$d%% Magic damage</string>
+    <string name="potion_scaling_effect">+%1$d + %2$d%% of base %3$s</string>
+    <string name="label_daily_info_pity_mixed">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop unowned Divine gear or the Dwarven Mortar and Pestle. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string>
+    <string name="label_daily_reward_pity_mixed">2,000 coins (1/%1$d: Divine gear or Dwarven Mortar and Pestle)</string>
 </resources>

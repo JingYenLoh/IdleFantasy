@@ -186,6 +186,7 @@ fun QuestsScreen(
                         hideCompleted       = state.hideCompleted,
                         dropDenominator = state.dwarvenDropDenominator,
                         dropIsDivine    = state.dailyDropIsDivine,
+                        dropIsMixed     = state.dailyDropIsMixed,
                         onClaimQuest   = { viewModel.claimDailyQuest(it) },
                         onNavigateToSkill = onNavigateToSkill,
                     )
@@ -246,6 +247,7 @@ private fun DailyQuestsContent(
     hideCompleted: Boolean = false,
     dropDenominator: Int? = null,
     dropIsDivine: Boolean = false,
+    dropIsMixed: Boolean = false,
     onClaimQuest: (String) -> Unit,
     onNavigateToSkill: (String) -> Unit = {},
 ) {
@@ -255,7 +257,7 @@ private fun DailyQuestsContent(
         item {
             Text(
                 text     = if (dropDenominator != null)
-                    stringResource(if (dropIsDivine) R.string.label_daily_info_pity_divine else R.string.label_daily_info_pity, dropDenominator)
+                    stringResource(if (dropIsMixed) R.string.label_daily_info_pity_mixed else if (dropIsDivine) R.string.label_daily_info_pity_divine else R.string.label_daily_info_pity, dropDenominator)
                 else
                     stringResource(R.string.label_daily_info_complete),
                 style    = MaterialTheme.typography.bodySmall,
@@ -285,6 +287,7 @@ private fun DailyQuestsContent(
                     quest           = q,
                     dropDenominator = dropDenominator,
                     dropIsDivine    = dropIsDivine,
+                    dropIsMixed     = dropIsMixed,
                     onClaim         = { onClaimQuest(q.template.id) },
                     onNavigateToSkill = onNavigateToSkill,
                 )
@@ -452,6 +455,7 @@ private fun DailyQuestCard(
     quest: DailyQuestWithProgress,
     dropDenominator: Int? = null,
     dropIsDivine: Boolean = false,
+    dropIsMixed: Boolean = false,
     onClaim: () -> Unit,
     onNavigateToSkill: (String) -> Unit = {},
 ) {
@@ -532,7 +536,7 @@ private fun DailyQuestCard(
             Spacer(Modifier.height(6.dp))
             Text(
                 text  = if (dropDenominator != null)
-                    stringResource(if (dropIsDivine) R.string.label_daily_reward_pity_divine else R.string.label_daily_reward_pity, dropDenominator)
+                    stringResource(if (dropIsMixed) R.string.label_daily_reward_pity_mixed else if (dropIsDivine) R.string.label_daily_reward_pity_divine else R.string.label_daily_reward_pity, dropDenominator)
                 else
                     stringResource(R.string.label_daily_reward_complete),
                 style = MaterialTheme.typography.labelSmall,

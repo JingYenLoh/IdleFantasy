@@ -239,7 +239,7 @@ class ArmoryViewModel @Inject constructor(
     companion object {
         val ARMOR_SLOTS     = setOf("head", "body", "legs", "boots", "shield")
         val ACCESSORY_SLOTS = setOf("ring", "necklace", "cape")
-        val TOOL_SLOTS      = setOf("pickaxe", "axe", "fishing_rod", "hoe", "hammer", "tinderbox", "grappling_hook", "frying_pan", "lockpick")
+        val TOOL_SLOTS      = setOf("pickaxe", "axe", "fishing_rod", "hoe", "hammer", "tinderbox", "grappling_hook", "frying_pan", "lockpick", "mortar")
 
         /** Isle-only equipment (tiered armor + Ancient Signet). Hidden from the armory
          *  list AND excluded from the collection total until the isle is unlocked. */

@@ -4752,7 +4752,7 @@
     "description": "Brew 30 attack brews for the Herblore Guild.",
     "rewards": {
       "coins": 1500,
-      "xp": 4000,
+      "xp": 6000,
       "xp_skill": "herblore",
       "items": {
         "potato": 80
@@ -4772,7 +4772,7 @@
     "description": "Brew 30 defence brews for the Herblore Guild.",
     "rewards": {
       "coins": 2000,
-      "xp": 5000,
+      "xp": 7500,
       "xp_skill": "herblore",
       "items": {
         "cabbage": 80
@@ -4792,7 +4792,7 @@
     "description": "Brew 30 strength brews for the Herblore Guild.",
     "rewards": {
       "coins": 2000,
-      "xp": 5000,
+      "xp": 7500,
       "xp_skill": "herblore",
       "items": {
         "carrot": 80
@@ -4812,7 +4812,7 @@
     "description": "Brew 25 attack potions for the Herblore Guild.",
     "rewards": {
       "coins": 2500,
-      "xp": 6000,
+      "xp": 9000,
       "xp_skill": "herblore",
       "items": {
         "potato": 50,
@@ -4833,7 +4833,7 @@
     "description": "Brew 25 strength potions for the Herblore Guild.",
     "rewards": {
       "coins": 3000,
-      "xp": 7000,
+      "xp": 10500,
       "xp_skill": "herblore",
       "items": {
         "carrot": 50,
@@ -4850,11 +4850,11 @@
     "name": "Attack Brews Reserve",
     "type": "craft",
     "target": "attack_brew",
-    "amount": 45,
-    "description": "Brew 45 attack brews for the Herblore Guild.",
+    "amount": 30,
+    "description": "Brew 30 attack brews for the Herblore Guild.",
     "rewards": {
       "coins": 2250,
-      "xp": 6000,
+      "xp": 9000,
       "xp_skill": "herblore",
       "items": {
         "potato": 120
@@ -4870,11 +4870,11 @@
     "name": "Defence Brews Reserve",
     "type": "craft",
     "target": "defense_brew",
-    "amount": 45,
-    "description": "Brew 45 defence brews for the Herblore Guild.",
+    "amount": 30,
+    "description": "Brew 30 defence brews for the Herblore Guild.",
     "rewards": {
       "coins": 3000,
-      "xp": 7500,
+      "xp": 11250,
       "xp_skill": "herblore",
       "items": {
         "cabbage": 120
@@ -4894,7 +4894,7 @@
     "description": "Brew 30 ranging potions for the Herblore Guild.",
     "rewards": {
       "coins": 8000,
-      "xp": 20000,
+      "xp": 30000,
       "xp_skill": "herblore",
       "items": {
         "raw_lobster": 30,
@@ -4915,7 +4915,7 @@
     "description": "Brew 30 magic potions for the Herblore Guild.",
     "rewards": {
       "coins": 10000,
-      "xp": 25000,
+      "xp": 37500,
       "xp_skill": "herblore",
       "items": {
         "raw_swordfish": 25
@@ -4935,7 +4935,7 @@
     "description": "Brew 30 super strength potions for the Herblore Guild.",
     "rewards": {
       "coins": 11000,
-      "xp": 27000,
+      "xp": 40500,
       "xp_skill": "herblore",
       "items": {
         "raw_monkfish": 25
@@ -4955,7 +4955,7 @@
     "description": "Brew 30 defence potions for the Herblore Guild.",
     "rewards": {
       "coins": 9000,
-      "xp": 22000,
+      "xp": 33000,
       "xp_skill": "herblore",
       "items": {
         "raw_lobster": 28,
@@ -4972,11 +4972,11 @@
     "name": "Ranging Potions Reserve",
     "type": "craft",
     "target": "ranging_potion",
-    "amount": 45,
-    "description": "Brew 45 ranging potions for the Herblore Guild.",
+    "amount": 30,
+    "description": "Brew 30 ranging potions for the Herblore Guild.",
     "rewards": {
       "coins": 12000,
-      "xp": 30000,
+      "xp": 45000,
       "xp_skill": "herblore",
       "items": {
         "raw_lobster": 45,
@@ -4993,11 +4993,11 @@
     "name": "Magic Potions Reserve",
     "type": "craft",
     "target": "magic_potion",
-    "amount": 45,
-    "description": "Brew 45 magic potions for the Herblore Guild.",
+    "amount": 30,
+    "description": "Brew 30 magic potions for the Herblore Guild.",
     "rewards": {
       "coins": 15000,
-      "xp": 37500,
+      "xp": 50000,
       "xp_skill": "herblore",
       "items": {
         "raw_swordfish": 38
@@ -5013,11 +5013,11 @@
     "name": "Super Strength Reserve",
     "type": "craft",
     "target": "super_strength_potion",
-    "amount": 45,
-    "description": "Brew 45 super strength potions for the Herblore Guild.",
+    "amount": 30,
+    "description": "Brew 30 super strength potions for the Herblore Guild.",
     "rewards": {
       "coins": 16500,
-      "xp": 40500,
+      "xp": 50000,
       "xp_skill": "herblore",
       "items": {
         "raw_monkfish": 38
@@ -5033,11 +5033,11 @@
     "name": "Super Ranging",
     "type": "craft",
     "target": "super_ranging_potion",
-    "amount": 30,
-    "description": "Brew 30 super ranging potions for the Herblore Guild.",
+    "amount": 20,
+    "description": "Brew 20 super ranging potions for the Herblore Guild.",
     "rewards": {
       "coins": 12000,
-      "xp": 30000,
+      "xp": 68000,
       "xp_skill": "herblore",
       "items": {
         "raw_shark": 20
@@ -5053,11 +5053,11 @@
     "name": "Super Magic",
     "type": "craft",
     "target": "super_magic_potion",
-    "amount": 30,
-    "description": "Brew 30 super magic potions for the Herblore Guild.",
+    "amount": 20,
+    "description": "Brew 20 super magic potions for the Herblore Guild.",
     "rewards": {
       "coins": 13000,
-      "xp": 32000,
+      "xp": 72000,
       "xp_skill": "herblore",
       "items": {
         "adamantite_ore": 25
@@ -5073,11 +5073,11 @@
     "name": "Super Attack Batch",
     "type": "craft",
     "target": "super_attack_potion",
-    "amount": 30,
-    "description": "Brew 30 super attack potions for the Herblore Guild.",
+    "amount": 20,
+    "description": "Brew 20 super attack potions for the Herblore Guild.",
     "rewards": {
       "coins": 12000,
-      "xp": 29000,
+      "xp": 65000,
       "xp_skill": "herblore",
       "items": {
         "raw_shark": 22
@@ -5093,11 +5093,11 @@
     "name": "Super Defence Batch",
     "type": "craft",
     "target": "super_defense_potion",
-    "amount": 30,
-    "description": "Brew 30 super defence potions for the Herblore Guild.",
+    "amount": 20,
+    "description": "Brew 20 super defence potions for the Herblore Guild.",
     "rewards": {
       "coins": 12500,
-      "xp": 31000,
+      "xp": 70000,
       "xp_skill": "herblore",
       "items": {
         "adamantite_ore": 28
@@ -5113,11 +5113,11 @@
     "name": "Super Ranging Reserve",
     "type": "craft",
     "target": "super_ranging_potion",
-    "amount": 45,
-    "description": "Brew 45 super ranging potions for the Herblore Guild.",
+    "amount": 30,
+    "description": "Brew 30 super ranging potions for the Herblore Guild.",
     "rewards": {
       "coins": 18000,
-      "xp": 45000,
+      "xp": 101000,
       "xp_skill": "herblore",
       "items": {
         "raw_shark": 30
@@ -5133,11 +5133,11 @@
     "name": "Super Magic Reserve",
     "type": "craft",
     "target": "super_magic_potion",
-    "amount": 45,
-    "description": "Brew 45 super magic potions for the Herblore Guild.",
+    "amount": 30,
+    "description": "Brew 30 super magic potions for the Herblore Guild.",
     "rewards": {
       "coins": 19500,
-      "xp": 48000,
+      "xp": 108000,
       "xp_skill": "herblore",
       "items": {
         "adamantite_ore": 38
@@ -5153,11 +5153,11 @@
     "name": "Super Attack Batch Reserve",
     "type": "craft",
     "target": "super_attack_potion",
-    "amount": 45,
-    "description": "Brew 45 super attack potions for the Herblore Guild.",
+    "amount": 30,
+    "description": "Brew 30 super attack potions for the Herblore Guild.",
     "rewards": {
       "coins": 18000,
-      "xp": 43500,
+      "xp": 98000,
       "xp_skill": "herblore",
       "items": {
         "raw_shark": 33
@@ -5173,11 +5173,11 @@
     "name": "Overload Batch",
     "type": "craft",
     "target": "overload_potion",
-    "amount": 25,
+    "amount": 10,
     "description": "Brew 15 overload potions for the Herblore Guild.",
     "rewards": {
       "coins": 20000,
-      "xp": 60000,
+      "xp": 80000,
       "xp_skill": "herblore",
       "items": {
         "raw_shark": 30,
@@ -5194,7 +5194,7 @@
     "name": "Overload Reserve",
     "type": "craft",
     "target": "overload_potion",
-    "amount": 42,
+    "amount": 20,
     "description": "Brew 25 overload potions for the guild vault.",
     "rewards": {
       "coins": 28000,
@@ -5215,7 +5215,7 @@
     "name": "Grand Stockpile",
     "type": "craft",
     "target": "overload_potion",
-    "amount": 68,
+    "amount": 30,
     "description": "Brew 40 overload potions for the grand vault.",
     "rewards": {
       "coins": 35000,
@@ -5236,11 +5236,11 @@
     "name": "Overload Vault",
     "type": "craft",
     "target": "overload_potion",
-    "amount": 33,
+    "amount": 15,
     "description": "Brew 20 overload potions for the guild vault.",
     "rewards": {
       "coins": 24000,
-      "xp": 70000,
+      "xp": 80000,
       "xp_skill": "herblore",
       "items": {
         "raw_manta_ray": 22,
@@ -5257,8 +5257,8 @@
     "name": "Overload Batch Reserve",
     "type": "craft",
     "target": "overload_potion",
-    "amount": 40,
-    "description": "Brew 40 overload potions for the Herblore Guild.",
+    "amount": 20,
+    "description": "Brew 20 overload potions for the Herblore Guild.",
     "rewards": {
       "coins": 32000,
       "xp": 96000,
@@ -5278,8 +5278,8 @@
     "name": "Overload Reserve Surplus",
     "type": "craft",
     "target": "overload_potion",
-    "amount": 65,
-    "description": "Brew 65 overload potions for the guild vault.",
+    "amount": 30,
+    "description": "Brew 30 overload potions for the guild vault.",
     "rewards": {
       "coins": 43500,
       "xp": 124000,
@@ -5299,8 +5299,8 @@
     "name": "Grand Stockpile Reserve",
     "type": "craft",
     "target": "overload_potion",
-    "amount": 100,
-    "description": "Brew 100 overload potions for the grand vault.",
+    "amount": 40,
+    "description": "Brew 40 overload potions for the grand vault.",
     "rewards": {
       "coins": 51500,
       "xp": 147000,

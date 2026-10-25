@@ -261,7 +261,7 @@ internal fun EquipPickerSheet(
                                 (it.magicAttackBonus ?: 0) + (it.magicDamageBonus ?: 0) +
                                 ((it.miningEfficiency ?: it.woodcuttingEfficiency ?: it.fishingEfficiency ?:
                                     it.farmingEfficiency ?: it.smithingEfficiency ?: it.firemakingEfficiency ?:
-                                    it.agilityEfficiency ?: it.cookingEfficiency ?: it.thievingEfficiency ?:
+                                    it.agilityEfficiency ?: it.cookingEfficiency ?: it.herbloreEfficiency ?: it.thievingEfficiency ?:
                                     0f) * 100).toInt()
                         },
                         { it.name },
@@ -344,6 +344,7 @@ internal fun buildEquipDetail(
     item.firemakingEfficiency?.let  { parts.add("${context.getString(R.string.profile_stat_firemaking)} ×${"%.2f".format(it)}") }
     item.agilityEfficiency?.let     { parts.add("${context.getString(R.string.profile_stat_agility)} ×${"%.2f".format(it)}") }
     item.cookingEfficiency?.let     { parts.add("${context.getString(R.string.profile_stat_cooking)} ×${"%.2f".format(it)}") }
+    item.herbloreEfficiency?.let     { parts.add("${context.getString(R.string.profile_stat_herblore)} ×${"%.2f".format(it)}") }
     item.thievingEfficiency?.let    { parts.add("${context.getString(R.string.profile_stat_thieving)} ×${"%.2f".format(it)}") }
     // Tools with efficiency stats hide their melee bonuses; keyed off the efficiency
     // block alone so the heirloom level label doesn't suppress them (issue #1594).

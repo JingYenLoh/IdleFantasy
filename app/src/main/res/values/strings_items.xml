@@ -1304,4 +1304,22 @@
     <string name="item_seedheart_ring_desc">A living seed sealed in silver. It hums with the patience of growing things.</string>
     <string name="item_bloomwood_staff_desc">A flowering branch from the Wildgrove that never wilts. Spells bloom from its tip.</string>
     <string name="item_petalweave_cape_desc">Stitched from a thousand spring petals at the Night Market. Only sold during the Bloomtide.</string>
+    <string name="item_bronze_mortar_name">Bronze Mortar and Pestle</string>
+    <string name="item_bronze_mortar_desc">A bronze mortar and pestle. Improves brewing experience and speed.</string>
+    <string name="item_iron_mortar_name">Iron Mortar and Pestle</string>
+    <string name="item_iron_mortar_desc">A iron mortar and pestle. Improves brewing experience and speed.</string>
+    <string name="item_steel_mortar_name">Steel Mortar and Pestle</string>
+    <string name="item_steel_mortar_desc">A steel mortar and pestle. Improves brewing experience and speed.</string>
+    <string name="item_mithril_mortar_name">Mithril Mortar and Pestle</string>
+    <string name="item_mithril_mortar_desc">A mithril mortar and pestle. Improves brewing experience and speed.</string>
+    <string name="item_adamantite_mortar_name">Adamantite Mortar and Pestle</string>
+    <string name="item_adamantite_mortar_desc">A adamantite mortar and pestle. Improves brewing experience and speed.</string>
+    <string name="item_runite_mortar_name">Runite Mortar and Pestle</string>
+    <string name="item_runite_mortar_desc">A runite mortar and pestle. Improves brewing experience and speed.</string>
+    <string name="item_dwarven_mortar_name">Dwarven Mortar and Pestle</string>
+    <string name="item_dwarven_mortar_desc">A dwarven mortar and pestle. Improves brewing experience and speed.</string>
+    <string name="item_divine_mortar_name">Divine Mortar and Pestle</string>
+    <string name="item_divine_mortar_desc">A divine mortar and pestle. Improves brewing experience and speed.</string>
+    <string name="item_heirloom_mortar_name">Heirloom Mortar and Pestle</string>
+    <string name="item_heirloom_mortar_desc">A mortar and pestle passed down by generations of herbalists. Every brew deepens its power.</string>
 </resources>

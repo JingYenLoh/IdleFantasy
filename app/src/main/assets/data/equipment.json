@@ -5176,5 +5176,133 @@
     "magic_attack_bonus": 4,
     "magic_damage_bonus": 2,
     "requirements": {}
+  },
+  "bronze_mortar": {
+    "name": "bronze_mortar",
+    "display_name": "Bronze Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A bronze mortar and pestle. Improves brewing experience and speed.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {
+      "herblore": 1
+    },
+    "herblore_efficiency": 1.0
+  },
+  "iron_mortar": {
+    "name": "iron_mortar",
+    "display_name": "Iron Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A iron mortar and pestle. Improves brewing experience and speed.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {
+      "herblore": 15
+    },
+    "herblore_efficiency": 1.25
+  },
+  "steel_mortar": {
+    "name": "steel_mortar",
+    "display_name": "Steel Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A steel mortar and pestle. Improves brewing experience and speed.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {
+      "herblore": 30
+    },
+    "herblore_efficiency": 1.5
+  },
+  "mithril_mortar": {
+    "name": "mithril_mortar",
+    "display_name": "Mithril Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A mithril mortar and pestle. Improves brewing experience and speed.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {
+      "herblore": 55
+    },
+    "herblore_efficiency": 1.75
+  },
+  "adamantite_mortar": {
+    "name": "adamantite_mortar",
+    "display_name": "Adamantite Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A adamantite mortar and pestle. Improves brewing experience and speed.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {
+      "herblore": 70
+    },
+    "herblore_efficiency": 2.0
+  },
+  "runite_mortar": {
+    "name": "runite_mortar",
+    "display_name": "Runite Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A runite mortar and pestle. Improves brewing experience and speed.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {
+      "herblore": 85
+    },
+    "herblore_efficiency": 2.25
+  },
+  "dwarven_mortar": {
+    "name": "dwarven_mortar",
+    "display_name": "Dwarven Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A dwarven mortar and pestle. Improves brewing experience and speed.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {
+      "herblore": 60
+    },
+    "herblore_efficiency": 2.5
+  },
+  "divine_mortar": {
+    "name": "divine_mortar",
+    "display_name": "Divine Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A divine mortar and pestle. Improves brewing experience and speed.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {
+      "herblore": 85
+    },
+    "herblore_efficiency": 3.0
+  },
+  "heirloom_mortar": {
+    "name": "heirloom_mortar",
+    "display_name": "Heirloom Mortar and Pestle",
+    "slot": "mortar",
+    "combat_style": null,
+    "description": "A mortar and pestle passed down by generations of herbalists. Every brew deepens its power.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "requirements": {},
+    "heirloom_skill": "herblore",
+    "heirloom_base": {
+      "efficiency": 1.25
+    },
+    "herblore_efficiency": 4.5
   }
 }

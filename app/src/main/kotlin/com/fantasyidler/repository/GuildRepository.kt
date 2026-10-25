@@ -123,7 +123,7 @@ class GuildRepository @Inject constructor(
         )
 
         fun countForTarget(items: Map<String, Int>, target: String): Int =
-            (items[target] ?: 0) + (items["enhanced_$target"] ?: 0) + (POTION_SUBSTITUTES[target]?.sumOf { items[it] ?: 0 } ?: 0)
+            (items[target] ?: 0) + (items["enhanced_$target"] ?: 0) + (POTION_SUBSTITUTES[target]?.sumOf { (items[it] ?: 0) + (items["enhanced_$it"] ?: 0) } ?: 0)
     }
 
     // -------------------------------------------------------------------------
@@ -437,8 +437,13 @@ class GuildRepository @Inject constructor(
                     level("smithing") >= tipsLevel
                 } else true
             }
-            template.guild == "herblore" && template.type == "craft" ->
-                level("herblore") >= (gameData.herbloreRecipes[template.target]?.levelRequired ?: 1)
+            template.guild == "herblore" && template.type == "craft" -> {
+                val recipe = gameData.herbloreRecipes[template.target]
+                level("herblore") >= (recipe?.levelRequired ?: 1) &&
+                    recipe?.materials?.keys.orEmpty().all { ingredient ->
+                        level("farming") >= (gameData.crops[ingredient]?.levelRequired ?: 1)
+                    }
+            }
             template.guild == "smithing" && template.type == "craft" ->
                 level("smithing") >= (gameData.smithingRecipes[template.target]?.levelRequired ?: 1)
             template.guild == "cooking" && template.type == "craft" -> {

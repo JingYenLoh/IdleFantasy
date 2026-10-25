@@ -98,6 +98,8 @@ data class CraftableRecipe(
     val tier: String = "",
     /** Combat stat bonuses granted by this consumable (herblore only). */
     val effects: Map<String, Int> = emptyMap(),
+    val effectPercent: Int = 0,
+    val magicDamagePercent: Int = 0,
     /** Combat style of the output weapon, if applicable (e.g. "attack", "ranged", "magic"). */
     val outputCombatStyle: String? = null,
 )
@@ -408,6 +410,8 @@ class CraftingViewModel @Inject constructor(
                 skillName     = Skills.HERBLORE,
                 category      = herbloreCategory(key),
                 effects       = r.effects,
+                effectPercent = r.effectPercent,
+                magicDamagePercent = r.magicDamagePercent,
             )
         }.sortedBy { it.levelRequired }
     }

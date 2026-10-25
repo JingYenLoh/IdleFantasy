@@ -69,6 +69,7 @@ data class TowerUiState(
     val inventory: Map<String, Int> = emptyMap(),
     val selectedPotionKey: String? = null,
     val availablePotions: Map<String, Int> = emptyMap(),
+    val potionEffects: Map<String, Map<String, Int>> = emptyMap(),
     val isQueueFull: Boolean = false,
 )
 
@@ -96,7 +97,7 @@ class TowerViewModel @Inject constructor(
     private val json: Json,
 ) : ViewModel() {
 
-    val potionEffects: Map<String, Map<String, Int>> = gameData.potionEffects
+    val potionEffects: Map<String, Map<String, Int>> get() = uiState.value.potionEffects
 
     init {
         // Transient loadout picks belong to the character that made them; without this reset
@@ -227,7 +228,8 @@ class TowerViewModel @Inject constructor(
                 magicLevel          = magicLevel,
                 inventory           = inventory,
                 selectedPotionKey   = extra.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 },
-                availablePotions    = inventory.filterKeys { it in gameData.potionEffects },
+                potionEffects = gameData.potionKeys.associateWith { boostRepo.boostedPotionEffects(flags, gameData.potionEffects(it, levels)) },
+                availablePotions    = inventory.filterKeys { it in gameData.potionKeys },
                 isQueueFull         = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
             )
         }
@@ -276,6 +278,7 @@ class TowerViewModel @Inject constructor(
                         skillName           = "tower",
                         activityKey         = "tower_floor_$nextFloor",
                         skillDisplayName    = "Infinite Tower: Floor $nextFloor",
+                        potionKey           = _extra.value.selectedPotionKey ?: flags.activePotionKey,
                         estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)),
                     )
                 )
@@ -342,7 +345,7 @@ class TowerViewModel @Inject constructor(
                     ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
                     playerRepo.consumeItems(mapOf(potionKey to 1))
-                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[potionKey] ?: emptyMap())
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects(potionKey, levels))
                 } else emptyMap()
 
                 val towerHpBonus = flags.towerHpBonus

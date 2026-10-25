@@ -674,12 +674,13 @@ object EquipSlot {
     const val TINDERBOX      = "tinderbox"
     const val GRAPPLING_HOOK = "grappling_hook"
     const val FRYING_PAN     = "frying_pan"
+    const val MORTAR         = "mortar"
     const val LOCKPICK       = "lockpick"
 
     val WEAPON_SLOTS = listOf(WEAPON_ATK, WEAPON_STR, WEAPON_RANGED, WEAPON_MAGIC)
     val ARMOR_SLOTS  = listOf(HEAD, BODY, LEGS, BOOTS, CAPE, RING, NECKLACE, SHIELD, SIGNET)
     val COMBAT_SLOTS = WEAPON_SLOTS + ARMOR_SLOTS
-    val TOOL_SLOTS   = listOf(PICKAXE, AXE, FISHING_ROD, HOE, HAMMER, TINDERBOX, GRAPPLING_HOOK, FRYING_PAN, LOCKPICK)
+    val TOOL_SLOTS   = listOf(PICKAXE, AXE, FISHING_ROD, HOE, HAMMER, TINDERBOX, GRAPPLING_HOOK, FRYING_PAN, LOCKPICK, MORTAR)
     val ALL          = COMBAT_SLOTS + TOOL_SLOTS
 
     /** Returns the combat style string that belongs in a given weapon slot, or null for non-weapon slots. */

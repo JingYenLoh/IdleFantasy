@@ -334,8 +334,9 @@ private fun CraftRecipeRow(
             if (recipe.effects.isNotEmpty()) {
                 Text(
                     text  = recipe.effects.entries.joinToString("  ") { (stat, bonus) ->
-                        "+$bonus ${GameStrings.skillName(context, stat)}"
-                    },
+                        if (recipe.effectPercent > 0) context.getString(R.string.potion_scaling_effect, bonus, recipe.effectPercent, GameStrings.skillName(context, stat))
+                        else "+$bonus ${GameStrings.skillName(context, stat)}"
+                    } + if (recipe.magicDamagePercent > 0) "  " + context.getString(R.string.potion_magic_damage, recipe.magicDamagePercent) else "",
                     style = MaterialTheme.typography.labelSmall,
                     color = if (enabled) MaterialTheme.colorScheme.primary else dim,
                 )
