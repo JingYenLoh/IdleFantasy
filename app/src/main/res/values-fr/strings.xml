@@ -362,12 +362,12 @@
     <string name="weekly_bonus_title">Bonus hebdomadaire !</string>
     <string name="weekly_bonus_claim">Réclamer le bonus hebdomadaire</string>
     <string name="label_daily_info_pity">Chaque quête quotidienne donne des pièces. Chaque quête a aussi une chance sur %1$d de lâcher une pièce d\'un équipement nain que vous ne possédez pas. Chaque récompense sans objet lâché augment les chances ; un objet lâché les réinitialisent à 1 sur 100.</string>
-    <string name="label_daily_info_pity_divine">Chaque quête quotidienne rapporte des pièces. Chaque quête offre également une chance de 1 sur %1$d de vous faire obtenir un équipement divin que vous ne possédez pas encore. Chaque fois que vous effectuez une quête sans obtenir d\'équipement, vos chances augmentent ; si vous obtenez un équipement, elles reviennent à 1 sur 100.</string>
+    <string name="label_daily_info_pity_divine">Chaque quête quotidienne rapporte des pièces. Chaque quête offre également une chance de 1 sur %1$d d\'obtenir un équipement divin que vous ne possédez pas encore. Chaque fois que vous effectuez une quête sans obtenir d\'équipement, vos chances augmentent ; si vous obtenez un équipement, elles reviennent à 1 sur 100.</string>
     <string name="label_daily_info_complete">Chaque quête quotidienne donne des pièces. Vous possédez déjà tout l\'équipement nain !</string>
     <string name="label_weekly_info">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces, ou %1$s de chance d\'obtenir un équipement divin.</string>
     <string name="label_weekly_info_complete">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces. Vous possédez déjà tout l\'équipement divin !</string>
     <string name="label_daily_reward_pity">2 000 pièces (1/%1$d : équipement nain)</string>
-    <string name="label_daily_reward_pity_divine">2,000 pièces (1/%1$d: équipement Divin)</string>
+    <string name="label_daily_reward_pity_divine">2,000 pièces (1/%1$d: Équipement divin)</string>
     <string name="label_daily_reward_complete">2 000 pièces</string>
     <string name="msg_daily_claimed_coins">Quête quotidienne terminée ! +2 000 pièces.</string>
     <string name="msg_daily_claimed_dwarven">Quête quotidienne terminée ! Vous avez trouvé %1$s !</string>
