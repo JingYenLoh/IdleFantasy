@@ -913,8 +913,7 @@ class HomeViewModel @Inject constructor(
             )
             for ((e, k) in towerKills) acc.dailyKills[e] = (acc.dailyKills[e] ?: 0) + k
             guildRepo.recordGuildCombat(towerKills, style)
-            var towerSlayerXp = 0L
-            for ((enemy, k) in towerKills) towerSlayerXp += slayerRepo.recordKills(enemy, k)
+            val towerSlayerXp = slayerRepo.recordSessionKills(towerKills)
             if (towerSlayerXp > 0L) towerXpPerSkill[Skills.SLAYER] = (towerXpPerSkill[Skills.SLAYER] ?: 0L) + towerSlayerXp
         }
 
@@ -1204,8 +1203,7 @@ class HomeViewModel @Inject constructor(
         val coins = its.remove("coins")?.toLong() ?: 0L
         val pets  = its.filterKeys { it in ctx.petIds }
         val loot  = its.filterKeys { it !in ctx.petIds }
-        var slayerXp = 0L
-        for ((enemy, k) in kills) slayerXp += slayerRepo.recordKills(enemy, k)
+        val slayerXp = slayerRepo.recordSessionKills(kills)
         if (slayerXp > 0L) xpPerSkill[Skills.SLAYER] = (xpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
         val combatStyle = detectCombatStyle(xpPerSkill)
         if (!grantXp) xpPerSkill.clear()

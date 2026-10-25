@@ -1350,7 +1350,7 @@
     <string name="house_item_lamp">Wall Lantern</string>
     <string name="slayer_title">Slayer Master</string>
     <string name="slayer_card_desc">Tasks and rewards for slayers</string>
-    <string name="slayer_desc">Complete tasks to earn Slayer XP and points. Spend points in the shop for exclusive gear.</string>
+    <string name="slayer_desc">Matching kills earn Slayer XP for the entire session, even beyond the task quota. Each completed assignment awards points once. Spend points in the shop for exclusive gear.</string>
     <string name="slayer_level_label">Level %1$d</string>
     <string name="slayer_xp_label">%1$s XP</string>
     <string name="slayer_points">%1$d pts</string>
@@ -1390,7 +1390,7 @@
     <string name="slayer_queue_added_many">Added %1$d dungeons to queue.</string>
     <string name="slayer_queue_added_partial">Added %1$d of %2$d dungeons to queue.</string>
     <string name="slayer_foretell_title">Foretell Future Tasks</string>
-    <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. They are assigned automatically when your current task is completed.</string>
+    <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. The next target takes over for the next session. Consecutive assignments for the same enemy can finish together; each kill earns XP once.</string>
     <string name="slayer_foretell_queue_empty">No tasks queued.</string>
     <string name="slayer_foretell_queue_btn">+ Queue</string>
     <string name="slayer_foretell_queue_full">Foretell queue is full (%1$d/%1$d).</string>

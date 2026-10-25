@@ -4,6 +4,7 @@ import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.data.model.SlayerTask
+import com.fantasyidler.simulator.SlayerSettlement
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.random.Random
@@ -158,105 +159,42 @@ class SlayerRepository @Inject constructor(
     }
 
     /**
-     * Record kills from a dungeon session.
-     *
-     * Returns Slayer XP earned (0 if no active task or enemy doesn't match).
-     * Handles task completion: awards points and records quest progress.
+     * Settle one complete session, oldest first when collecting a backlog. Matching kills
+     * earn XP for the entire session; each preassigned task pays completion rewards once.
+     * Eligibility is captured here (collection time), like the existing task progression.
      */
-    suspend fun recordKills(enemyKey: String, count: Int): Long {
-        if (count <= 0) return 0L
-        val flags = playerRepo.getFlags()
-        val task  = flags.activeSlayerTask ?: return 0L
-        if (boostRepo.slayerMultiTaskActive(flags)) return recordKillsMultiTask(flags, enemyKey, count)
-        if (task.enemyKey != enemyKey) return 0L
-
-        val equippedCape   = playerRepo.getEquipped()[EquipSlot.CAPE]?.let { gameData.equipment[it] }
-        val capeMult       = resolveCapeMultiplier(
-            Skills.SLAYER, equippedCape, playerRepo.getInventory().keys,
-            flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman,
-        )
-
-        // Order-strict chain walk: kills left over after completing the active task roll
-        // into the next foretold task, but only while consecutive tasks are for the same
-        // enemy (issue #1677). The multi-task prestige perk keeps its broader any-order
-        // behavior in recordKillsMultiTask.
-        val chain = (listOf(task) + flags.foretelledTasks).toMutableList()
-        var remaining      = count
-        var xpEarned       = 0L
-        var applied        = 0
-        var completedCount = 0
-        for (idx in chain.indices) {
-            if (remaining <= 0) break
-            val t = chain[idx]
-            if (t.enemyKey != enemyKey) break
-            val added = minOf(remaining, t.targetKills - t.killsCompleted)
-            if (added <= 0) break
-            remaining -= added
-            applied   += added
-            xpEarned  += (added.toLong() * t.xpPerKill * capeMult).toLong()
-            chain[idx] = t.copy(killsCompleted = t.killsCompleted + added)
-            if (chain[idx].killsCompleted < t.targetKills) break
-            completedCount++
-        }
-        if (applied <= 0) return 0L
-
-        val pointsGained = chain.take(completedCount)
-            .sumOf { (it.taskPoints * boostRepo.slayerPointsMultiplier(flags)).toInt() }
-        playerRepo.updateFlags(
-            flags.copy(
-                activeSlayerTask = chain.getOrNull(completedCount),
-                foretelledTasks  = chain.drop(completedCount + 1),
-                slayerPoints     = flags.slayerPoints + pointsGained,
+    suspend fun recordSessionKills(killsByEnemy: Map<String, Int>): Long {
+        val (result, xpEarned) = playerRepo.withLock {
+            val flags = playerRepo.getFlagsUnlocked()
+            val result = SlayerSettlement.calculate(
+                flags.activeSlayerTask, flags.foretelledTasks, killsByEnemy,
+                boostRepo.slayerMultiTaskActive(flags),
             )
-        )
-        repeat(completedCount) { questRepo.recordSlayerTaskCompleted() }
-        if (completedCount > 0) playerRepo.recordWeeklyProgress("slayer_task", "any", completedCount)
-        guildRepo.recordGuildSlayer(applied, completedCount)
-        return xpEarned
-    }
-
-    /**
-     * Foresight final tier: kills flow through the active task and then every matching
-     * foretold task in queue order, so one dungeon can complete several tasks at once.
-     */
-    private suspend fun recordKillsMultiTask(flags: PlayerFlags, enemyKey: String, count: Int): Long {
-        val active = flags.activeSlayerTask ?: return 0L
-        val chain  = (listOf(active) + flags.foretelledTasks).toMutableList()
-
-        val equippedCape = playerRepo.getEquipped()[EquipSlot.CAPE]?.let { gameData.equipment[it] }
-        val capeMult     = resolveCapeMultiplier(
-            Skills.SLAYER, equippedCape, playerRepo.getInventory().keys,
-            flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman,
-        )
-
-        var remaining = count
-        var xpEarned  = 0L
-        for (idx in chain.indices) {
-            if (remaining <= 0) break
-            val t = chain[idx]
-            if (t.enemyKey != enemyKey || t.killsCompleted >= t.targetKills) continue
-            val added = minOf(remaining, t.targetKills - t.killsCompleted)
-            remaining -= added
-            xpEarned  += (added.toLong() * t.xpPerKill * capeMult).toLong()
-            chain[idx] = t.copy(killsCompleted = t.killsCompleted + added)
-        }
-        val killsApplied = count - remaining
-        if (killsApplied <= 0) return 0L
-
-        val completedTasks = chain.filter { it.killsCompleted >= it.targetKills }
-        val openTasks      = chain.filter { it.killsCompleted <  it.targetKills }
-        val pointsGained   = completedTasks.sumOf { (it.taskPoints * boostRepo.slayerPointsMultiplier(flags)).toInt() }
-
-        playerRepo.updateFlags(
-            flags.copy(
-                activeSlayerTask = openTasks.firstOrNull(),
-                foretelledTasks  = openTasks.drop(1),
-                slayerPoints     = flags.slayerPoints + pointsGained,
+            if (result.taskKills == 0) return@withLock result to 0L
+            val equippedCape = playerRepo.getEquipped()[EquipSlot.CAPE]?.let { gameData.equipment[it] }
+            val capeMult = resolveCapeMultiplier(
+                Skills.SLAYER, equippedCape, playerRepo.getInventoryUnlocked().keys,
+                flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman,
             )
-        )
-        repeat(completedTasks.size) { questRepo.recordSlayerTaskCompleted() }
-        if (completedTasks.isNotEmpty()) playerRepo.recordWeeklyProgress("slayer_task", "any", completedTasks.size)
-        guildRepo.recordGuildSlayer(killsApplied, completedTasks.size)
+            val pointsGained = result.completedTasks.sumOf {
+                (it.taskPoints * boostRepo.slayerPointsMultiplier(flags)).toInt()
+            }
+            playerRepo.updateFlagsUnlocked(flags.copy(
+                activeSlayerTask = result.activeTask,
+                foretelledTasks = result.foretoldTasks,
+                slayerPoints = flags.slayerPoints + pointsGained,
+            ))
+            result to (result.baseXp * capeMult.toDouble()).toLong()
+        }
+        // These hooks acquire the player lock themselves. Keep them outside the task-state
+        // mutation to avoid re-entering the non-reentrant mutex during offline collection.
+        if (result.taskKills > 0) {
+            repeat(result.completedTasks.size) { questRepo.recordSlayerTaskCompleted() }
+            if (result.completedTasks.isNotEmpty()) {
+                playerRepo.recordWeeklyProgress("slayer_task", "any", result.completedTasks.size)
+            }
+            guildRepo.recordGuildSlayer(result.taskKills, result.completedTasks.size)
+        }
         return xpEarned
     }
 

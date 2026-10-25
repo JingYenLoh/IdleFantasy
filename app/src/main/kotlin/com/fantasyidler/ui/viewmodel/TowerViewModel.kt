@@ -531,8 +531,7 @@ class TowerViewModel @Inject constructor(
                 )
                 playerRepo.recordDailyKills(allKillsByEnemy)
                 guildRepo.recordGuildCombat(allKillsByEnemy, combatStyle)
-                var slayerXp = 0L
-                for ((enemy, k) in allKillsByEnemy) slayerXp += slayerRepo.recordKills(enemy, k)
+                val slayerXp = slayerRepo.recordSessionKills(allKillsByEnemy)
                 if (slayerXp > 0L) totalXpPerSkill[Skills.SLAYER] = (totalXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
             }
 
